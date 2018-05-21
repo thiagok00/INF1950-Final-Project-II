@@ -3,12 +3,24 @@
 
 USING_NS_CC;
 
-Scene* RAGameScene::createScene()
+Scene* RAGameScene::createScene(int gameMode)
 {
-    return RAGameScene::create();
+    RAGameScene *pRet = new(std::nothrow) RAGameScene(); \
+    if (pRet && pRet->init(gameMode))
+    {
+        pRet->autorelease();
+        return pRet;
+    }
+    else
+    {
+        delete pRet;
+        pRet = nullptr;
+        return nullptr;
+    }
+    
 }
 
-bool RAGameScene::init()
+bool RAGameScene::init(int gameMode)
 {
     //////////////////////////////
     // 1. super init first
@@ -25,8 +37,17 @@ bool RAGameScene::init()
     varBackLayer->setPosition(Vec2(0,0));
     this->addChild(varBackLayer);
     
+    if(gameMode == kGAMEMODE_SINGLEPLAYER)
+    {
+        gameController = new RASinglePlayerGameController(this);
+        gameController->startGame();
+    }
     
     
     return true;
 }
 
+void RAGameScene::renderMap (RAMap* map)
+{
+    printf("Rendering Map\n");
+}

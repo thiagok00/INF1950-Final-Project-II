@@ -10,6 +10,12 @@
 RAMap::RAMap()
 {
 
+    //TODO: This is necessary?
+    for (int i = 0; i < MAP_MAX_COL * MAP_MAX_ROW; i++)
+    {
+        map.push_back(NULL);
+    }
+    
 }
 
 RAMap::~RAMap()

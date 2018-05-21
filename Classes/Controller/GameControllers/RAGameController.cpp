@@ -6,3 +6,10 @@
 //
 
 #include "RAGameController.hpp"
+
+
+RAGameController::RAGameController(RASceneProtocol *gs)
+{
+    gameEngine = NULL;
+    gameScene = gs;
+}

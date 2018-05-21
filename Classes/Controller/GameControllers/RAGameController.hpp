@@ -15,9 +15,22 @@
 
 
 #include <stdio.h>
+#include "RAGameEngine.hpp"
+
+#include "RASceneProtocol.h"
 
 class RAGameController
 {
+public:
+
+    RAGameController(RASceneProtocol *gs);
+    ~RAGameController();
+    virtual void startGame() {}
+
+protected:
+    RAGameEngine *gameEngine;
+    RASceneProtocol  *gameScene;
+    
     
 };
 

@@ -7,7 +7,7 @@
 
 #include "RALevelGenerator.hpp"
 
-static RAMap* generateLevel(int difficulty)
+RAMap* RALevelGenerator::generateLevel(int difficulty)
 {
     RAMap *map = new RAMap();
 

@@ -9,10 +9,18 @@
 #define RASinglePlayerController_hpp
 
 #include <stdio.h>
+
 #include "RAGameController.hpp"
 
 class RASinglePlayerGameController: public RAGameController
 {
+public:
+    
+    RASinglePlayerGameController(RASceneProtocol *gs);
+    ~RASinglePlayerGameController();
+    void startGame();
+
+protected:
     
 };
 

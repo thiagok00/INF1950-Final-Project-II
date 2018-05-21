@@ -6,3 +6,15 @@
 //
 
 #include "RASinglePlayerGameController.hpp"
+
+
+RASinglePlayerGameController::RASinglePlayerGameController(RASceneProtocol *gs) : RAGameController (gs)
+{
+}
+
+
+void RASinglePlayerGameController::startGame()
+{
+    gameEngine = RAGameEngine::createGame(kGAMEMODE_SINGLEPLAYER);
+    gameScene->renderMap(gameEngine->gameMap);
+}

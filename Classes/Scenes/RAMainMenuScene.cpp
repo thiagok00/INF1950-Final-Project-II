@@ -55,7 +55,7 @@ void RAMainMenuScene::startSinglePlayerCallback(Ref* pSender, cocos2d::ui::Widge
     {
         case cocos2d::ui::Widget::TouchEventType::ENDED:
             printf("Starting Single Player Game\n");
-            _director->pushScene(RAGameScene::createScene());
+            _director->pushScene(RAGameScene::createScene(kGAMEMODE_SINGLEPLAYER));
             break;
         default:
             break;
