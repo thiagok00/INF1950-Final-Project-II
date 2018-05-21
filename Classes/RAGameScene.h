@@ -10,9 +10,8 @@ public:
 
     virtual bool init();
     
-    // a selector callback
-    void menuCloseCallback(cocos2d::Ref* pSender);
-    
+    cocos2d::LayerColor *varBackLayer;
+    cocos2d::Size varScreenSize;
     // implement the "static create()" method manually
     CREATE_FUNC(RAGameScene);
 };

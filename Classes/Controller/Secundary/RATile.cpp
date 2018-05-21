@@ -1,35 +1,35 @@
 //
-//  TileModel.cpp
+//  RATile.cpp
 //  Radius-mobile
 //
 //  Created by Thiago De Angelis on 25/04/2018.
 //
 
-#include "TileModel.hpp"
+#include "RATile.hpp"
 
-TileModel::TileModel(int row, int col, bool walkable)
+RATile::RATile(int row, int col, bool walkable)
 {
     this->row = row;
     this->col = col;
     this->walkable = walkable;
 }
 
-TileModel::~TileModel()
+RATile::~RATile()
 {
     
 }
 
-int TileModel::getRow()
+int RATile::getRow()
 {
     return this->row;
 }
 
-int TileModel::getCol()
+int RATile::getCol()
 {
     return this->col;
 }
 
-bool TileModel::isWakable()
+bool RATile::isWakable()
 {
     return this->walkable;
 }

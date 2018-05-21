@@ -15,10 +15,6 @@
 		294D0D641D0D56D500F7F5D4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 294D0D631D0D56D500F7F5D4 /* CoreText.framework */; };
 		3EACC98F19EE6D4300EB3C5E /* res in Resources */ = {isa = PBXBuildFile; fileRef = 3EACC98E19EE6D4300EB3C5E /* res */; };
 		3EACC99019EE6D4300EB3C5E /* res in Resources */ = {isa = PBXBuildFile; fileRef = 3EACC98E19EE6D4300EB3C5E /* res */; };
-		46880B7B19C43A67006E1F66 /* CloseNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 46880B7619C43A67006E1F66 /* CloseNormal.png */; };
-		46880B7C19C43A67006E1F66 /* CloseNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 46880B7619C43A67006E1F66 /* CloseNormal.png */; };
-		46880B7D19C43A67006E1F66 /* CloseSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 46880B7719C43A67006E1F66 /* CloseSelected.png */; };
-		46880B7E19C43A67006E1F66 /* CloseSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 46880B7719C43A67006E1F66 /* CloseSelected.png */; };
 		46880B8119C43A67006E1F66 /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 46880B7A19C43A67006E1F66 /* HelloWorld.png */; };
 		46880B8219C43A67006E1F66 /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 46880B7A19C43A67006E1F66 /* HelloWorld.png */; };
 		46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8419C43A87006E1F66 /* AppDelegate.cpp */; };
@@ -64,8 +60,16 @@
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
-		D09151AE209134FF009649BA /* TileModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D09151AC209134FF009649BA /* TileModel.cpp */; };
-		D09151B120913BCB009649BA /* MapModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D09151AF20913BCB009649BA /* MapModel.cpp */; };
+		D022E1A020B26C7100BACC96 /* RAMainMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D022E19E20B26C7100BACC96 /* RAMainMenuScene.cpp */; };
+		D08AF02C20B249A400BB9B17 /* RALevelGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D08AF02A20B249A400BB9B17 /* RALevelGenerator.cpp */; };
+		D08AF02F20B252A500BB9B17 /* RAGameEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D08AF02D20B252A500BB9B17 /* RAGameEngine.cpp */; };
+		D08AF03220B253F200BB9B17 /* RAPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D08AF03020B253F100BB9B17 /* RAPlayer.cpp */; };
+		D08AF03520B259F500BB9B17 /* RAGameController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D08AF03320B259F500BB9B17 /* RAGameController.cpp */; };
+		D08AF03820B25A0000BB9B17 /* RASinglePlayerGameController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D08AF03620B25A0000BB9B17 /* RASinglePlayerGameController.cpp */; };
+		D08AF03F20B262D700BB9B17 /* placeholderButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D08AF03E20B262D700BB9B17 /* placeholderButton.png */; };
+		D08AF04020B262D700BB9B17 /* placeholderButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D08AF03E20B262D700BB9B17 /* placeholderButton.png */; };
+		D09151AE209134FF009649BA /* RATile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D09151AC209134FF009649BA /* RATile.cpp */; };
+		D09151B120913BCB009649BA /* RAMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D09151AF20913BCB009649BA /* RAMap.cpp */; };
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
@@ -121,13 +125,10 @@
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		294D0D631D0D56D500F7F5D4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
 		3EACC98E19EE6D4300EB3C5E /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; path = res; sourceTree = "<group>"; };
-		46880B7619C43A67006E1F66 /* CloseNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseNormal.png; sourceTree = "<group>"; };
-		46880B7719C43A67006E1F66 /* CloseSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseSelected.png; sourceTree = "<group>"; };
 		46880B7A19C43A67006E1F66 /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelloWorld.png; sourceTree = "<group>"; };
 		46880B8419C43A87006E1F66 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
 		46880B8519C43A87006E1F66 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		46880B8619C43A87006E1F66 /* RAGameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RAGameScene.cpp; sourceTree = "<group>"; };
-		46880B8719C43A87006E1F66 /* RAGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAGameScene.h; sourceTree = "<group>"; };
 		503AE0F617EB97AB00D1A890 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
 		503AE0F717EB97AB00D1A890 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		503AE0FA17EB989F00D1A890 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppController.h; path = ios/AppController.h; sourceTree = SOURCE_ROOT; };
@@ -168,10 +169,24 @@
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		D09151AC209134FF009649BA /* TileModel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TileModel.cpp; sourceTree = "<group>"; };
-		D09151AD209134FF009649BA /* TileModel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TileModel.hpp; sourceTree = "<group>"; };
-		D09151AF20913BCB009649BA /* MapModel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MapModel.cpp; sourceTree = "<group>"; };
-		D09151B020913BCB009649BA /* MapModel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MapModel.hpp; sourceTree = "<group>"; };
+		D022E19B20B26A2600BACC96 /* RAGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAGameScene.h; sourceTree = "<group>"; };
+		D022E19E20B26C7100BACC96 /* RAMainMenuScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RAMainMenuScene.cpp; sourceTree = "<group>"; };
+		D022E19F20B26C7100BACC96 /* RAMainMenuScene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RAMainMenuScene.hpp; sourceTree = "<group>"; };
+		D08AF02A20B249A400BB9B17 /* RALevelGenerator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RALevelGenerator.cpp; sourceTree = "<group>"; };
+		D08AF02B20B249A400BB9B17 /* RALevelGenerator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RALevelGenerator.hpp; sourceTree = "<group>"; };
+		D08AF02D20B252A500BB9B17 /* RAGameEngine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RAGameEngine.cpp; sourceTree = "<group>"; };
+		D08AF02E20B252A500BB9B17 /* RAGameEngine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RAGameEngine.hpp; sourceTree = "<group>"; };
+		D08AF03020B253F100BB9B17 /* RAPlayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RAPlayer.cpp; sourceTree = "<group>"; };
+		D08AF03120B253F100BB9B17 /* RAPlayer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RAPlayer.hpp; sourceTree = "<group>"; };
+		D08AF03320B259F500BB9B17 /* RAGameController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RAGameController.cpp; sourceTree = "<group>"; };
+		D08AF03420B259F500BB9B17 /* RAGameController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RAGameController.hpp; sourceTree = "<group>"; };
+		D08AF03620B25A0000BB9B17 /* RASinglePlayerGameController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RASinglePlayerGameController.cpp; sourceTree = "<group>"; };
+		D08AF03720B25A0000BB9B17 /* RASinglePlayerGameController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RASinglePlayerGameController.hpp; sourceTree = "<group>"; };
+		D08AF03E20B262D700BB9B17 /* placeholderButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholderButton.png; sourceTree = "<group>"; };
+		D09151AC209134FF009649BA /* RATile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RATile.cpp; sourceTree = "<group>"; };
+		D09151AD209134FF009649BA /* RATile.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RATile.hpp; sourceTree = "<group>"; };
+		D09151AF20913BCB009649BA /* RAMap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RAMap.cpp; sourceTree = "<group>"; };
+		D09151B020913BCB009649BA /* RAMap.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RAMap.hpp; sourceTree = "<group>"; };
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -302,10 +317,9 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D08AF03E20B262D700BB9B17 /* placeholderButton.png */,
 				521A8EA819F11F5000D177D7 /* fonts */,
 				3EACC98E19EE6D4300EB3C5E /* res */,
-				46880B7619C43A67006E1F66 /* CloseNormal.png */,
-				46880B7719C43A67006E1F66 /* CloseSelected.png */,
 				46880B7A19C43A67006E1F66 /* HelloWorld.png */,
 			);
 			name = Resources;
@@ -315,11 +329,13 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				D09151AA209134ED009649BA /* Model */,
+				46880B8619C43A87006E1F66 /* RAGameScene.cpp */,
+				D022E19B20B26A2600BACC96 /* RAGameScene.h */,
+				D09151AA209134ED009649BA /* Controller */,
 				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
-				46880B8619C43A87006E1F66 /* RAGameScene.cpp */,
-				46880B8719C43A87006E1F66 /* RAGameScene.h */,
+				D022E19E20B26C7100BACC96 /* RAMainMenuScene.cpp */,
+				D022E19F20B26C7100BACC96 /*     Scene.hpp */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -372,15 +388,41 @@
 			path = ios;
 			sourceTree = SOURCE_ROOT;
 		};
-		D09151AA209134ED009649BA /* Model */ = {
+		D08AF03920B25A3000BB9B17 /* GameControllers */ = {
 			isa = PBXGroup;
 			children = (
-				D09151AF20913BCB009649BA /* MapModel.cpp */,
-				D09151B020913BCB009649BA /* MapModel.hpp */,
-				D09151AC209134FF009649BA /* TileModel.cpp */,
-				D09151AD209134FF009649BA /* TileModel.hpp */,
+				D08AF03320B259F500BB9B17 /* RAGameController.cpp */,
+				D08AF03420B259F500BB9B17 /* RAGameController.hpp */,
+				D08AF03620B25A0000BB9B17 /* RASinglePlayerGameController.cpp */,
+				D08AF03720B25A0000BB9B17 /* RASinglePlayerGameController.hpp */,
 			);
-			path = Model;
+			path = GameControllers;
+			sourceTree = "<group>";
+		};
+		D08AF03A20B25B3700BB9B17 /* Secundary */ = {
+			isa = PBXGroup;
+			children = (
+				D09151AF20913BCB009649BA /* RAMap.cpp */,
+				D09151B020913BCB009649BA /* RAMap.hpp */,
+				D09151AC209134FF009649BA /* RATile.cpp */,
+				D09151AD209134FF009649BA /* RATile.hpp */,
+				D08AF03020B253F100BB9B17 /* RAPlayer.cpp */,
+				D08AF03120B253F100BB9B17 /* RAPlayer.hpp */,
+			);
+			path = Secundary;
+			sourceTree = "<group>";
+		};
+		D09151AA209134ED009649BA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D08AF03A20B25B3700BB9B17 /* Secundary */,
+				D08AF03920B25A3000BB9B17 /* GameControllers */,
+				D08AF02D20B252A500BB9B17 /* RAGameEngine.cpp */,
+				D08AF02E20B252A500BB9B17 /* RAGameEngine.hpp */,
+				D08AF02A20B249A400BB9B17 /* RALevelGenerator.cpp */,
+				D08AF02B20B249A400BB9B17 /* RALevelGenerator.hpp */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -496,10 +538,10 @@
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				46880B8119C43A67006E1F66 /* HelloWorld.png in Resources */,
-				46880B7D19C43A67006E1F66 /* CloseSelected.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
+				D08AF03F20B262D700BB9B17 /* placeholderButton.png in Resources */,
 				521A8EA919F11F5000D177D7 /* fonts in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
@@ -511,7 +553,6 @@
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
 				521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */,
-				46880B7B19C43A67006E1F66 /* CloseNormal.png in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -524,8 +565,7 @@
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 				3EACC99019EE6D4300EB3C5E /* res in Resources */,
 				521A8EAA19F11F5000D177D7 /* fonts in Resources */,
-				46880B7C19C43A67006E1F66 /* CloseNormal.png in Resources */,
-				46880B7E19C43A67006E1F66 /* CloseSelected.png in Resources */,
+				D08AF04020B262D700BB9B17 /* placeholderButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -537,12 +577,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
+				D08AF03520B259F500BB9B17 /* RAGameController.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* RAGameScene.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
-				D09151B120913BCB009649BA /* MapModel.cpp in Sources */,
-				D09151AE209134FF009649BA /* TileModel.cpp in Sources */,
+				D08AF03220B253F200BB9B17 /* RAPlayer.cpp in Sources */,
+				D09151B120913BCB009649BA /* RAMap.cpp in Sources */,
+				D09151AE209134FF009649BA /* RATile.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
+				D08AF02C20B249A400BB9B17 /* RALevelGenerator.cpp in Sources */,
+				D08AF02F20B252A500BB9B17 /* RAGameEngine.cpp in Sources */,
+				D08AF03820B25A0000BB9B17 /* RASinglePlayerGameController.cpp in Sources */,
+				D022E1A020B26C7100BACC96 /* RAMainMenuScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,21 +1,21 @@
 //
-//  TileModel.hpp
+//  RATile.hpp
 //  Radius-mobile
 //
 //  Created by Thiago De Angelis on 25/04/2018.
 //
 
-#ifndef TileModel_hpp
-#define TileModel_hpp
+#ifndef RATile_hpp
+#define RATile_hpp
 
 #include <stdio.h>
 
-class TileModel
+class RATile
 {
 public:
     
-    TileModel(int row,int col, bool walkable);
-    ~TileModel();
+    RATile(int row,int col, bool walkable);
+    ~RATile();
     
     int getRow();
     int getCol();
@@ -28,4 +28,4 @@ protected:
     bool walkable;
 };
 
-#endif /* TileModel_hpp */
+#endif /* RATile_hpp */
