@@ -20,29 +20,12 @@ void RASinglePlayerGameController::startGame()
     gameScene->loadPlayer(gameEngine->player1);
 }
 
-void RASinglePlayerGameController::movePlayer(int direction)
+void RASinglePlayerGameController::playerAction(RADirection direction)
 {
-    if(gameEngine == NULL)
+    if(gameEngine == nullptr)
         return;
-    RADirection raDir;
-    
-    switch (direction) {
-        case kDIRECTION_UP:
-            raDir = UP;
-            break;
-        case kDIRECTION_DOWN:
-            raDir = DOWN;
-            break;
-        case kDIRECTION_LEFT:
-            raDir = LEFT;
-            break;
-        case kDIRECTION_RIGHT:
-            raDir = RIGHT;
-            break;
-        default:
-            return;
-    }
-    if (gameEngine->movePlayer(gameEngine->player1, raDir))
+
+    if (gameEngine->movePlayer(gameEngine->player1, direction))
     {
         gameScene->playerMoved(gameEngine->player1, direction);
     }

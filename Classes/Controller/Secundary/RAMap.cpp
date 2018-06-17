@@ -13,10 +13,10 @@ RAMap::RAMap()
     //TODO: This is necessary?
     for (int i = 0; i < MAP_MAX_COL * MAP_MAX_ROW; i++)
     {
-        map.push_back(NULL);
+        map.push_back(nullptr);
     }
-    player1RespawnTile = NULL;
-    player2RespawnTile = NULL;
+    player1RespawnTile = nullptr;
+    player2RespawnTile = nullptr;
 }
 
 RAMap::~RAMap()
@@ -26,10 +26,10 @@ RAMap::~RAMap()
 
 RATile* RAMap::getTile(int row, int col)
 {
-    return this->map[row + col*MAP_MAX_ROW];
+    return this->map[col + row*MAP_MAX_COL];
 }
 
 void RAMap::setTile(int row, int col, RATile *t)
 {
-    this->map[row + col*MAP_MAX_ROW] = t;
+    this->map[col + row*MAP_MAX_COL] = t;
 }

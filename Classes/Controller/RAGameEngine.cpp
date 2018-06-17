@@ -14,8 +14,8 @@
 
 RAGameEngine::RAGameEngine(int gameMode)
 {
-    player1 = NULL;
-    player2 = NULL;
+    player1 = nullptr;
+    player2 = nullptr;
     gameMode = gameMode;
     playerTurn = 0;
 }
@@ -36,11 +36,11 @@ RAGameEngine* RAGameEngine::createGame(int gameMode)
     
     eng->gameMap = RALevelGenerator::generateLevel(0);
     
-    if(eng->player1 != NULL)
+    if(eng->player1 != nullptr)
     {
         eng->player1->tile = eng->gameMap->player1RespawnTile;
     }
-    if(eng->player2 != NULL)
+    if(eng->player2 != nullptr)
     {
         eng->player2->tile = eng->gameMap->player2RespawnTile;
     }
@@ -51,39 +51,48 @@ RAGameEngine* RAGameEngine::createGame(int gameMode)
 
 bool RAGameEngine::movePlayer(RAPlayer *player, RADirection direction)
 {
-    if(player == NULL)
+    if(player == nullptr)
         return false;
     
-    RATile *destTile = NULL;
+    RATile *destTile = nullptr;
     
     switch(direction)
     {
         case RIGHT:
-            if (player->tile->getRow() == MAP_MAX_ROW) //on top
+            if (player->tile->getCol() == MAP_MAX_COL - 1)
                 return false;
             else
-                destTile = gameMap->getTile(player->tile->getRow()+1, player->tile->getCol());
+                destTile = gameMap->getTile(player->tile->getRow(), player->tile->getCol() + 1);
             break;
         case LEFT:
-            if (player->tile->getRow() == 0) //on bottom
-                return false;
-            else
-                destTile = gameMap->getTile(player->tile->getRow()-1, player->tile->getCol());
-            break;
-        case DOWN:
             if (player->tile->getCol() == 0)
                 return false;
             else
-                destTile = gameMap->getTile(player->tile->getRow(), player->tile->getCol()-1);
+                destTile = gameMap->getTile(player->tile->getRow(), player->tile->getCol() - 1);
             break;
-        case UP:
-            if (player->tile->getCol() == MAP_MAX_COL)
+        case DOWN:
+            if (player->tile->getRow() == 0)
                 return false;
             else
-                destTile = gameMap->getTile(player->tile->getRow(), player->tile->getCol()+1);
+                destTile = gameMap->getTile(player->tile->getRow() - 1, player->tile->getCol());
+            break;
+        case UP:
+            if (player->tile->getRow() == MAP_MAX_ROW - 1)
+                return false;
+            else
+                destTile = gameMap->getTile(player->tile->getRow() + 1, player->tile->getCol());
             break;
     }
     
+    if(destTile->creature != nullptr)
+    {
+        //attack
+        CCLOG("ATTACK!");
+        return false;
+    }
+    
+    CCLOG("MOVING FROM: %dx%d TO %dx%d",player->tile->getRow(),player->tile->getCol(),destTile->getRow(),destTile->getCol());
+
     player->tile = destTile;
     return true;
 }

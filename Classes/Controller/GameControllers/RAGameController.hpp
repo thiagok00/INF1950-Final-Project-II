@@ -26,7 +26,7 @@ public:
     RAGameController(RASceneProtocol *gs);
     ~RAGameController();
     virtual void startGame() {}
-    virtual void movePlayer(int direction) {}
+    virtual void playerAction(RADirection direction) {}
 
 protected:
     RAGameEngine *gameEngine;

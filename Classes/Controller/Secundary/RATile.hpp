@@ -9,6 +9,7 @@
 #define RATile_hpp
 
 #include <stdio.h>
+#include "RACreature.hpp"
 
 class RATile
 {
@@ -21,6 +22,7 @@ public:
     int getCol();
     bool isWakable();
     const char * getDescription();
+    RACreature *creature;
     
 protected:
     int row;

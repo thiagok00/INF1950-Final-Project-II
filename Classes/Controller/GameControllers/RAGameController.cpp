@@ -10,6 +10,6 @@
 
 RAGameController::RAGameController(RASceneProtocol *gs)
 {
-    gameEngine = NULL;
+    gameEngine = nullptr;
     gameScene = gs;
 }

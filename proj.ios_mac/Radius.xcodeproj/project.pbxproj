@@ -64,6 +64,10 @@
 		D03B113D20D6BC73003D24AD /* cave_ground.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B113B20D6BC72003D24AD /* cave_ground.png */; };
 		D03B114220D6C961003D24AD /* player_idle_south.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B114120D6C961003D24AD /* player_idle_south.png */; };
 		D03B114320D6C961003D24AD /* player_idle_south.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B114120D6C961003D24AD /* player_idle_south.png */; };
+		D03B114A20D6F17C003D24AD /* creature_example.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B114920D6F17B003D24AD /* creature_example.png */; };
+		D03B114B20D6F17C003D24AD /* creature_example.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B114920D6F17B003D24AD /* creature_example.png */; };
+		D03B114E20D6F463003D24AD /* RACreature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D03B114C20D6F463003D24AD /* RACreature.cpp */; };
+		D03B114F20D6F463003D24AD /* RACreature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D03B114C20D6F463003D24AD /* RACreature.cpp */; };
 		D08AF02C20B249A400BB9B17 /* RALevelGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D08AF02A20B249A400BB9B17 /* RALevelGenerator.cpp */; };
 		D08AF02F20B252A500BB9B17 /* RAGameEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D08AF02D20B252A500BB9B17 /* RAGameEngine.cpp */; };
 		D08AF03220B253F200BB9B17 /* RAPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D08AF03020B253F100BB9B17 /* RAPlayer.cpp */; };
@@ -178,6 +182,9 @@
 		D022E1A720B28E5700BACC96 /* RASceneProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RASceneProtocol.h; sourceTree = "<group>"; };
 		D03B113B20D6BC72003D24AD /* cave_ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cave_ground.png; sourceTree = "<group>"; };
 		D03B114120D6C961003D24AD /* player_idle_south.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player_idle_south.png; sourceTree = "<group>"; };
+		D03B114920D6F17B003D24AD /* creature_example.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = creature_example.png; sourceTree = "<group>"; };
+		D03B114C20D6F463003D24AD /* RACreature.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RACreature.cpp; sourceTree = "<group>"; };
+		D03B114D20D6F463003D24AD /* RACreature.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RACreature.hpp; sourceTree = "<group>"; };
 		D08AF02A20B249A400BB9B17 /* RALevelGenerator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RALevelGenerator.cpp; sourceTree = "<group>"; };
 		D08AF02B20B249A400BB9B17 /* RALevelGenerator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RALevelGenerator.hpp; sourceTree = "<group>"; };
 		D08AF02D20B252A500BB9B17 /* RAGameEngine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RAGameEngine.cpp; sourceTree = "<group>"; };
@@ -323,6 +330,7 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D03B114920D6F17B003D24AD /* creature_example.png */,
 				D03B114120D6C961003D24AD /* player_idle_south.png */,
 				D03B113B20D6BC72003D24AD /* cave_ground.png */,
 				D08AF03E20B262D700BB9B17 /* placeholderButton.png */,
@@ -413,6 +421,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		D03B115020D6FB35003D24AD /* Enemies */ = {
+			isa = PBXGroup;
+			children = (
+				D03B114C20D6F463003D24AD /* RACreature.cpp */,
+				D03B114D20D6F463003D24AD /* RACreature.hpp */,
+			);
+			path = Enemies;
+			sourceTree = "<group>";
+		};
 		D08AF03920B25A3000BB9B17 /* GameControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -427,6 +444,7 @@
 		D08AF03A20B25B3700BB9B17 /* Secundary */ = {
 			isa = PBXGroup;
 			children = (
+				D03B115020D6FB35003D24AD /* Enemies */,
 				D09151AF20913BCB009649BA /* RAMap.cpp */,
 				D09151B020913BCB009649BA /* RAMap.hpp */,
 				D09151AC209134FF009649BA /* RATile.cpp */,
@@ -578,6 +596,7 @@
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
+				D03B114A20D6F17C003D24AD /* creature_example.png in Resources */,
 				521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
 			);
@@ -587,6 +606,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D03B114B20D6F17C003D24AD /* creature_example.png in Resources */,
 				D03B114320D6C961003D24AD /* player_idle_south.png in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 				3EACC99019EE6D4300EB3C5E /* res in Resources */,
@@ -606,6 +626,7 @@
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				D08AF03520B259F500BB9B17 /* RAGameController.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* RAGameScene.cpp in Sources */,
+				D03B114E20D6F463003D24AD /* RACreature.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				D08AF03220B253F200BB9B17 /* RAPlayer.cpp in Sources */,
 				D09151B120913BCB009649BA /* RAMap.cpp in Sources */,
@@ -623,6 +644,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D03B114F20D6F463003D24AD /* RACreature.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				46880B8B19C43A87006E1F66 /* RAGameScene.cpp in Sources */,

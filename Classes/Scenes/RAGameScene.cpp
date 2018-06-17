@@ -3,7 +3,13 @@
 
 USING_NS_CC;
 
-#define MOVE_ACTION_TAG 100
+#define MOVE_ACTION_TAG 1000
+
+#define zORDER_CREATURE 102
+#define zORDER_PLAYER 103
+#define zORDER_TILE 101
+#define zORDER_HUD 999
+
 
 Scene* RAGameScene::createScene(int gameMode)
 {
@@ -89,17 +95,38 @@ void RAGameScene::renderMap (RAMap* map)
             tileSprite->setScale(tileSize.width/tileSprite->getContentSize().width);
             tileSprite->setAnchorPoint(Vec2(0.5,0.5));
             tileSprite->setPosition(xPos,yPos);
+            CCLOG("CONTINHA: %d x %d",i,j);
+
+            //render creature of tile
+            if(t->creature != nullptr)
+            {
+                Sprite *creatureSprite;
+                Size creatureSize = tileSize;
+                switch(t->creature->id)
+                {
+                    case Rat:
+                        creatureSprite = Sprite::create("creature_example.png");
+                        break;
+                    case Cave_rat:
+                        creatureSprite = Sprite::create("creature_example.png");
+                        break;
+                }
+                
+                //map test
+                //Label *descTile = Label::createWithTTF("", <#const std::string &fontFilePath#>, <#float fontSize#>)
+                
+                creatureSprite->setScale(creatureSize.width/creatureSprite->getContentSize().width);
+                creatureSprite->setAnchorPoint(Vec2(0.5,0.5));
+                creatureSprite->setPosition(xPos,yPos);
+                varBackLayer->addChild(creatureSprite,zORDER_CREATURE);
+            }
             
             mapSprites.push_back(tileSprite);
             
-            varBackLayer->addChild(tileSprite,100);
-            
-            
+            varBackLayer->addChild(tileSprite,zORDER_TILE);
             xPos += tileSize.width;
-            if (j+1 == MAP_MAX_COL)
-                yPos += tileSize.height;
         }
-        
+        yPos += tileSize.height;
     }
 }
 
@@ -114,8 +141,8 @@ void RAGameScene::loadPlayer (RAPlayer* player)
     playerSprite->setScale(playerSize.width/playerSprite->getContentSize().width);
     playerSprite->setAnchorPoint(Vec2(0.5,0.5));
     
-    playerSprite->setPosition(mapSprites.at(MAP_MAX_COL*player->tile->getCol() + player->tile->getRow())->getPosition());
-    varBackLayer->addChild(playerSprite,101);
+    playerSprite->setPosition(mapSprites.at(MAP_MAX_ROW*player->tile->getRow() + player->tile->getCol())->getPosition());
+    varBackLayer->addChild(playerSprite,zORDER_PLAYER);
     
     player1Node.pSprite = playerSprite;
     player1Node.pController = player;
@@ -127,9 +154,9 @@ void RAGameScene::playerMoved(RAPlayer* player, int direction)
 
     playerSprite = player1Node.pSprite;
     
-    Vec2 destination = mapSprites.at(MAP_MAX_COL*player->tile->getCol() + player->tile->getRow())->getPosition();
+    Vec2 destination = mapSprites.at(MAP_MAX_ROW*player->tile->getRow() + player->tile->getCol())->getPosition();
 
-    auto moveAction = MoveTo::create(0.5, destination);
+    auto moveAction = MoveTo::create(0.3, destination);
     
     moveAction->setTag(MOVE_ACTION_TAG);
     playerSprite->runAction(moveAction);
@@ -180,14 +207,14 @@ void RAGameScene::update(float dt)
             CCLOG("SWIPED LEFT");
             isTouchDown = false;
             
-            gameController->movePlayer(kDIRECTION_LEFT);
+            gameController->playerAction(LEFT);
         }
         else if (initialTouchPos[0] - currentTouchPos[0] < - varScreenSize.width * 0.05)
         {
             CCLOG("SWIPED RIGHT");
             isTouchDown = false;
             
-            gameController->movePlayer(kDIRECTION_RIGHT);
+            gameController->playerAction(RIGHT);
 
         }
         else if (initialTouchPos[1] - currentTouchPos[1] > varScreenSize.width * 0.05)
@@ -195,7 +222,7 @@ void RAGameScene::update(float dt)
             CCLOG("SWIPED DOWN");
             isTouchDown = false;
             
-            gameController->movePlayer(kDIRECTION_DOWN);
+            gameController->playerAction(DOWN);
 
         }
         else if (initialTouchPos[1] - currentTouchPos[1] < - varScreenSize.width * 0.05)
@@ -203,7 +230,7 @@ void RAGameScene::update(float dt)
             CCLOG("SWIPED UP");
             isTouchDown = false;
             
-            gameController->movePlayer(kDIRECTION_UP);
+            gameController->playerAction(UP);
 
         }
     }
