@@ -12,7 +12,7 @@
 
 #include "RAGameController.hpp"
 
-class RASinglePlayerGameController: public RAGameController
+class RASinglePlayerGameController: public RAGameController, public RASceneProtocol
 {
 public:
     
@@ -20,6 +20,11 @@ public:
     ~RASinglePlayerGameController();
     void startGame();
     void playerAction(RADirection direction);
+    
+    //virtual void renderMap (RAMap* map) {}
+    //virtual void loadPlayer (RAPlayer *player) {}
+    void playerMoved (RAPlayer* player, RATile * tile);
+    void playerAttackedCreature (RAPlayer* player, RACreature *creature, float damage);
 
 protected:
     

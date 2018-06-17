@@ -23,8 +23,10 @@ public:
     /* RASceneProtocol Methods */
     void renderMap (RAMap* map);
     void loadPlayer (RAPlayer *player);
-    void playerMoved (RAPlayer* player, int direction);
-    
+    void playerMoved (RAPlayer* player, RATile * tile);
+    void playerAttackedCreature (RAPlayer* player, RACreature *creature, float damage);
+
+
     std::vector<cocos2d::Sprite*> mapSprites;
     
     cocos2d::LayerColor *varBackLayer;
@@ -54,6 +56,14 @@ public:
     
     PlayerNode player1Node;
     PlayerNode player2Node;
+    
+    struct CreatureNode
+    {
+        RACreature* cController;
+        cocos2d::Sprite* cSprite;
+    };
+    
+    CreatureNode creatureExample;
     
 };
 

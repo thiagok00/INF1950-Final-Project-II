@@ -12,17 +12,18 @@
 #define PLAYER2_TURN 2
 
 
-RAGameEngine::RAGameEngine(int gameMode)
+RAGameEngine::RAGameEngine(int gameMode, RASceneProtocol *gameListener)
 {
     player1 = nullptr;
     player2 = nullptr;
+    this->gameListener = gameListener;
     gameMode = gameMode;
     playerTurn = 0;
 }
 
-RAGameEngine* RAGameEngine::createGame(int gameMode)
+RAGameEngine* RAGameEngine::createGame(int gameMode, RASceneProtocol *gameListener)
 {
-    RAGameEngine* eng = new RAGameEngine(gameMode);
+    RAGameEngine* eng = new RAGameEngine(gameMode, gameListener);
     
     if(gameMode == kGAMEMODE_SINGLEPLAYER)
     {
@@ -49,13 +50,12 @@ RAGameEngine* RAGameEngine::createGame(int gameMode)
     return eng;
 }
 
-bool RAGameEngine::movePlayer(RAPlayer *player, RADirection direction)
+bool RAGameEngine::doPlayerAction(RAPlayer *player, RADirection direction)
 {
     if(player == nullptr)
         return false;
     
     RATile *destTile = nullptr;
-    
     switch(direction)
     {
         case RIGHT:
@@ -88,11 +88,18 @@ bool RAGameEngine::movePlayer(RAPlayer *player, RADirection direction)
     {
         //attack
         CCLOG("ATTACK!");
-        return false;
+        
+        gameListener->playerAttackedCreature(player, destTile->creature, player->atkDamage);
+        return true;
+    }
+    //CCLOG("MOVING FROM: %dx%d TO %dx%d",player->tile->getRow(),player->tile->getCol(),destTile->getRow(),destTile->getCol());
+    player->tile = destTile;
+    if(gameListener != nullptr)
+    {
+        gameListener->playerMoved(player, destTile);
     }
     
-    CCLOG("MOVING FROM: %dx%d TO %dx%d",player->tile->getRow(),player->tile->getCol(),destTile->getRow(),destTile->getCol());
-
-    player->tile = destTile;
     return true;
+    
+    
 }

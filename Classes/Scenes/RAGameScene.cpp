@@ -111,9 +111,8 @@ void RAGameScene::renderMap (RAMap* map)
                         creatureSprite = Sprite::create("creature_example.png");
                         break;
                 }
-                
-                //map test
-                //Label *descTile = Label::createWithTTF("", <#const std::string &fontFilePath#>, <#float fontSize#>)
+                this->creatureExample.cSprite = creatureSprite;
+                this->creatureExample.cController = t->creature;
                 
                 creatureSprite->setScale(creatureSize.width/creatureSprite->getContentSize().width);
                 creatureSprite->setAnchorPoint(Vec2(0.5,0.5));
@@ -148,18 +147,24 @@ void RAGameScene::loadPlayer (RAPlayer* player)
     player1Node.pController = player;
 }
 
-void RAGameScene::playerMoved(RAPlayer* player, int direction)
+void RAGameScene::playerMoved(RAPlayer* player, RATile * tile)
 {
     Sprite *playerSprite;
 
     playerSprite = player1Node.pSprite;
     
-    Vec2 destination = mapSprites.at(MAP_MAX_ROW*player->tile->getRow() + player->tile->getCol())->getPosition();
+    Vec2 destination = mapSprites.at(MAP_MAX_ROW*tile->getRow() + tile->getCol())->getPosition();
 
     auto moveAction = MoveTo::create(0.3, destination);
     
     moveAction->setTag(MOVE_ACTION_TAG);
     playerSprite->runAction(moveAction);
+}
+
+void RAGameScene::playerAttackedCreature (RAPlayer* player, RACreature *creature, float damage)
+{
+    auto blinkAction = Blink::create(0.5, 3);
+    creatureExample.cSprite->runAction(blinkAction);
 }
 
 // MARK: Touch Events

@@ -430,6 +430,17 @@
 			path = Enemies;
 			sourceTree = "<group>";
 		};
+		D03B115220D7169E003D24AD /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				D08AF02A20B249A400BB9B17 /* RALevelGenerator.cpp */,
+				D08AF02B20B249A400BB9B17 /* RALevelGenerator.hpp */,
+				D08AF02D20B252A500BB9B17 /* RAGameEngine.cpp */,
+				D08AF02E20B252A500BB9B17 /* RAGameEngine.hpp */,
+			);
+			path = Engine;
+			sourceTree = "<group>";
+		};
 		D08AF03920B25A3000BB9B17 /* GameControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -460,10 +471,7 @@
 			children = (
 				D08AF03A20B25B3700BB9B17 /* Secundary */,
 				D08AF03920B25A3000BB9B17 /* GameControllers */,
-				D08AF02D20B252A500BB9B17 /* RAGameEngine.cpp */,
-				D08AF02E20B252A500BB9B17 /* RAGameEngine.hpp */,
-				D08AF02A20B249A400BB9B17 /* RALevelGenerator.cpp */,
-				D08AF02B20B249A400BB9B17 /* RALevelGenerator.hpp */,
+				D03B115220D7169E003D24AD /* Engine */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

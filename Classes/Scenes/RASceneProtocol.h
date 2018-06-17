@@ -15,7 +15,8 @@ class RASceneProtocol
 public:
     virtual void renderMap (RAMap* map) {}
     virtual void loadPlayer (RAPlayer *player) {}
-    virtual void playerMoved (RAPlayer* player, int direction) {}
+    virtual void playerMoved (RAPlayer* player, RATile * tile) {}
+    virtual void playerAttackedCreature (RAPlayer* player, RACreature *creature, float damage) {}
 };
 
 #endif /* RASceneProtocol_h */

@@ -15,7 +15,7 @@ RASinglePlayerGameController::RASinglePlayerGameController(RASceneProtocol *gs) 
 
 void RASinglePlayerGameController::startGame()
 {
-    gameEngine = RAGameEngine::createGame(kGAMEMODE_SINGLEPLAYER);
+    gameEngine = RAGameEngine::createGame(kGAMEMODE_SINGLEPLAYER, this);
     gameScene->renderMap(gameEngine->gameMap);
     gameScene->loadPlayer(gameEngine->player1);
 }
@@ -25,8 +25,16 @@ void RASinglePlayerGameController::playerAction(RADirection direction)
     if(gameEngine == nullptr)
         return;
 
-    if (gameEngine->movePlayer(gameEngine->player1, direction))
-    {
-        gameScene->playerMoved(gameEngine->player1, direction);
-    }
+    gameEngine->doPlayerAction(gameEngine->player1, direction);
+
+}
+
+void RASinglePlayerGameController::playerMoved (RAPlayer* player, RATile * tile)
+{
+    gameScene->playerMoved(player, tile);
+}
+
+void RASinglePlayerGameController::playerAttackedCreature (RAPlayer* player, RACreature *creature, float damage)
+{
+    gameScene->playerAttackedCreature(player, creature, damage);
 }
