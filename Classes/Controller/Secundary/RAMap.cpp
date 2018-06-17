@@ -15,7 +15,8 @@ RAMap::RAMap()
     {
         map.push_back(NULL);
     }
-    
+    player1RespawnTile = NULL;
+    player2RespawnTile = NULL;
 }
 
 RAMap::~RAMap()

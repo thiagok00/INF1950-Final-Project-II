@@ -22,11 +22,39 @@ public:
     
     /* RASceneProtocol Methods */
     void renderMap (RAMap* map);
+    void loadPlayer (RAPlayer *player);
+    void playerMoved (RAPlayer* player, int direction);
+    
+    std::vector<cocos2d::Sprite*> mapSprites;
     
     cocos2d::LayerColor *varBackLayer;
     cocos2d::Size varScreenSize;
+    
+    //touch events
+    bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event);
+    void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event);
+    void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event);
+    void onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* event);
+    
+    bool isTouchDown;
+    
+    float initialTouchPos[2];
+    float currentTouchPos[2];
+    
+    void update(float dt);
+
     // implement the "static create()" method manually
     //CREATE_FUNC(RAGameScene);
+    
+    struct PlayerNode
+    {
+        RAPlayer* pController;
+        cocos2d::Sprite* pSprite;
+    };
+    
+    PlayerNode player1Node;
+    PlayerNode player2Node;
+    
 };
 
 #endif // __RAGameScene_SCENE_H__

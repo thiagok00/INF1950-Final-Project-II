@@ -15,8 +15,6 @@
 		294D0D641D0D56D500F7F5D4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 294D0D631D0D56D500F7F5D4 /* CoreText.framework */; };
 		3EACC98F19EE6D4300EB3C5E /* res in Resources */ = {isa = PBXBuildFile; fileRef = 3EACC98E19EE6D4300EB3C5E /* res */; };
 		3EACC99019EE6D4300EB3C5E /* res in Resources */ = {isa = PBXBuildFile; fileRef = 3EACC98E19EE6D4300EB3C5E /* res */; };
-		46880B8119C43A67006E1F66 /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 46880B7A19C43A67006E1F66 /* HelloWorld.png */; };
-		46880B8219C43A67006E1F66 /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 46880B7A19C43A67006E1F66 /* HelloWorld.png */; };
 		46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8419C43A87006E1F66 /* AppDelegate.cpp */; };
 		46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8419C43A87006E1F66 /* AppDelegate.cpp */; };
 		46880B8A19C43A87006E1F66 /* RAGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8619C43A87006E1F66 /* RAGameScene.cpp */; };
@@ -62,6 +60,10 @@
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
 		D022E1A020B26C7100BACC96 /* RAMainMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D022E19E20B26C7100BACC96 /* RAMainMenuScene.cpp */; };
 		D022E1A520B276F500BACC96 /* RAMainMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D022E19E20B26C7100BACC96 /* RAMainMenuScene.cpp */; };
+		D03B113C20D6BC73003D24AD /* cave_ground.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B113B20D6BC72003D24AD /* cave_ground.png */; };
+		D03B113D20D6BC73003D24AD /* cave_ground.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B113B20D6BC72003D24AD /* cave_ground.png */; };
+		D03B114220D6C961003D24AD /* player_idle_south.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B114120D6C961003D24AD /* player_idle_south.png */; };
+		D03B114320D6C961003D24AD /* player_idle_south.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B114120D6C961003D24AD /* player_idle_south.png */; };
 		D08AF02C20B249A400BB9B17 /* RALevelGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D08AF02A20B249A400BB9B17 /* RALevelGenerator.cpp */; };
 		D08AF02F20B252A500BB9B17 /* RAGameEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D08AF02D20B252A500BB9B17 /* RAGameEngine.cpp */; };
 		D08AF03220B253F200BB9B17 /* RAPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D08AF03020B253F100BB9B17 /* RAPlayer.cpp */; };
@@ -126,7 +128,6 @@
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		294D0D631D0D56D500F7F5D4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
 		3EACC98E19EE6D4300EB3C5E /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; path = res; sourceTree = "<group>"; };
-		46880B7A19C43A67006E1F66 /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelloWorld.png; sourceTree = "<group>"; };
 		46880B8419C43A87006E1F66 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
 		46880B8519C43A87006E1F66 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		46880B8619C43A87006E1F66 /* RAGameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RAGameScene.cpp; sourceTree = "<group>"; };
@@ -175,6 +176,8 @@
 		D022E19F20B26C7100BACC96 /* RAMainMenuScene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RAMainMenuScene.hpp; sourceTree = "<group>"; };
 		D022E1A620B280CC00BACC96 /* RAUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RAUtil.h; sourceTree = "<group>"; };
 		D022E1A720B28E5700BACC96 /* RASceneProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RASceneProtocol.h; sourceTree = "<group>"; };
+		D03B113B20D6BC72003D24AD /* cave_ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cave_ground.png; sourceTree = "<group>"; };
+		D03B114120D6C961003D24AD /* player_idle_south.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player_idle_south.png; sourceTree = "<group>"; };
 		D08AF02A20B249A400BB9B17 /* RALevelGenerator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RALevelGenerator.cpp; sourceTree = "<group>"; };
 		D08AF02B20B249A400BB9B17 /* RALevelGenerator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RALevelGenerator.hpp; sourceTree = "<group>"; };
 		D08AF02D20B252A500BB9B17 /* RAGameEngine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RAGameEngine.cpp; sourceTree = "<group>"; };
@@ -320,10 +323,11 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D03B114120D6C961003D24AD /* player_idle_south.png */,
+				D03B113B20D6BC72003D24AD /* cave_ground.png */,
 				D08AF03E20B262D700BB9B17 /* placeholderButton.png */,
 				521A8EA819F11F5000D177D7 /* fonts */,
 				3EACC98E19EE6D4300EB3C5E /* res */,
-				46880B7A19C43A67006E1F66 /* HelloWorld.png */,
 			);
 			name = Resources;
 			path = ../Resources;
@@ -332,6 +336,7 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D03B114420D6DE51003D24AD /* View */,
 				D022E1A320B276E900BACC96 /* Scenes */,
 				D09151AA209134ED009649BA /* Controller */,
 				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
@@ -399,6 +404,13 @@
 				D022E19F20B26C7100BACC96 /* RAMainMenuScene.hpp */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		D03B114420D6DE51003D24AD /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		D08AF03920B25A3000BB9B17 /* GameControllers */ = {
@@ -548,13 +560,14 @@
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
+				D03B114220D6C961003D24AD /* player_idle_south.png in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
-				46880B8119C43A67006E1F66 /* HelloWorld.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
 				D08AF03F20B262D700BB9B17 /* placeholderButton.png in Resources */,
+				D03B113C20D6BC73003D24AD /* cave_ground.png in Resources */,
 				521A8EA919F11F5000D177D7 /* fonts in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
@@ -574,10 +587,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46880B8219C43A67006E1F66 /* HelloWorld.png in Resources */,
+				D03B114320D6C961003D24AD /* player_idle_south.png in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 				3EACC99019EE6D4300EB3C5E /* res in Resources */,
 				521A8EAA19F11F5000D177D7 /* fonts in Resources */,
+				D03B113D20D6BC73003D24AD /* cave_ground.png in Resources */,
 				D08AF04020B262D700BB9B17 /* placeholderButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

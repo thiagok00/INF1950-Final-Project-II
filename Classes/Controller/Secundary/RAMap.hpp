@@ -24,9 +24,12 @@ public:
     RATile* getTile(int row, int col);
     void setTile(int row, int col, RATile *t);
     
+    RATile *player1RespawnTile;
+    RATile *player2RespawnTile;
+    
 protected:
     std::vector<RATile*> map;
-    
+
 };
 
 

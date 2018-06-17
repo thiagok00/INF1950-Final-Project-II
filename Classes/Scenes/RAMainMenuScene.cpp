@@ -43,8 +43,6 @@ bool RAMainMenuScene::init()
     
     varBackLayer->addChild(varSinglePlayerButton);
     
-    
-    
     return true;
 }
 
@@ -54,7 +52,7 @@ void RAMainMenuScene::startSinglePlayerCallback(Ref* pSender, cocos2d::ui::Widge
     switch(type)
     {
         case cocos2d::ui::Widget::TouchEventType::ENDED:
-            printf("Starting Single Player Game\n");
+            printf("RAMainMenuScene: Starting Single Player Game\n");
             _director->pushScene(RAGameScene::createScene(kGAMEMODE_SINGLEPLAYER));
             break;
         default:
@@ -62,6 +60,3 @@ void RAMainMenuScene::startSinglePlayerCallback(Ref* pSender, cocos2d::ui::Widge
     }
     
 }
-
-
-

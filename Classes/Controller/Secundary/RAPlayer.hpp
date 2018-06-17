@@ -9,6 +9,11 @@
 #define RAPlayer_hpp
 
 #include <stdio.h>
+#include "RATile.hpp"
+
+enum RADirection {
+    UP, DOWN, LEFT, RIGHT
+};
 
 class RAPlayer
 {
@@ -20,6 +25,8 @@ public:
     int healthPoints;
     int atkDamage;
     int actionPoints;
+    
+    RATile *tile;
 };
 
 #endif /* RAPlayer_hpp */

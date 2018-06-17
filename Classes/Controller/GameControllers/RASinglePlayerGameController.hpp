@@ -19,6 +19,7 @@ public:
     RASinglePlayerGameController(RASceneProtocol *gs);
     ~RASinglePlayerGameController();
     void startGame();
+    void movePlayer(int direction);
 
 protected:
     

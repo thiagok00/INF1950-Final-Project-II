@@ -22,9 +22,13 @@ public:
     static RAGameEngine* createGame(int gameMode);
     RAMap *gameMap;
 
-protected:
     RAPlayer* player1;
     RAPlayer* player2;
+    
+    bool movePlayer(RAPlayer *player, RADirection direction);
+    
+protected:
+
     
     int gameMode;
     int playerTurn;
