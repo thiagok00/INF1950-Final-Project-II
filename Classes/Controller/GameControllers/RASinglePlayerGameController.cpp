@@ -34,13 +34,18 @@ void RASinglePlayerGameController::playerMoved (RAPlayer* player, RATile * tile)
     gameScene->playerMoved(player, tile);
 }
 
-void RASinglePlayerGameController::playerAttackedCreature (RAPlayer* player, RACreature *creature, float damage)
+void RASinglePlayerGameController::playerAttackedCreature (RAPlayer* player, RACreature *creature, int damage, bool died)
 {
-    gameScene->playerAttackedCreature(player, creature, damage);
+    gameScene->playerAttackedCreature(player, creature, damage, died);
 }
 
 void RASinglePlayerGameController::creatureMoved(RACreature *creature, int row, int col)
 {
     gameScene->creatureMoved(creature, row, col);
+}
+
+void RASinglePlayerGameController::creatureAttackedPlayer(RACreature *creature, RAPlayer * player, int damage)
+{
+    gameScene->creatureAttackedPlayer(creature, player, damage);
 }
 

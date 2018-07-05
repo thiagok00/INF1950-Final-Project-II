@@ -161,10 +161,15 @@ void RAGameScene::playerMoved(RAPlayer* player, RATile * tile)
     playerSprite->runAction(moveAction);
 }
 
-void RAGameScene::playerAttackedCreature (RAPlayer* player, RACreature *creature, float damage)
+void RAGameScene::playerAttackedCreature (RAPlayer* player, RACreature *creature, int damage, bool died)
 {
     auto blinkAction = Blink::create(0.5, 3);
     creatureExample.cSprite->runAction(blinkAction);
+    
+    if (died)
+    {
+        //creature died, do something
+    }
 }
 
 void RAGameScene::creatureMoved(RACreature *creature, int row, int col)
@@ -178,6 +183,17 @@ void RAGameScene::creatureMoved(RACreature *creature, int row, int col)
     creatureSprite->runAction(moveAction);
 }
 
+void RAGameScene::creatureAttackedPlayer(RACreature *creature, RAPlayer * player, int damage)
+{
+    auto rt = RotateBy::create(0.5, 0.8);
+    auto rt2 = rt->reverse();
+    auto seq = Sequence::create(rt,rt2, NULL);
+    this->creatureExample.cSprite->runAction(seq);
+    
+    auto blinkAction = Blink::create(0.5, 3);
+    player1Node.pSprite->runAction(blinkAction);
+    
+}
 
 // MARK: Touch Events
 bool RAGameScene::onTouchBegan(Touch* touch, Event* event)

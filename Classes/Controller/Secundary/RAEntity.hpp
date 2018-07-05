@@ -24,12 +24,17 @@ public:
     int healthPoints;
     int maxHealthPoints;
     int atkDamage;
+    int armor;
     
     bool isDead();
     void resetTurn();
     
     int row;
     int col;
+    
+    //returns real damage took (damage - armor)
+    int inflictDamage(int damage);
+    
     
 protected:
     bool dead;

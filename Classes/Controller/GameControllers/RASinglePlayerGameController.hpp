@@ -24,8 +24,9 @@ public:
     //virtual void renderMap (RAMap* map) {}
     //virtual void loadPlayer (RAPlayer *player) {}
     void playerMoved (RAPlayer* player, RATile * tile);
-    void playerAttackedCreature (RAPlayer* player, RACreature *creature, float damage);
+    void playerAttackedCreature (RAPlayer* player, RACreature *creature, int damage, bool died);
     void creatureMoved(RACreature *creature, int row, int col);
+    void creatureAttackedPlayer(RACreature *creature, RAPlayer * player, int damage);
 
 protected:
     

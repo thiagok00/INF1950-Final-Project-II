@@ -17,8 +17,10 @@ public:
     virtual void renderMap (RAMap* map) {}
     virtual void loadPlayer (RAPlayer *player) {}
     virtual void playerMoved (RAPlayer* player, RATile * tile) {}
-    virtual void playerAttackedCreature (RAPlayer* player, RACreature *creature, float damage) {}
+    virtual void playerAttackedCreature (RAPlayer* player, RACreature *creature, int damage, bool died) {}
     virtual void creatureMoved(RACreature *creature, int row, int col) {}
+    virtual void creatureAttackedPlayer(RACreature *creature, RAPlayer * player, int damage) {}
+
 };
 
 #endif /* RASceneProtocol_h */

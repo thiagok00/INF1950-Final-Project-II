@@ -93,13 +93,17 @@ bool RAGameEngine::doPlayerAction(RAPlayer *player, RADirection direction)
             break;
     }
     
-    if(destTile->creature != nullptr)
+    if(destTile->creature != nullptr && !destTile->creature->isDead())
     {
         //attack
         if(player1->actionPoints > 0)
         {
             CCLOG("ATTACK!");
-            gameListener->playerAttackedCreature(player, destTile->creature, player->atkDamage);
+            gameListener->playerAttackedCreature(player,
+                                                 destTile->creature,
+                                                 destTile->creature->inflictDamage(player->atkDamage),
+                                                 destTile->creature->isDead()
+                                                 );
             player->actionPoints--;
             return true;
         }
@@ -169,14 +173,28 @@ void RAGameEngine::switchTurn()
         for(RACreature *cr : gameMap->creatures)
         {
             //TODO: creature AI
-            int row, col;
-            row = cr->row - 1;
-            col = cr->col;
-            if (row < 0) row = 1;
-            gameMap->moveCreatureToTile(cr, row, col);
-            gameListener->creatureMoved(cr, row, col);
-            
-            CCLOG("CRIATURA SE MOVEU PARA X:%D Y:%D",row,col);
+            if (!cr->isDead())
+            {
+                int row, col;
+                row = cr->row - 1;
+                col = cr->col;
+                if (row < 0) row = 1;
+                
+                if(player1->tile == gameMap->getTile(row, col))
+                {
+                    //player standing in destiny tile, so attack
+                    gameListener->creatureAttackedPlayer(cr, player1, cr->atkDamage);
+                }
+                else
+                {
+                    //just move
+                    gameMap->moveCreatureToTile(cr, row, col);
+                    gameListener->creatureMoved(cr, row, col);
+                }
+                
+                
+                CCLOG("CRIATURA SE MOVEU PARA X:%D Y:%D",row,col);
+            }
         }
         switchTurn();
     }

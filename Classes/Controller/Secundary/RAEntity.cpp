@@ -31,3 +31,16 @@ void RAEntity::resetTurn()
     this->speed = this->maxSpeed;
     this->actionPoints = this->maxActionPoints;
 }
+
+int RAEntity::inflictDamage(int damage)
+{
+    int realDamage = damage - armor;
+    if(realDamage < 0) realDamage = 0;
+
+    healthPoints = healthPoints - realDamage;
+    if(healthPoints <= 0)
+    {
+        dead = true;
+    }
+    return realDamage;
+}
