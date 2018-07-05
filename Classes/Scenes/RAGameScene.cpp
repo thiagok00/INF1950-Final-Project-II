@@ -167,6 +167,18 @@ void RAGameScene::playerAttackedCreature (RAPlayer* player, RACreature *creature
     creatureExample.cSprite->runAction(blinkAction);
 }
 
+void RAGameScene::creatureMoved(RACreature *creature, int row, int col)
+{
+    Sprite * creatureSprite = creatureExample.cSprite;
+    Vec2 destination = mapSprites[col + row*MAP_MAX_COL]->getPosition();
+    
+    auto moveAction = MoveTo::create(0.3, destination);
+    
+    moveAction->setTag(MOVE_ACTION_TAG);
+    creatureSprite->runAction(moveAction);
+}
+
+
 // MARK: Touch Events
 bool RAGameScene::onTouchBegan(Touch* touch, Event* event)
 {

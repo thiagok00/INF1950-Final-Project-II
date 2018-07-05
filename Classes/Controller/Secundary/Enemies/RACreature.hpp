@@ -9,6 +9,7 @@
 #define RACreature_hpp
 
 #include <stdio.h>
+#include "RAEntity.hpp"
 
 enum CreatureID
 {
@@ -16,16 +17,17 @@ enum CreatureID
     Cave_rat
 };
 
-class RACreature
+class RACreature: public RAEntity
 {
 public:
-    RACreature(CreatureID id, int maxHealthPoints, int atkDamage);
+    RACreature(CreatureID id, int maxHealthPoints, int atkDamage, int experience);
     ~RACreature();
     
     CreatureID id;
-    int healthPoints;
-    int maxHealthPoints;
-    int atkDamage;
+    int experience;
+    
+    void resetTurn();
+
 };
 
 #endif /* RACreature_hpp */

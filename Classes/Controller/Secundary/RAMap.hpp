@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include "RAMap.hpp"
 #include "RATile.hpp"
+#include "RACreature.hpp"
 
 #define MAP_MAX_ROW 8
 #define MAP_MAX_COL 8
@@ -27,6 +28,11 @@ public:
     RATile *player1RespawnTile;
     RATile *player2RespawnTile;
     
+    bool addCreatureToTile(RACreature* creature, int row, int col);
+    bool moveCreatureToTile(RACreature* creature, int row, int col);
+
+    std::vector<RACreature*> creatures;
+
 protected:
     std::vector<RATile*> map;
 

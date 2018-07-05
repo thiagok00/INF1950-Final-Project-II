@@ -32,7 +32,9 @@ public:
 protected:
 
     int gameMode;
-    int playerTurn;
+    int turnOrder;
+    
+    void switchTurn();
     
 };
 

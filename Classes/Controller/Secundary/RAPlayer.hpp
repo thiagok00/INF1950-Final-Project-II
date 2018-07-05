@@ -10,23 +10,23 @@
 
 #include <stdio.h>
 #include "RATile.hpp"
+#include "RAEntity.hpp"
 
 enum RADirection {
     UP, DOWN, LEFT, RIGHT
 };
 
-class RAPlayer
+class RAPlayer: public RAEntity
 {
 public:
     RAPlayer();
     ~RAPlayer();
     
-    
-    int healthPoints;
-    int atkDamage;
-    int actionPoints;
+    int playerID;
     
     RATile *tile;
+
+protected:
 };
 
 #endif /* RAPlayer_hpp */

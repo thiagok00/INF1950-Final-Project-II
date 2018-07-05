@@ -8,12 +8,10 @@
 #include "RACreature.hpp"
 
 
-RACreature::RACreature(CreatureID id, int maxHealthPoints, int atkDamage)
+RACreature::RACreature(CreatureID id, int maxHealthPoints, int atkDamage, int experience) : RAEntity(maxHealthPoints, atkDamage, 1, 1)
 {
     this->id = id;
-    this->maxHealthPoints = maxHealthPoints;
-    this->healthPoints = maxHealthPoints;
-    this->atkDamage = atkDamage;
+    this->experience = experience;
 }
 
 RACreature::~RACreature()

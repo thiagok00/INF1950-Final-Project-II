@@ -8,8 +8,9 @@
 #include "RAGameEngine.hpp"
 #include "RALevelGenerator.hpp"
 
-#define PLAYER1_TURN 1
-#define PLAYER2_TURN 2
+#define PLAYER1_TURN    1
+#define PLAYER2_TURN    2
+#define CREATURE_TURN   3
 
 
 RAGameEngine::RAGameEngine(int gameMode, RASceneProtocol *gameListener)
@@ -18,7 +19,7 @@ RAGameEngine::RAGameEngine(int gameMode, RASceneProtocol *gameListener)
     player2 = nullptr;
     this->gameListener = gameListener;
     gameMode = gameMode;
-    playerTurn = 0;
+    turnOrder = 0;
 }
 
 RAGameEngine* RAGameEngine::createGame(int gameMode, RASceneProtocol *gameListener)
@@ -28,6 +29,7 @@ RAGameEngine* RAGameEngine::createGame(int gameMode, RASceneProtocol *gameListen
     if(gameMode == kGAMEMODE_SINGLEPLAYER)
     {
         eng->player1 = new RAPlayer();
+        eng->player1->playerID = PLAYER1_TURN;
         // ....
     }
     else
@@ -47,12 +49,19 @@ RAGameEngine* RAGameEngine::createGame(int gameMode, RASceneProtocol *gameListen
     }
     //eng->player1->tile = eng->gameMap[]
     
+    eng->turnOrder = PLAYER1_TURN;
+    eng->player1->resetTurn();
+    
     return eng;
 }
 
 bool RAGameEngine::doPlayerAction(RAPlayer *player, RADirection direction)
 {
     if(player == nullptr)
+        return false;
+    
+    //Not player turn
+    if(turnOrder != player->playerID)
         return false;
     
     RATile *destTile = nullptr;
@@ -87,19 +96,88 @@ bool RAGameEngine::doPlayerAction(RAPlayer *player, RADirection direction)
     if(destTile->creature != nullptr)
     {
         //attack
-        CCLOG("ATTACK!");
-        
-        gameListener->playerAttackedCreature(player, destTile->creature, player->atkDamage);
-        return true;
+        if(player1->actionPoints > 0)
+        {
+            CCLOG("ATTACK!");
+            gameListener->playerAttackedCreature(player, destTile->creature, player->atkDamage);
+            player->actionPoints--;
+            return true;
+        }
+        else
+        {
+            CCLOG("FAIL ATTACK! - NO ACTION POINTS");
+        }
     }
     //CCLOG("MOVING FROM: %dx%d TO %dx%d",player->tile->getRow(),player->tile->getCol(),destTile->getRow(),destTile->getCol());
-    player->tile = destTile;
-    if(gameListener != nullptr)
+    if (player->speed > 0 )
     {
-        gameListener->playerMoved(player, destTile);
+        player->tile = destTile;
+        if(gameListener != nullptr)
+        {
+            gameListener->playerMoved(player, destTile);
+        }
+        player->speed--;
     }
-    
+    if (player->speed == 0 || player->actionPoints == 0)
+    {
+        switchTurn();
+
+    }
     return true;
     
+}
+
+void RAGameEngine::switchTurn()
+{
+    int nextTurn = -1;
+    if(turnOrder == PLAYER1_TURN)
+    {
+        if(player2 != nullptr && !player2->isDead())
+        {
+            nextTurn = PLAYER2_TURN;
+        }
+        else
+        {
+            nextTurn = CREATURE_TURN;
+        }
+    }
+    else if(turnOrder == PLAYER2_TURN)
+    {
+            nextTurn = CREATURE_TURN;
+    }
+    else if(turnOrder == CREATURE_TURN)
+    {
+        if(player1 != nullptr && !player1->isDead())
+        {
+            nextTurn = PLAYER1_TURN;
+        }
+        else if (player2 != nullptr && !player2->isDead())
+        {
+            nextTurn = PLAYER2_TURN;
+        }
+    }
     
+    turnOrder = nextTurn;
+
+    if(turnOrder == PLAYER1_TURN)
+        player1->resetTurn();
+    if(turnOrder == PLAYER2_TURN)
+        player2->resetTurn();
+    if(turnOrder == CREATURE_TURN)
+    {
+        //creature actions...
+        for(RACreature *cr : gameMap->creatures)
+        {
+            //TODO: creature AI
+            int row, col;
+            row = cr->row - 1;
+            col = cr->col;
+            if (row < 0) row = 1;
+            gameMap->moveCreatureToTile(cr, row, col);
+            gameListener->creatureMoved(cr, row, col);
+            
+            CCLOG("CRIATURA SE MOVEU PARA X:%D Y:%D",row,col);
+        }
+        switchTurn();
+    }
 }

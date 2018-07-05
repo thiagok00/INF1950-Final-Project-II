@@ -25,6 +25,7 @@ public:
     //virtual void loadPlayer (RAPlayer *player) {}
     void playerMoved (RAPlayer* player, RATile * tile);
     void playerAttackedCreature (RAPlayer* player, RACreature *creature, float damage);
+    void creatureMoved(RACreature *creature, int row, int col);
 
 protected:
     

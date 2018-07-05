@@ -33,3 +33,44 @@ void RAMap::setTile(int row, int col, RATile *t)
 {
     this->map[col + row*MAP_MAX_COL] = t;
 }
+
+bool RAMap::addCreatureToTile(RACreature* creature, int row, int col)
+{
+    RATile* tile = this->getTile(row, col);
+    if(tile->creature == nullptr)
+    {
+        creature->row = row;
+        creature->col = col;
+        tile->creature = creature;
+        creatures.push_back(creature);
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool RAMap::moveCreatureToTile(RACreature* creature, int row, int col)
+{
+    //TODO: improve this
+    for (RATile * t : this->map)
+    {
+        if (t->creature == creature)
+        {
+            t->creature = nullptr;
+            RATile *destTile = this->getTile(row, col);
+            if (destTile != nullptr)
+            {
+                destTile->creature = creature;
+                creature->row = row;
+                creature->col = col;
+                return true;
+            }
+            return false;
+        }
+    }
+    return false;
+}
+
+

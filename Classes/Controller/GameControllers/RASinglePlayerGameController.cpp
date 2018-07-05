@@ -38,3 +38,9 @@ void RASinglePlayerGameController::playerAttackedCreature (RAPlayer* player, RAC
 {
     gameScene->playerAttackedCreature(player, creature, damage);
 }
+
+void RASinglePlayerGameController::creatureMoved(RACreature *creature, int row, int col)
+{
+    gameScene->creatureMoved(creature, row, col);
+}
+

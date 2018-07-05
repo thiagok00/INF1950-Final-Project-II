@@ -9,6 +9,7 @@
 #define RASceneProtocol_h
 #include "RAMap.hpp"
 #include "RAPlayer.hpp"
+#include "RACreature.hpp"
 
 class RASceneProtocol
 {
@@ -17,6 +18,7 @@ public:
     virtual void loadPlayer (RAPlayer *player) {}
     virtual void playerMoved (RAPlayer* player, RATile * tile) {}
     virtual void playerAttackedCreature (RAPlayer* player, RACreature *creature, float damage) {}
+    virtual void creatureMoved(RACreature *creature, int row, int col) {}
 };
 
 #endif /* RASceneProtocol_h */
