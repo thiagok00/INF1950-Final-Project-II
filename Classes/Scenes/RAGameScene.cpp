@@ -8,6 +8,7 @@ USING_NS_CC;
 #define zORDER_CREATURE 102
 #define zORDER_PLAYER 103
 #define zORDER_TILE 101
+#define zORDER_EFFECTS 104
 #define zORDER_HUD 999
 
 
@@ -47,6 +48,22 @@ bool RAGameScene::init(int gameMode)
     varBackLayer->setPosition(Vec2(0,0));
     this->addChild(varBackLayer, 0);
     
+    //HUD
+    varExperienceLabel = Label::createWithTTF("----", "fonts/arial.ttf", 32);
+    varExperienceLabel->setAnchorPoint(Vec2(0.5, 0.5));
+    varExperienceLabel->setPosition(Vec2(varScreenSize.width/2.0f, varScreenSize.height - varExperienceLabel->getBoundingBox().size.height/2.0f));
+    
+    healthBarBaseSize = Size(varScreenSize.width*0.6, varScreenSize.height*0.08);
+    healthBarBase = LayerColor::create(Color4B::BLACK, healthBarBaseSize.width, healthBarBaseSize.height);
+    healthBarBase->setAnchorPoint(Vec2(0.5,0.5));
+    healthBarBase->setPosition(varScreenSize.width*0.3, healthBarBase->getBoundingBox().size.height/2.0f);
+    varBackLayer->addChild(healthBarBase);
+    
+    healthBar = LayerColor::create(Color4B::RED, healthBarBaseSize.width, healthBarBaseSize.height);
+    healthBar->setAnchorPoint(Vec2(0.0,0.0));
+    healthBar->setPosition(Vec2(0,0));
+    healthBarBase->addChild(healthBar);
+    
     if(gameMode == kGAMEMODE_SINGLEPLAYER)
     {
         gameController = new RASinglePlayerGameController(this);
@@ -65,17 +82,66 @@ bool RAGameScene::init(int gameMode)
     initialTouchPos[0] = 0;
     initialTouchPos[1] = 0;
     this->scheduleUpdate();
+    /*************/
+
+    varBackLayer->addChild(varExperienceLabel);
 
     
     return true;
 }
 
+//
+//MARK: AUX Methods
+//
+
+void RAGameScene::auxUpdateExperienceLabelText(int experiencePoints)
+{
+    std::ostringstream oss1;
+    oss1 << experiencePoints;
+    std::string buf = oss1.str();
+    
+    varExperienceLabel->setString(buf);
+}
+
+void RAGameScene::auxUpdateHealthBar(float healthPercentage)
+{
+    healthBar->removeFromParentAndCleanup(true);
+    healthBar = LayerColor::create(Color4B::RED, healthBarBaseSize.width*healthPercentage, healthBarBaseSize.height);
+    healthBar->setAnchorPoint(Vec2(0.5,0.5));
+    healthBar->setPosition(Vec2(0,0));
+    healthBarBase->addChild(healthBar);
+}
+
+Label* RAGameScene::auxCreateDamageLabel(int damage, Color4B textColor, Vec2 pos)
+{
+    std::ostringstream oss1;
+    oss1 << damage;
+    std::string buf = oss1.str();
+    Label *damageLabel = Label::createWithTTF(buf, "fonts/arial.ttf", 25);
+    damageLabel->setAnchorPoint(Vec2(0.5,0.5));
+    damageLabel->setTextColor(textColor);
+    damageLabel->setPosition(pos);
+    varBackLayer->addChild(damageLabel, zORDER_EFFECTS);
+    
+    auto act1 = MoveBy::create(1, Vec2(0, tileSize.width));
+    auto act2 = FadeOut::create(1);
+    
+    damageLabel->runAction(act1);
+    damageLabel->runAction(act2);
+    //TODO: remove from parent damageLabel
+    
+    
+    return damageLabel;
+}
+
+
+//
 //  MARK: RASceneProtocol Methods
+//
 void RAGameScene::renderMap (RAMap* map)
 {
     printf("RAGameScene: Rendering Map\n");
 
-    Size tileSize;
     tileSize.width = varScreenSize.width/MAP_MAX_ROW;
     tileSize.height = tileSize.width;
     
@@ -95,7 +161,6 @@ void RAGameScene::renderMap (RAMap* map)
             tileSprite->setScale(tileSize.width/tileSprite->getContentSize().width);
             tileSprite->setAnchorPoint(Vec2(0.5,0.5));
             tileSprite->setPosition(xPos,yPos);
-            CCLOG("CONTINHA: %d x %d",i,j);
 
             //render creature of tile
             if(t->creature != nullptr)
@@ -145,6 +210,8 @@ void RAGameScene::loadPlayer (RAPlayer* player)
     
     player1Node.pSprite = playerSprite;
     player1Node.pController = player;
+    
+    auxUpdateExperienceLabelText(player->getExperiencePoints());
 }
 
 void RAGameScene::playerMoved(RAPlayer* player, RATile * tile)
@@ -166,9 +233,16 @@ void RAGameScene::playerAttackedCreature (RAPlayer* player, RACreature *creature
     auto blinkAction = Blink::create(0.5, 3);
     creatureExample.cSprite->runAction(blinkAction);
     
+    //Damage Feedback
+    auxCreateDamageLabel(damage,Color4B::YELLOW,creatureExample.cSprite->getPosition());
+    
+
+    
+    
     if (died)
     {
         //creature died, do something
+        auxUpdateExperienceLabelText(player->getExperiencePoints());
     }
 }
 
@@ -190,9 +264,12 @@ void RAGameScene::creatureAttackedPlayer(RACreature *creature, RAPlayer * player
     auto seq = Sequence::create(rt,rt2, NULL);
     this->creatureExample.cSprite->runAction(seq);
     
+    auxCreateDamageLabel(damage, Color4B::RED, player1Node.pSprite->getPosition());
+    
     auto blinkAction = Blink::create(0.5, 3);
     player1Node.pSprite->runAction(blinkAction);
     
+    auxUpdateHealthBar((float)player->healthPoints/(float)player->maxHealthPoints);
 }
 
 // MARK: Touch Events

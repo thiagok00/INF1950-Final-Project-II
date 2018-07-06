@@ -23,10 +23,14 @@ public:
     ~RAPlayer();
     
     int playerID;
-    
     RATile *tile;
-
+    
+    int getExperiencePoints();
+    bool addExperiencePoints(int experience);
+    
 protected:
+    int experiencePoints;
+    int experienceMultiplier;
 };
 
 #endif /* RAPlayer_hpp */

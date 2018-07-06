@@ -13,6 +13,21 @@
 
 class RAGameScene : public cocos2d::Scene, public RASceneProtocol
 {
+protected:
+    //HUD
+    cocos2d::Label *varExperienceLabel;
+    void auxUpdateExperienceLabelText(int experiencePoints);
+    
+    cocos2d::Size healthBarBaseSize;
+    cocos2d::LayerColor *healthBarBase;
+    cocos2d::LayerColor *healthBar;
+    
+    //0.0 to 1.0
+    void auxUpdateHealthBar(float healthPercentage);
+    
+    cocos2d::Label* auxCreateDamageLabel(int damage, cocos2d::Color4B textColor, cocos2d::Vec2 pos);
+    
+    cocos2d::Size tileSize;
 public:
     static cocos2d::Scene* createScene(int gameMode);
 

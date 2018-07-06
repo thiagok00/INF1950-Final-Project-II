@@ -13,7 +13,7 @@
 class RAEntity
 {
 public:
-    RAEntity(int maxHealth, int atkDamage, int maxSpeed, int maxActionPoints);
+    RAEntity(int maxHealth, int baseAtkDamage, int maxSpeed, int maxActionPoints, int armor);
     
     
     int actionPoints;
@@ -23,8 +23,6 @@ public:
     
     int healthPoints;
     int maxHealthPoints;
-    int atkDamage;
-    int armor;
     
     bool isDead();
     void resetTurn();
@@ -34,10 +32,14 @@ public:
     
     //returns real damage took (damage - armor)
     int inflictDamage(int damage);
-    
+    int getAtkDamage();
     
 protected:
     bool dead;
+    int baseAtkDamage;
+    int armor;
+
+
 
 };
 

@@ -20,7 +20,7 @@ enum CreatureID
 class RACreature: public RAEntity
 {
 public:
-    RACreature(CreatureID id, int maxHealthPoints, int atkDamage, int experience);
+    RACreature(CreatureID id, int maxHealthPoints, int atkDamage, int experience, int armor);
     ~RACreature();
     
     CreatureID id;

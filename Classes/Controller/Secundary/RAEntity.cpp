@@ -7,11 +7,11 @@
 
 #include "RAEntity.hpp"
 
-RAEntity::RAEntity(int maxHealth, int atkDamage, int maxSpeed, int maxActionPoints)
+RAEntity::RAEntity(int maxHealth, int baseAtkDamage, int maxSpeed, int maxActionPoints, int armor)
 {
     this->maxHealthPoints = maxHealth;
     this->healthPoints = maxHealth;
-    this->atkDamage = atkDamage;
+    this->baseAtkDamage = baseAtkDamage;
     
     this->maxActionPoints = maxActionPoints;
     this->dead = false;
@@ -19,6 +19,8 @@ RAEntity::RAEntity(int maxHealth, int atkDamage, int maxSpeed, int maxActionPoin
     
     this->actionPoints = 0;
     this->speed = 0;
+    
+    this->armor = armor;
 }
 
 bool RAEntity::isDead()
@@ -43,4 +45,9 @@ int RAEntity::inflictDamage(int damage)
         dead = true;
     }
     return realDamage;
+}
+
+int RAEntity::getAtkDamage()
+{
+    return this->baseAtkDamage;
 }

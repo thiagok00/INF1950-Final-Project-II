@@ -99,12 +99,21 @@ bool RAGameEngine::doPlayerAction(RAPlayer *player, RADirection direction)
         if(player1->actionPoints > 0)
         {
             CCLOG("ATTACK!");
+            int damageTook = destTile->creature->inflictDamage(player->getAtkDamage());
+            bool isDead = destTile->creature->isDead();
+            
+            //add experience
+            if (destTile->creature->isDead())
+            {
+                player->addExperiencePoints(destTile->creature->experience);
+            }
+            player->actionPoints--;
+
             gameListener->playerAttackedCreature(player,
                                                  destTile->creature,
-                                                 destTile->creature->inflictDamage(player->atkDamage),
-                                                 destTile->creature->isDead()
+                                                 damageTook,
+                                                 isDead
                                                  );
-            player->actionPoints--;
             return true;
         }
         else
@@ -183,7 +192,8 @@ void RAGameEngine::switchTurn()
                 if(player1->tile == gameMap->getTile(row, col))
                 {
                     //player standing in destiny tile, so attack
-                    gameListener->creatureAttackedPlayer(cr, player1, cr->atkDamage);
+                    int damageTook = player1->inflictDamage(cr->getAtkDamage());
+                    gameListener->creatureAttackedPlayer(cr, player1, damageTook);
                 }
                 else
                 {
