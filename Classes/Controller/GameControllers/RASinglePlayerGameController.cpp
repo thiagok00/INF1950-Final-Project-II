@@ -29,6 +29,11 @@ void RASinglePlayerGameController::playerAction(RADirection direction)
 
 }
 
+bool RASinglePlayerGameController::playerUseItem(RAPlayer *player, int slot)
+{
+    return gameEngine->doPlayerUseItem(player, slot);
+}
+
 void RASinglePlayerGameController::playerMoved (RAPlayer* player, RATile * tile)
 {
     gameScene->playerMoved(player, tile);
@@ -49,3 +54,7 @@ void RASinglePlayerGameController::creatureAttackedPlayer(RACreature *creature, 
     gameScene->creatureAttackedPlayer(creature, player, damage);
 }
 
+void RASinglePlayerGameController::playerMovedAndCaughtItem (RAPlayer* player, RATile * tile, RAItem *item)
+{
+    gameScene->playerMovedAndCaughtItem(player, tile, item);
+}

@@ -17,7 +17,7 @@ class RATargetItem: public RAItem
 public:
     RATargetItem(int charges);
     
-    virtual void doAction(RAEntity *target) {};
+    virtual bool doAction(RAEntity *target) {return false;};
 };
 
 class RAOffensiveTargetItem: public RATargetItem
@@ -26,7 +26,10 @@ public:
     
     RAOffensiveTargetItem(int charges, int damage);
     
-    void doAction(RAEntity *target);
+    bool doAction(RAEntity *target);
+    
+    //Factory Methods
+    static RAOffensiveTargetItem* createMissileRune();
     
 protected:
     int damage;

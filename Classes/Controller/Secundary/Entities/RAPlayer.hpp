@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include "RATile.hpp"
 #include "RAEntity.hpp"
+#include "RAItem.hpp"
 
 enum RADirection {
     UP, DOWN, LEFT, RIGHT
@@ -28,9 +29,23 @@ public:
     int getExperiencePoints();
     bool addExperiencePoints(int experience);
     
+    int manaPoints;
+    int maxManaPoints;
+    
+    //Slots Methods
+    bool addItemToSlot(RAItem* item);
+    bool isSlotFull();
+    
+    RAItem * getItemAtSlot(int slot);
+    void removeItemAtSlot(int slot);
+    
 protected:
     int experiencePoints;
     int experienceMultiplier;
+    
+    RAItem* itensSlots[6];
+    int occupiedSlots;
+    int maxSlots;
 };
 
 #endif /* RAPlayer_hpp */

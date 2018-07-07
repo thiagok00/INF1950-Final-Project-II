@@ -27,6 +27,8 @@ public:
     ~RAGameController();
     virtual void startGame() {}
     virtual void playerAction(RADirection direction) {}
+    virtual bool playerUseItem(RAPlayer *player, int slot) {return false;}
+
 
 protected:
     RAGameEngine *gameEngine;

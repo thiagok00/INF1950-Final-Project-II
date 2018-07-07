@@ -7,6 +7,7 @@
 
 #include "RALevelGenerator.hpp"
 #include "RACreature.hpp"
+#include "RASelfUseItem.hpp"
 
 RAMap* RALevelGenerator::generateLevel(int difficulty)
 {
@@ -30,8 +31,7 @@ RAMap* RALevelGenerator::generateLevel(int difficulty)
     map->player1RespawnTile = map->getTile(1, 1);
     map->player2RespawnTile = map->getTile(1, 2);
 
-    //RAItem * item = new RAItem(ItemID(Healing_Rune));
-    
-    map->addItemToTile(item, 2, 1);
+    RASelfUseItem * item = RAHealItem::createHealthRune();
+    map->addItemToTile(item, 2, 2);
     return map;
 }

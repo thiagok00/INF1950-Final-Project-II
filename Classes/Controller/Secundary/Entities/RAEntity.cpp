@@ -43,6 +43,7 @@ int RAEntity::inflictDamage(int damage)
     if(healthPoints <= 0)
     {
         dead = true;
+        healthPoints = 0;
     }
     return realDamage;
 }

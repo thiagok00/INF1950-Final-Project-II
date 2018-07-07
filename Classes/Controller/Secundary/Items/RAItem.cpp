@@ -10,7 +10,8 @@
 
 RAItem::RAItem(ItemID id, int charge)
 {
-
+    this->id = id;
+    this->charges = charge;
 }
 
 
@@ -18,3 +19,9 @@ int RAItem::getCharges()
 {
     return this->charges;
 }
+
+ItemID RAItem::getItemID()
+{
+    return this->id;
+}
+

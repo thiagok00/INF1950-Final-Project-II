@@ -21,9 +21,12 @@ class RAItem
     
 protected:
     int charges;
-public:
+    ItemID id;
     RAItem(ItemID id, int charges);
+    virtual ~RAItem() {}
     
+public:
     int getCharges();
+    ItemID getItemID();
 };
 #endif /* RAItem_hpp */

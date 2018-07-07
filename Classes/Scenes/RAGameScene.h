@@ -41,6 +41,7 @@ public:
     void renderMap (RAMap* map);
     void loadPlayer (RAPlayer *player);
     void playerMoved (RAPlayer* player, RATile * tile);
+    void playerMovedAndCaughtItem (RAPlayer* player, RATile * tile, RAItem *item);
     void playerAttackedCreature (RAPlayer* player, RACreature *creature, int damage, bool died);
     void creatureMoved(RACreature *creature, int row, int col);
     void creatureAttackedPlayer(RACreature *creature, RAPlayer * player, int damage);
@@ -95,6 +96,13 @@ public:
     
     CreatureNode creatureExample;
     
+    struct ItemNode
+    {
+        RAItem *iController;
+        cocos2d::LayerColor* iSprite;
+    };
+    
+    ItemNode itemExample;
 };
 
 #endif // __RAGameScene_SCENE_H__

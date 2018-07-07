@@ -18,7 +18,7 @@ public:
 
     RASelfUseItem(int charges);
     
-    virtual void doAction(RAPlayer *owner){};
+    virtual bool doAction(RAPlayer *owner){};
 
 };
 
@@ -26,12 +26,17 @@ class RAHealItem : public RASelfUseItem
 {
 public:
     
-    RAHealItem(int charges, int heal);
+    RAHealItem(int charges, int healthPointsHeal, int manaPointsHeal);
     
-    void doAction(RAPlayer *owner);
+    bool doAction(RAPlayer *owner);
     
+    //Factory Methods
+    static RAHealItem* createHealthRune();
+    static RAHealItem* createManaPotion();
+
 protected:
-    int heal;
+    int healthPointsHeal;
+    int manaPointsHeal;
 };
 
 

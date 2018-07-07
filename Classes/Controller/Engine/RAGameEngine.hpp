@@ -28,7 +28,7 @@ public:
     RASceneProtocol *gameListener;
     
     bool doPlayerAction(RAPlayer *player, RADirection direction);
-    
+    bool doPlayerUseItem(RAPlayer *player, int slot);
 protected:
 
     int gameMode;

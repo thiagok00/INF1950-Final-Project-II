@@ -18,11 +18,21 @@ RAOffensiveTargetItem::RAOffensiveTargetItem(int charges, int damage) : RATarget
     this->damage = damage;
 }
 
-void RAOffensiveTargetItem::doAction(RAEntity *target)
+bool RAOffensiveTargetItem::doAction(RAEntity *target)
 {
     if(charges > 0)
     {
         target->inflictDamage(damage);
         charges--;
+        return true;
     }
+    return false;
+}
+
+RAOffensiveTargetItem* createMissileRune()
+{
+    const int charges = 5;
+    const int damage = 5;
+    auto missileRune = new RAOffensiveTargetItem(charges, damage);
+    return missileRune;
 }

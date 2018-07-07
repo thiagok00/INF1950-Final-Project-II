@@ -118,7 +118,13 @@ bool RAGameScene::init(int gameMode)
         btnVec[i]->addTouchEventListener(CC_CALLBACK_2(RAGameScene::useItemSlotButton, this));
         varBackLayer->addChild(btnVec[i], zORDER_HUD);
     }
-    
+    varItemSlot1Button = btnVec[0];
+    varItemSlot2Button = btnVec[1];
+    varItemSlot3Button = btnVec[2];
+    varItemSlot4Button = btnVec[3];
+    varItemSlot5Button = btnVec[4];
+    varItemSlot6Button = btnVec[5];
+
     return true;
 }
 
@@ -226,6 +232,8 @@ void RAGameScene::renderMap (RAMap* map)
                 itemSpr->setAnchorPoint(Vec2(0.5, 0.5));
                 tileSprite->addChild(itemSpr, zORDER_ITEM);
                 
+                itemExample.iSprite = itemSpr;
+                itemExample.iController = t->droppedItem;
             }
             
             mapSprites.push_back(tileSprite);
@@ -269,6 +277,17 @@ void RAGameScene::playerMoved(RAPlayer* player, RATile * tile)
     
     moveAction->setTag(MOVE_ACTION_TAG);
     playerSprite->runAction(moveAction);
+}
+
+void RAGameScene::playerMovedAndCaughtItem (RAPlayer* player, RATile * tile, RAItem *item)
+{
+    playerMoved(player, tile);
+    
+    //TODO: implement this right
+    this->itemExample.iSprite->removeFromParentAndCleanup(true);
+    this->varItemSlot1Button->setColor(Color3B::MAGENTA);
+    
+    
 }
 
 void RAGameScene::playerAttackedCreature (RAPlayer* player, RACreature *creature, int damage, bool died)
@@ -391,10 +410,18 @@ void RAGameScene::update(float dt)
 
 void RAGameScene::useItemSlotButton(Ref* pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+    int slot = (int) pSender->_ID;
+    
+    RAPlayer *player = player1Node.pController;
+
     switch(type)
     {
         case cocos2d::ui::Widget::TouchEventType::ENDED:
             CCLOG("clicked button tag %u", pSender->_ID);
+            if(gameController->playerUseItem(player1Node.pController, slot))
+                varItemSlot1Button->setColor(Color3B::RED);
+            //FIXME: tirar essa linha
+            this->auxUpdateHealthBar((float)player->healthPoints/(float)player->maxHealthPoints);
             break;
         default:
             break;

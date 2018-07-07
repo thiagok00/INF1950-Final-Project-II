@@ -7,6 +7,7 @@
 
 #include "RAGameEngine.hpp"
 #include "RALevelGenerator.hpp"
+#include "RASelfUseItem.hpp"
 
 #define PLAYER1_TURN    1
 #define PLAYER2_TURN    2
@@ -125,20 +126,66 @@ bool RAGameEngine::doPlayerAction(RAPlayer *player, RADirection direction)
     if (player->speed > 0 )
     {
         player->tile = destTile;
-        if(gameListener != nullptr)
+        player->speed--;
+        
+        if(destTile->droppedItem != nullptr && player->addItemToSlot(destTile->droppedItem))
+        {
+            //player caught item
+            RAItem *caughtItem = destTile->droppedItem;
+            destTile->droppedItem = nullptr;
+            if (gameListener != nullptr)
+            {
+                gameListener->playerMovedAndCaughtItem(player, destTile, caughtItem);
+            }
+        }
+        else if(gameListener != nullptr)
         {
             gameListener->playerMoved(player, destTile);
         }
-        player->speed--;
     }
     if (player->speed == 0 || player->actionPoints == 0)
     {
         switchTurn();
-
     }
     return true;
     
 }
+
+bool RAGameEngine::doPlayerUseItem(RAPlayer *player, int slot)
+{
+    if(turnOrder == PLAYER1_TURN)
+    {
+        if(player->actionPoints > 0)
+        {
+            auto baseItem = player->getItemAtSlot(slot);
+            if (baseItem == nullptr)
+                return false;
+            switch (baseItem->getItemID()) {
+                case idItemTarget:
+                    
+                    break;
+                case idItemSelfUse:
+                    if(RASelfUseItem *item = dynamic_cast<RASelfUseItem*>(baseItem))
+                    {
+                        item->doAction(player);
+                    }
+                    break;
+                case idItemAreaItem:
+                    //TODO: not implemented yet
+                    break;
+            }
+            player->actionPoints--;
+            
+            if (baseItem->getCharges() <= 0)
+            {
+                player->removeItemAtSlot(slot);
+            }
+            return true;
+        }
+    }
+    return false;
+}
+
 
 void RAGameEngine::switchTurn()
 {
