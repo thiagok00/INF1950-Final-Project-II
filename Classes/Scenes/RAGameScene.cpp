@@ -56,21 +56,36 @@ bool RAGameScene::init(int gameMode)
     varBackLayer->setPosition(Vec2(0,0));
     this->addChild(varBackLayer, 0);
     
+    //
     //HUD
+    //
     varExperienceLabel = Label::createWithTTF("----", "fonts/arial.ttf", 32);
     varExperienceLabel->setAnchorPoint(Vec2(0.5, 0.5));
     varExperienceLabel->setPosition(Vec2(varScreenSize.width/2.0f, varScreenSize.height - varExperienceLabel->getBoundingBox().size.height/2.0f));
     
-    healthBarBaseSize = Size(varScreenSize.width*0.6, varScreenSize.height*0.08);
+    //health bar
+    healthBarBaseSize = Size(varScreenSize.width*0.6, varScreenSize.height*0.05);
     healthBarBase = LayerColor::create(Color4B::BLACK, healthBarBaseSize.width, healthBarBaseSize.height);
     healthBarBase->setAnchorPoint(Vec2(0.5,0.5));
-    healthBarBase->setPosition(varScreenSize.width*0.3, healthBarBase->getBoundingBox().size.height/2.0f);
+    healthBarBase->setPosition(varScreenSize.width*0.3, healthBarBase->getBoundingBox().size.height*2);
     varBackLayer->addChild(healthBarBase);
     
     healthBar = LayerColor::create(Color4B::RED, healthBarBaseSize.width, healthBarBaseSize.height);
     healthBar->setAnchorPoint(Vec2(0.0,0.0));
     healthBar->setPosition(Vec2(0,0));
     healthBarBase->addChild(healthBar);
+    
+    //mana bar
+    manaBarBase = LayerColor::create(Color4B::BLACK, healthBarBaseSize.width, healthBarBaseSize.height);
+    manaBarBase->setAnchorPoint(Vec2(0.5,0.5));
+    manaBarBase->setPosition(varScreenSize.width*0.3, manaBarBase->getBoundingBox().size.height/2.0f);
+    varBackLayer->addChild(manaBarBase);
+    
+    manaBar = LayerColor::create(Color4B::BLUE, healthBarBaseSize.width, healthBarBaseSize.height);
+    manaBar->setAnchorPoint(Vec2(0.0,0.0));
+    manaBar->setPosition(Vec2(0,0));
+    manaBarBase->addChild(manaBar);
+    
     
     if(gameMode == kGAMEMODE_SINGLEPLAYER)
     {
@@ -149,6 +164,16 @@ void RAGameScene::auxUpdateHealthBar(float healthPercentage)
     healthBar->setPosition(Vec2(0,0));
     healthBarBase->addChild(healthBar);
 }
+
+void RAGameScene::auxUpdateManaBar(float manaPercentage)
+{
+    manaBar->removeFromParentAndCleanup(true);
+    manaBar = LayerColor::create(Color4B::BLUE, healthBarBaseSize.width*manaPercentage, healthBarBaseSize.height);
+    manaBar->setAnchorPoint(Vec2(0.5,0.5));
+    manaBar->setPosition(Vec2(0,0));
+    manaBarBase->addChild(healthBar);
+}
+
 
 Label* RAGameScene::auxCreateDamageLabel(int damage, Color4B textColor, Vec2 pos)
 {

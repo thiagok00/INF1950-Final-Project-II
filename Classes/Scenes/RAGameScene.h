@@ -23,9 +23,13 @@ protected:
     cocos2d::LayerColor *healthBarBase;
     cocos2d::LayerColor *healthBar;
 
+    cocos2d::LayerColor *manaBarBase;
+    cocos2d::LayerColor *manaBar;
     
     //0.0 to 1.0
     void auxUpdateHealthBar(float healthPercentage);
+    void auxUpdateManaBar(float manaPercentage);
+
     
     cocos2d::Label* auxCreateDamageLabel(int damage, cocos2d::Color4B textColor, cocos2d::Vec2 pos);
     
