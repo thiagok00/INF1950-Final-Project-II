@@ -10,6 +10,7 @@
 
 #include <stdio.h>
 #include "RACreature.hpp"
+#include "RAItem.hpp"
 
 class RATile
 {
@@ -21,8 +22,9 @@ public:
     int getRow();
     int getCol();
     bool isWakable();
-    const char * getDescription();
-    RACreature *creature;
+    const char  * getDescription();
+    RACreature  *creature;
+    RAItem      *droppedItem;
     
 protected:
     int row;

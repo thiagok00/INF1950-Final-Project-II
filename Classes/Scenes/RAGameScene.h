@@ -9,6 +9,7 @@
 //Game Controllers
 #include "RAGameController.hpp"
 #include "RASinglePlayerGameController.hpp"
+#include "ui/CocosGUI.h"
 
 
 class RAGameScene : public cocos2d::Scene, public RASceneProtocol
@@ -21,6 +22,7 @@ protected:
     cocos2d::Size healthBarBaseSize;
     cocos2d::LayerColor *healthBarBase;
     cocos2d::LayerColor *healthBar;
+
     
     //0.0 to 1.0
     void auxUpdateHealthBar(float healthPercentage);
@@ -64,6 +66,17 @@ public:
 
     // implement the "static create()" method manually
     //CREATE_FUNC(RAGameScene);
+    
+    //itens slots
+    cocos2d::ui::Button *varItemSlot1Button;
+    cocos2d::ui::Button *varItemSlot2Button;
+    cocos2d::ui::Button *varItemSlot3Button;
+    cocos2d::ui::Button *varItemSlot4Button;
+    cocos2d::ui::Button *varItemSlot5Button;
+    cocos2d::ui::Button *varItemSlot6Button;
+    
+    void useItemSlotButton(Ref* pSender, cocos2d::ui::Widget::TouchEventType type);
+    
     
     struct PlayerNode
     {

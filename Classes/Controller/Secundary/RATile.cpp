@@ -12,6 +12,8 @@ RATile::RATile(int row, int col, bool walkable)
     this->row = row;
     this->col = col;
     this->walkable = walkable;
+    this->creature = nullptr;
+    this->droppedItem = nullptr;
 }
 
 RATile::~RATile()

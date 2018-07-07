@@ -78,6 +78,15 @@
 		D09151AE209134FF009649BA /* RATile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D09151AC209134FF009649BA /* RATile.cpp */; };
 		D09151B120913BCB009649BA /* RAMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D09151AF20913BCB009649BA /* RAMap.cpp */; };
 		D09C8F4620EDA8700062F997 /* RAEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D09C8F4420EDA8700062F997 /* RAEntity.cpp */; };
+		D09D103920F049EC006F9885 /* RAPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D08AF03020B253F100BB9B17 /* RAPlayer.cpp */; };
+		D09D103A20F049F2006F9885 /* RAEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D09C8F4420EDA8700062F997 /* RAEntity.cpp */; };
+		D09D103D20F04A20006F9885 /* RAItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D09D103B20F04A20006F9885 /* RAItem.cpp */; };
+		D09D104120F052B1006F9885 /* RATargetItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D09D103F20F052B1006F9885 /* RATargetItem.cpp */; };
+		D09D104220F052B1006F9885 /* RATargetItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D09D103F20F052B1006F9885 /* RATargetItem.cpp */; };
+		D09D104520F052DC006F9885 /* RASelfUseItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D09D104320F052DC006F9885 /* RASelfUseItem.cpp */; };
+		D09D104620F052DC006F9885 /* RASelfUseItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D09D104320F052DC006F9885 /* RASelfUseItem.cpp */; };
+		D09D104920F052F3006F9885 /* RAAreaItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D09D104720F052F3006F9885 /* RAAreaItem.cpp */; };
+		D09D104A20F052F3006F9885 /* RAAreaItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D09D104720F052F3006F9885 /* RAAreaItem.cpp */; };
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
@@ -203,6 +212,14 @@
 		D09151B020913BCB009649BA /* RAMap.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RAMap.hpp; sourceTree = "<group>"; };
 		D09C8F4420EDA8700062F997 /* RAEntity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RAEntity.cpp; sourceTree = "<group>"; };
 		D09C8F4520EDA8700062F997 /* RAEntity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RAEntity.hpp; sourceTree = "<group>"; };
+		D09D103B20F04A20006F9885 /* RAItem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RAItem.cpp; sourceTree = "<group>"; };
+		D09D103C20F04A20006F9885 /* RAItem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RAItem.hpp; sourceTree = "<group>"; };
+		D09D103F20F052B1006F9885 /* RATargetItem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RATargetItem.cpp; sourceTree = "<group>"; };
+		D09D104020F052B1006F9885 /* RATargetItem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RATargetItem.hpp; sourceTree = "<group>"; };
+		D09D104320F052DC006F9885 /* RASelfUseItem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RASelfUseItem.cpp; sourceTree = "<group>"; };
+		D09D104420F052DC006F9885 /* RASelfUseItem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RASelfUseItem.hpp; sourceTree = "<group>"; };
+		D09D104720F052F3006F9885 /* RAAreaItem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RAAreaItem.cpp; sourceTree = "<group>"; };
+		D09D104820F052F3006F9885 /* RAAreaItem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RAAreaItem.hpp; sourceTree = "<group>"; };
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -424,13 +441,17 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		D03B115020D6FB35003D24AD /* Enemies */ = {
+		D03B115020D6FB35003D24AD /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				D09C8F4420EDA8700062F997 /* RAEntity.cpp */,
+				D09C8F4520EDA8700062F997 /* RAEntity.hpp */,
+				D08AF03020B253F100BB9B17 /* RAPlayer.cpp */,
+				D08AF03120B253F100BB9B17 /* RAPlayer.hpp */,
 				D03B114C20D6F463003D24AD /* RACreature.cpp */,
 				D03B114D20D6F463003D24AD /* RACreature.hpp */,
 			);
-			path = Enemies;
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		D03B115220D7169E003D24AD /* Engine */ = {
@@ -458,15 +479,12 @@
 		D08AF03A20B25B3700BB9B17 /* Secundary */ = {
 			isa = PBXGroup;
 			children = (
-				D03B115020D6FB35003D24AD /* Enemies */,
+				D09D103E20F05135006F9885 /* Items */,
+				D03B115020D6FB35003D24AD /* Entities */,
 				D09151AF20913BCB009649BA /* RAMap.cpp */,
 				D09151B020913BCB009649BA /* RAMap.hpp */,
 				D09151AC209134FF009649BA /* RATile.cpp */,
 				D09151AD209134FF009649BA /* RATile.hpp */,
-				D08AF03020B253F100BB9B17 /* RAPlayer.cpp */,
-				D08AF03120B253F100BB9B17 /* RAPlayer.hpp */,
-				D09C8F4420EDA8700062F997 /* RAEntity.cpp */,
-				D09C8F4520EDA8700062F997 /* RAEntity.hpp */,
 			);
 			path = Secundary;
 			sourceTree = "<group>";
@@ -479,6 +497,21 @@
 				D03B115220D7169E003D24AD /* Engine */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		D09D103E20F05135006F9885 /* Items */ = {
+			isa = PBXGroup;
+			children = (
+				D09D103B20F04A20006F9885 /* RAItem.cpp */,
+				D09D103C20F04A20006F9885 /* RAItem.hpp */,
+				D09D103F20F052B1006F9885 /* RATargetItem.cpp */,
+				D09D104020F052B1006F9885 /* RATargetItem.hpp */,
+				D09D104320F052DC006F9885 /* RASelfUseItem.cpp */,
+				D09D104420F052DC006F9885 /* RASelfUseItem.hpp */,
+				D09D104720F052F3006F9885 /* RAAreaItem.cpp */,
+				D09D104820F052F3006F9885 /* RAAreaItem.hpp */,
+			);
+			path = Items;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -643,12 +676,16 @@
 				D03B114E20D6F463003D24AD /* RACreature.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				D08AF03220B253F200BB9B17 /* RAPlayer.cpp in Sources */,
+				D09D104520F052DC006F9885 /* RASelfUseItem.cpp in Sources */,
+				D09D104120F052B1006F9885 /* RATargetItem.cpp in Sources */,
 				D09151B120913BCB009649BA /* RAMap.cpp in Sources */,
 				D09151AE209134FF009649BA /* RATile.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
+				D09D104920F052F3006F9885 /* RAAreaItem.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				D08AF02C20B249A400BB9B17 /* RALevelGenerator.cpp in Sources */,
 				D08AF02F20B252A500BB9B17 /* RAGameEngine.cpp in Sources */,
+				D09D103D20F04A20006F9885 /* RAItem.cpp in Sources */,
 				D08AF03820B25A0000BB9B17 /* RASinglePlayerGameController.cpp in Sources */,
 				D022E1A020B26C7100BACC96 /* RAMainMenuScene.cpp in Sources */,
 			);
@@ -659,10 +696,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				D03B114F20D6F463003D24AD /* RACreature.cpp in Sources */,
+				D09D103920F049EC006F9885 /* RAPlayer.cpp in Sources */,
+				D09D104A20F052F3006F9885 /* RAAreaItem.cpp in Sources */,
+				D09D104220F052B1006F9885 /* RATargetItem.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				46880B8B19C43A87006E1F66 /* RAGameScene.cpp in Sources */,
 				D022E1A520B276F500BACC96 /* RAMainMenuScene.cpp in Sources */,
+				D09D104620F052DC006F9885 /* RASelfUseItem.cpp in Sources */,
+				D09D103A20F049F2006F9885 /* RAEntity.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

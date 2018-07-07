@@ -5,11 +5,19 @@ USING_NS_CC;
 
 #define MOVE_ACTION_TAG 1000
 
-#define zORDER_CREATURE 102
-#define zORDER_PLAYER 103
+#define zORDER_CREATURE 110
+#define zORDER_PLAYER 111
+#define zORDER_ITEM 105
 #define zORDER_TILE 101
-#define zORDER_EFFECTS 104
+#define zORDER_EFFECTS 120
 #define zORDER_HUD 999
+
+#define TAG_BTN_SLOT1   1
+#define TAG_BTN_SLOT2   2
+#define TAG_BTN_SLOT3   3
+#define TAG_BTN_SLOT4   4
+#define TAG_BTN_SLOT5   5
+#define TAG_BTN_SLOT6   6
 
 
 Scene* RAGameScene::createScene(int gameMode)
@@ -86,6 +94,30 @@ bool RAGameScene::init(int gameMode)
 
     varBackLayer->addChild(varExperienceLabel);
 
+    
+    //ITEM SLOT BUTTONS
+    Size slotBtnSize = Size(varScreenSize.width*0.1, varScreenSize.width*0.1);
+
+    ui::Button* btnVec[6];
+    Vec2 pos[6];
+    pos[0] = Vec2(slotBtnSize.width/2.0f, slotBtnSize.height + slotBtnSize.height/2.0f);
+    pos[1] = Vec2(pos[0].x + slotBtnSize.width, pos[0].y);
+    pos[2] = Vec2(pos[1].x + slotBtnSize.width, pos[0].y);
+    pos[3] = Vec2(pos[0].x, pos[0].y - slotBtnSize.height);
+    pos[4] = Vec2(pos[3].x + slotBtnSize.width, pos[3].y);
+    pos[5] = Vec2(pos[4].x + slotBtnSize.width, pos[3].y);
+    
+    for(int i = 0; i < 6; i++)
+    {
+        btnVec[i] = ui::Button::create("placeholderButton.png");
+        btnVec[i]->setAnchorPoint(Vec2(0.5, 0.5));
+        btnVec[i]->setPosition(pos[i]);
+        btnVec[i]->setScale9Enabled(true);
+        btnVec[i]->setScale(slotBtnSize.width/btnVec[i]->getContentSize().width, slotBtnSize.height/btnVec[i]->getContentSize().height);
+        btnVec[i]->_ID = i+1;
+        btnVec[i]->addTouchEventListener(CC_CALLBACK_2(RAGameScene::useItemSlotButton, this));
+        varBackLayer->addChild(btnVec[i], zORDER_HUD);
+    }
     
     return true;
 }
@@ -183,6 +215,17 @@ void RAGameScene::renderMap (RAMap* map)
                 creatureSprite->setAnchorPoint(Vec2(0.5,0.5));
                 creatureSprite->setPosition(xPos,yPos);
                 varBackLayer->addChild(creatureSprite,zORDER_CREATURE);
+            }
+            
+            //render item
+            if(t->droppedItem != nullptr)
+            {
+                Color4B color;
+                color = Color4B::MAGENTA;
+                LayerColor* itemSpr = LayerColor::create(color, tileSize.width*0.6, tileSize.height*0.6);
+                itemSpr->setAnchorPoint(Vec2(0.5, 0.5));
+                tileSprite->addChild(itemSpr, zORDER_ITEM);
+                
             }
             
             mapSprites.push_back(tileSprite);
@@ -343,5 +386,17 @@ void RAGameScene::update(float dt)
             gameController->playerAction(UP);
 
         }
+    }
+}
+
+void RAGameScene::useItemSlotButton(Ref* pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+    switch(type)
+    {
+        case cocos2d::ui::Widget::TouchEventType::ENDED:
+            CCLOG("clicked button tag %u", pSender->_ID);
+            break;
+        default:
+            break;
     }
 }

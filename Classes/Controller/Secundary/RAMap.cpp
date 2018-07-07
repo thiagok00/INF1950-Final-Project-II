@@ -73,4 +73,22 @@ bool RAMap::moveCreatureToTile(RACreature* creature, int row, int col)
     return false;
 }
 
+bool RAMap::addItemToTile(RAItem* item, int row, int col)
+{
+    RATile* tile = this->getTile(row, col);
+    if(tile->droppedItem == nullptr)
+    {
+        tile->droppedItem = item;
+        return true;
+    }
+    return false;
+}
 
+RAItem* RAMap::removeItemToTile(int row, int col)
+{
+    RATile* tile = this->getTile(row, col);
+    RAItem* item = tile->droppedItem;
+    tile->droppedItem = nullptr;
+    //FIXME: possible memmory leak point
+    return item;
+}
