@@ -18,7 +18,7 @@ public:
 
     RASelfUseItem(int charges);
     
-    virtual bool doAction(RAPlayer *owner){};
+    virtual bool doAction(RAPlayer *owner){return false;};
 
 };
 

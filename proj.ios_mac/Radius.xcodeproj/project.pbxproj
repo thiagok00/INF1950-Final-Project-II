@@ -66,27 +66,21 @@
 		D03B114320D6C961003D24AD /* player_idle_south.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B114120D6C961003D24AD /* player_idle_south.png */; };
 		D03B114A20D6F17C003D24AD /* creature_example.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B114920D6F17B003D24AD /* creature_example.png */; };
 		D03B114B20D6F17C003D24AD /* creature_example.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B114920D6F17B003D24AD /* creature_example.png */; };
-		D03B114E20D6F463003D24AD /* RACreature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D03B114C20D6F463003D24AD /* RACreature.cpp */; };
-		D03B114F20D6F463003D24AD /* RACreature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D03B114C20D6F463003D24AD /* RACreature.cpp */; };
-		D08AF02C20B249A400BB9B17 /* RALevelGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D08AF02A20B249A400BB9B17 /* RALevelGenerator.cpp */; };
-		D08AF02F20B252A500BB9B17 /* RAGameEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D08AF02D20B252A500BB9B17 /* RAGameEngine.cpp */; };
-		D08AF03220B253F200BB9B17 /* RAPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D08AF03020B253F100BB9B17 /* RAPlayer.cpp */; };
+		D04B04E720F2C71B009FB450 /* RAMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D04B04CE20F2C71B009FB450 /* RAMap.cpp */; };
+		D04B04E820F2C71B009FB450 /* RAItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D04B04D220F2C71B009FB450 /* RAItem.cpp */; };
+		D04B04E920F2C71B009FB450 /* RATargetItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D04B04D320F2C71B009FB450 /* RATargetItem.cpp */; };
+		D04B04EA20F2C71B009FB450 /* RAAreaItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D04B04D820F2C71B009FB450 /* RAAreaItem.cpp */; };
+		D04B04EB20F2C71B009FB450 /* RASelfUseItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D04B04D920F2C71B009FB450 /* RASelfUseItem.cpp */; };
+		D04B04EC20F2C71B009FB450 /* RAGameEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D04B04DB20F2C71B009FB450 /* RAGameEngine.cpp */; };
+		D04B04ED20F2C71B009FB450 /* RALevelGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D04B04DD20F2C71B009FB450 /* RALevelGenerator.cpp */; };
+		D04B04EE20F2C71B009FB450 /* RATile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D04B04DF20F2C71B009FB450 /* RATile.cpp */; };
+		D04B04EF20F2C71B009FB450 /* RACreature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D04B04E320F2C71B009FB450 /* RACreature.cpp */; };
+		D04B04F020F2C71B009FB450 /* RAPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D04B04E420F2C71B009FB450 /* RAPlayer.cpp */; };
+		D04B04F120F2C71B009FB450 /* RAEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D04B04E520F2C71B009FB450 /* RAEntity.cpp */; };
 		D08AF03520B259F500BB9B17 /* RAGameController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D08AF03320B259F500BB9B17 /* RAGameController.cpp */; };
 		D08AF03820B25A0000BB9B17 /* RASinglePlayerGameController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D08AF03620B25A0000BB9B17 /* RASinglePlayerGameController.cpp */; };
 		D08AF03F20B262D700BB9B17 /* placeholderButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D08AF03E20B262D700BB9B17 /* placeholderButton.png */; };
 		D08AF04020B262D700BB9B17 /* placeholderButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D08AF03E20B262D700BB9B17 /* placeholderButton.png */; };
-		D09151AE209134FF009649BA /* RATile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D09151AC209134FF009649BA /* RATile.cpp */; };
-		D09151B120913BCB009649BA /* RAMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D09151AF20913BCB009649BA /* RAMap.cpp */; };
-		D09C8F4620EDA8700062F997 /* RAEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D09C8F4420EDA8700062F997 /* RAEntity.cpp */; };
-		D09D103920F049EC006F9885 /* RAPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D08AF03020B253F100BB9B17 /* RAPlayer.cpp */; };
-		D09D103A20F049F2006F9885 /* RAEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D09C8F4420EDA8700062F997 /* RAEntity.cpp */; };
-		D09D103D20F04A20006F9885 /* RAItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D09D103B20F04A20006F9885 /* RAItem.cpp */; };
-		D09D104120F052B1006F9885 /* RATargetItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D09D103F20F052B1006F9885 /* RATargetItem.cpp */; };
-		D09D104220F052B1006F9885 /* RATargetItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D09D103F20F052B1006F9885 /* RATargetItem.cpp */; };
-		D09D104520F052DC006F9885 /* RASelfUseItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D09D104320F052DC006F9885 /* RASelfUseItem.cpp */; };
-		D09D104620F052DC006F9885 /* RASelfUseItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D09D104320F052DC006F9885 /* RASelfUseItem.cpp */; };
-		D09D104920F052F3006F9885 /* RAAreaItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D09D104720F052F3006F9885 /* RAAreaItem.cpp */; };
-		D09D104A20F052F3006F9885 /* RAAreaItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D09D104720F052F3006F9885 /* RAAreaItem.cpp */; };
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
@@ -193,33 +187,33 @@
 		D03B113B20D6BC72003D24AD /* cave_ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cave_ground.png; sourceTree = "<group>"; };
 		D03B114120D6C961003D24AD /* player_idle_south.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player_idle_south.png; sourceTree = "<group>"; };
 		D03B114920D6F17B003D24AD /* creature_example.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = creature_example.png; sourceTree = "<group>"; };
-		D03B114C20D6F463003D24AD /* RACreature.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RACreature.cpp; sourceTree = "<group>"; };
-		D03B114D20D6F463003D24AD /* RACreature.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RACreature.hpp; sourceTree = "<group>"; };
-		D08AF02A20B249A400BB9B17 /* RALevelGenerator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RALevelGenerator.cpp; sourceTree = "<group>"; };
-		D08AF02B20B249A400BB9B17 /* RALevelGenerator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RALevelGenerator.hpp; sourceTree = "<group>"; };
-		D08AF02D20B252A500BB9B17 /* RAGameEngine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RAGameEngine.cpp; sourceTree = "<group>"; };
-		D08AF02E20B252A500BB9B17 /* RAGameEngine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RAGameEngine.hpp; sourceTree = "<group>"; };
-		D08AF03020B253F100BB9B17 /* RAPlayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RAPlayer.cpp; sourceTree = "<group>"; };
-		D08AF03120B253F100BB9B17 /* RAPlayer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RAPlayer.hpp; sourceTree = "<group>"; };
+		D04B04CE20F2C71B009FB450 /* RAMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RAMap.cpp; sourceTree = "<group>"; };
+		D04B04CF20F2C71B009FB450 /* RATile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RATile.hpp; sourceTree = "<group>"; };
+		D04B04D020F2C71B009FB450 /* RAMap.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RAMap.hpp; sourceTree = "<group>"; };
+		D04B04D220F2C71B009FB450 /* RAItem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RAItem.cpp; sourceTree = "<group>"; };
+		D04B04D320F2C71B009FB450 /* RATargetItem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RATargetItem.cpp; sourceTree = "<group>"; };
+		D04B04D420F2C71B009FB450 /* RAAreaItem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RAAreaItem.hpp; sourceTree = "<group>"; };
+		D04B04D520F2C71B009FB450 /* RASelfUseItem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RASelfUseItem.hpp; sourceTree = "<group>"; };
+		D04B04D620F2C71B009FB450 /* RAItem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RAItem.hpp; sourceTree = "<group>"; };
+		D04B04D720F2C71B009FB450 /* RATargetItem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RATargetItem.hpp; sourceTree = "<group>"; };
+		D04B04D820F2C71B009FB450 /* RAAreaItem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RAAreaItem.cpp; sourceTree = "<group>"; };
+		D04B04D920F2C71B009FB450 /* RASelfUseItem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RASelfUseItem.cpp; sourceTree = "<group>"; };
+		D04B04DB20F2C71B009FB450 /* RAGameEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RAGameEngine.cpp; sourceTree = "<group>"; };
+		D04B04DC20F2C71B009FB450 /* RALevelGenerator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RALevelGenerator.hpp; sourceTree = "<group>"; };
+		D04B04DD20F2C71B009FB450 /* RALevelGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RALevelGenerator.cpp; sourceTree = "<group>"; };
+		D04B04DE20F2C71B009FB450 /* RAGameEngine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RAGameEngine.hpp; sourceTree = "<group>"; };
+		D04B04DF20F2C71B009FB450 /* RATile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RATile.cpp; sourceTree = "<group>"; };
+		D04B04E120F2C71B009FB450 /* RAPlayer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RAPlayer.hpp; sourceTree = "<group>"; };
+		D04B04E220F2C71B009FB450 /* RAEntity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RAEntity.hpp; sourceTree = "<group>"; };
+		D04B04E320F2C71B009FB450 /* RACreature.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RACreature.cpp; sourceTree = "<group>"; };
+		D04B04E420F2C71B009FB450 /* RAPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RAPlayer.cpp; sourceTree = "<group>"; };
+		D04B04E520F2C71B009FB450 /* RAEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RAEntity.cpp; sourceTree = "<group>"; };
+		D04B04E620F2C71B009FB450 /* RACreature.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RACreature.hpp; sourceTree = "<group>"; };
 		D08AF03320B259F500BB9B17 /* RAGameController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RAGameController.cpp; sourceTree = "<group>"; };
 		D08AF03420B259F500BB9B17 /* RAGameController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RAGameController.hpp; sourceTree = "<group>"; };
 		D08AF03620B25A0000BB9B17 /* RASinglePlayerGameController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RASinglePlayerGameController.cpp; sourceTree = "<group>"; };
 		D08AF03720B25A0000BB9B17 /* RASinglePlayerGameController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RASinglePlayerGameController.hpp; sourceTree = "<group>"; };
 		D08AF03E20B262D700BB9B17 /* placeholderButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholderButton.png; sourceTree = "<group>"; };
-		D09151AC209134FF009649BA /* RATile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RATile.cpp; sourceTree = "<group>"; };
-		D09151AD209134FF009649BA /* RATile.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RATile.hpp; sourceTree = "<group>"; };
-		D09151AF20913BCB009649BA /* RAMap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RAMap.cpp; sourceTree = "<group>"; };
-		D09151B020913BCB009649BA /* RAMap.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RAMap.hpp; sourceTree = "<group>"; };
-		D09C8F4420EDA8700062F997 /* RAEntity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RAEntity.cpp; sourceTree = "<group>"; };
-		D09C8F4520EDA8700062F997 /* RAEntity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RAEntity.hpp; sourceTree = "<group>"; };
-		D09D103B20F04A20006F9885 /* RAItem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RAItem.cpp; sourceTree = "<group>"; };
-		D09D103C20F04A20006F9885 /* RAItem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RAItem.hpp; sourceTree = "<group>"; };
-		D09D103F20F052B1006F9885 /* RATargetItem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RATargetItem.cpp; sourceTree = "<group>"; };
-		D09D104020F052B1006F9885 /* RATargetItem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RATargetItem.hpp; sourceTree = "<group>"; };
-		D09D104320F052DC006F9885 /* RASelfUseItem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RASelfUseItem.cpp; sourceTree = "<group>"; };
-		D09D104420F052DC006F9885 /* RASelfUseItem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RASelfUseItem.hpp; sourceTree = "<group>"; };
-		D09D104720F052F3006F9885 /* RAAreaItem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RAAreaItem.cpp; sourceTree = "<group>"; };
-		D09D104820F052F3006F9885 /* RAAreaItem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RAAreaItem.hpp; sourceTree = "<group>"; };
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -364,7 +358,7 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				D03B114420D6DE51003D24AD /* View */,
+				D04B04CD20F2C71B009FB450 /* Model */,
 				D022E1A320B276E900BACC96 /* Scenes */,
 				D09151AA209134ED009649BA /* Controller */,
 				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
@@ -434,35 +428,57 @@
 			path = Scenes;
 			sourceTree = "<group>";
 		};
-		D03B114420D6DE51003D24AD /* View */ = {
+		D04B04CD20F2C71B009FB450 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D04B04DA20F2C71B009FB450 /* Engine */,
+				D04B04D120F2C71B009FB450 /* Items */,
+				D04B04E020F2C71B009FB450 /* Entities */,
+				D04B04CE20F2C71B009FB450 /* RAMap.cpp */,
+				D04B04CF20F2C71B009FB450 /* RATile.hpp */,
+				D04B04D020F2C71B009FB450 /* RAMap.hpp */,
+				D04B04DF20F2C71B009FB450 /* RATile.cpp */,
 			);
-			path = View;
+			path = Model;
 			sourceTree = "<group>";
 		};
-		D03B115020D6FB35003D24AD /* Entities */ = {
+		D04B04D120F2C71B009FB450 /* Items */ = {
 			isa = PBXGroup;
 			children = (
-				D09C8F4420EDA8700062F997 /* RAEntity.cpp */,
-				D09C8F4520EDA8700062F997 /* RAEntity.hpp */,
-				D08AF03020B253F100BB9B17 /* RAPlayer.cpp */,
-				D08AF03120B253F100BB9B17 /* RAPlayer.hpp */,
-				D03B114C20D6F463003D24AD /* RACreature.cpp */,
-				D03B114D20D6F463003D24AD /* RACreature.hpp */,
+				D04B04D220F2C71B009FB450 /* RAItem.cpp */,
+				D04B04D320F2C71B009FB450 /* RATargetItem.cpp */,
+				D04B04D420F2C71B009FB450 /* RAAreaItem.hpp */,
+				D04B04D520F2C71B009FB450 /* RASelfUseItem.hpp */,
+				D04B04D620F2C71B009FB450 /* RAItem.hpp */,
+				D04B04D720F2C71B009FB450 /* RATargetItem.hpp */,
+				D04B04D820F2C71B009FB450 /* RAAreaItem.cpp */,
+				D04B04D920F2C71B009FB450 /* RASelfUseItem.cpp */,
 			);
-			path = Entities;
+			path = Items;
 			sourceTree = "<group>";
 		};
-		D03B115220D7169E003D24AD /* Engine */ = {
+		D04B04DA20F2C71B009FB450 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
-				D08AF02A20B249A400BB9B17 /* RALevelGenerator.cpp */,
-				D08AF02B20B249A400BB9B17 /* RALevelGenerator.hpp */,
-				D08AF02D20B252A500BB9B17 /* RAGameEngine.cpp */,
-				D08AF02E20B252A500BB9B17 /* RAGameEngine.hpp */,
+				D04B04DB20F2C71B009FB450 /* RAGameEngine.cpp */,
+				D04B04DC20F2C71B009FB450 /* RALevelGenerator.hpp */,
+				D04B04DD20F2C71B009FB450 /* RALevelGenerator.cpp */,
+				D04B04DE20F2C71B009FB450 /* RAGameEngine.hpp */,
 			);
 			path = Engine;
+			sourceTree = "<group>";
+		};
+		D04B04E020F2C71B009FB450 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				D04B04E120F2C71B009FB450 /* RAPlayer.hpp */,
+				D04B04E220F2C71B009FB450 /* RAEntity.hpp */,
+				D04B04E320F2C71B009FB450 /* RACreature.cpp */,
+				D04B04E420F2C71B009FB450 /* RAPlayer.cpp */,
+				D04B04E520F2C71B009FB450 /* RAEntity.cpp */,
+				D04B04E620F2C71B009FB450 /* RACreature.hpp */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		D08AF03920B25A3000BB9B17 /* GameControllers */ = {
@@ -476,42 +492,12 @@
 			path = GameControllers;
 			sourceTree = "<group>";
 		};
-		D08AF03A20B25B3700BB9B17 /* Secundary */ = {
-			isa = PBXGroup;
-			children = (
-				D09D103E20F05135006F9885 /* Items */,
-				D03B115020D6FB35003D24AD /* Entities */,
-				D09151AF20913BCB009649BA /* RAMap.cpp */,
-				D09151B020913BCB009649BA /* RAMap.hpp */,
-				D09151AC209134FF009649BA /* RATile.cpp */,
-				D09151AD209134FF009649BA /* RATile.hpp */,
-			);
-			path = Secundary;
-			sourceTree = "<group>";
-		};
 		D09151AA209134ED009649BA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				D08AF03A20B25B3700BB9B17 /* Secundary */,
 				D08AF03920B25A3000BB9B17 /* GameControllers */,
-				D03B115220D7169E003D24AD /* Engine */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		D09D103E20F05135006F9885 /* Items */ = {
-			isa = PBXGroup;
-			children = (
-				D09D103B20F04A20006F9885 /* RAItem.cpp */,
-				D09D103C20F04A20006F9885 /* RAItem.hpp */,
-				D09D103F20F052B1006F9885 /* RATargetItem.cpp */,
-				D09D104020F052B1006F9885 /* RATargetItem.hpp */,
-				D09D104320F052DC006F9885 /* RASelfUseItem.cpp */,
-				D09D104420F052DC006F9885 /* RASelfUseItem.hpp */,
-				D09D104720F052F3006F9885 /* RAAreaItem.cpp */,
-				D09D104820F052F3006F9885 /* RAAreaItem.hpp */,
-			);
-			path = Items;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -671,23 +657,23 @@
 			files = (
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				D08AF03520B259F500BB9B17 /* RAGameController.cpp in Sources */,
-				D09C8F4620EDA8700062F997 /* RAEntity.cpp in Sources */,
+				D04B04EA20F2C71B009FB450 /* RAAreaItem.cpp in Sources */,
+				D04B04EB20F2C71B009FB450 /* RASelfUseItem.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* RAGameScene.cpp in Sources */,
-				D03B114E20D6F463003D24AD /* RACreature.cpp in Sources */,
+				D04B04EF20F2C71B009FB450 /* RACreature.cpp in Sources */,
+				D04B04E920F2C71B009FB450 /* RATargetItem.cpp in Sources */,
+				D04B04EC20F2C71B009FB450 /* RAGameEngine.cpp in Sources */,
+				D04B04F120F2C71B009FB450 /* RAEntity.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
-				D08AF03220B253F200BB9B17 /* RAPlayer.cpp in Sources */,
-				D09D104520F052DC006F9885 /* RASelfUseItem.cpp in Sources */,
-				D09D104120F052B1006F9885 /* RATargetItem.cpp in Sources */,
-				D09151B120913BCB009649BA /* RAMap.cpp in Sources */,
-				D09151AE209134FF009649BA /* RATile.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
-				D09D104920F052F3006F9885 /* RAAreaItem.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
-				D08AF02C20B249A400BB9B17 /* RALevelGenerator.cpp in Sources */,
-				D08AF02F20B252A500BB9B17 /* RAGameEngine.cpp in Sources */,
-				D09D103D20F04A20006F9885 /* RAItem.cpp in Sources */,
+				D04B04E720F2C71B009FB450 /* RAMap.cpp in Sources */,
 				D08AF03820B25A0000BB9B17 /* RASinglePlayerGameController.cpp in Sources */,
+				D04B04F020F2C71B009FB450 /* RAPlayer.cpp in Sources */,
+				D04B04EE20F2C71B009FB450 /* RATile.cpp in Sources */,
+				D04B04ED20F2C71B009FB450 /* RALevelGenerator.cpp in Sources */,
 				D022E1A020B26C7100BACC96 /* RAMainMenuScene.cpp in Sources */,
+				D04B04E820F2C71B009FB450 /* RAItem.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -695,16 +681,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D03B114F20D6F463003D24AD /* RACreature.cpp in Sources */,
-				D09D103920F049EC006F9885 /* RAPlayer.cpp in Sources */,
-				D09D104A20F052F3006F9885 /* RAAreaItem.cpp in Sources */,
-				D09D104220F052B1006F9885 /* RATargetItem.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				46880B8B19C43A87006E1F66 /* RAGameScene.cpp in Sources */,
 				D022E1A520B276F500BACC96 /* RAMainMenuScene.cpp in Sources */,
-				D09D104620F052DC006F9885 /* RASelfUseItem.cpp in Sources */,
-				D09D103A20F049F2006F9885 /* RAEntity.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
