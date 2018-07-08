@@ -14,7 +14,7 @@
 class RASceneProtocol
 {
 public:
-    virtual void renderMap (RAMap* map) {}
+    virtual void loadMap (RAMap* map) {}
     virtual void loadPlayer (RAPlayer *player) {}
     virtual void playerMoved (RAPlayer* player, RATile * tile) {}
     virtual void playerMovedAndCaughtItem (RAPlayer* player, RATile * tile, RAItem *item) {}

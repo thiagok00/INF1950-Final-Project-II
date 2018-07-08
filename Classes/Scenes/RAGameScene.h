@@ -42,7 +42,7 @@ public:
     RAGameController *gameController;
     
     /* RASceneProtocol Methods */
-    void renderMap (RAMap* map);
+    void loadMap (RAMap* map);
     void loadPlayer (RAPlayer *player);
     void playerMoved (RAPlayer* player, RATile * tile);
     void playerMovedAndCaughtItem (RAPlayer* player, RATile * tile, RAItem *item);

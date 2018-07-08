@@ -16,7 +16,7 @@ RASinglePlayerGameController::RASinglePlayerGameController(RASceneProtocol *gs) 
 void RASinglePlayerGameController::startGame()
 {
     gameEngine = RAGameEngine::createGame(kGAMEMODE_SINGLEPLAYER, this);
-    gameScene->renderMap(gameEngine->gameMap);
+    gameScene->loadMap(gameEngine->gameMap);
     gameScene->loadPlayer(gameEngine->player1);
 }
 

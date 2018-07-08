@@ -201,7 +201,7 @@ Label* RAGameScene::auxCreateDamageLabel(int damage, Color4B textColor, Vec2 pos
 //
 //  MARK: RASceneProtocol Methods
 //
-void RAGameScene::renderMap (RAMap* map)
+void RAGameScene::loadMap (RAMap* map)
 {
     printf("RAGameScene: Rendering Map\n");
 

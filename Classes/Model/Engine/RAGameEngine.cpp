@@ -119,7 +119,9 @@ bool RAGameEngine::doPlayerAction(RAPlayer *player, RADirection direction)
         }
         else
         {
+            //Fail to Attack - Do nothing
             CCLOG("FAIL ATTACK! - NO ACTION POINTS");
+            return false;
         }
     }
     //CCLOG("MOVING FROM: %dx%d TO %dx%d",player->tile->getRow(),player->tile->getCol(),destTile->getRow(),destTile->getCol());
