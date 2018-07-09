@@ -19,8 +19,8 @@ public:
     RASinglePlayerGameController(RASceneProtocol *gs);
     ~RASinglePlayerGameController();
     void startGame();
-    void playerAction(RADirection direction);
-    bool playerUseItem(RAPlayer *player, int slot);
+    void doPlayerAction(RAPlayer *player, RADirection direction);
+    void doPlayerUseItem(RAPlayer *player, int slot);
 
 
     

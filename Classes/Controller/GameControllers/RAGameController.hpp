@@ -26,8 +26,8 @@ public:
     RAGameController(RASceneProtocol *gs);
     ~RAGameController();
     virtual void startGame() {}
-    virtual void playerAction(RADirection direction) {}
-    virtual bool playerUseItem(RAPlayer *player, int slot) {return false;}
+    virtual void doPlayerAction(RAPlayer * player, RADirection direction) {}
+    virtual void doPlayerUseItem(RAPlayer *player, int slot) {}
 
 
 protected:

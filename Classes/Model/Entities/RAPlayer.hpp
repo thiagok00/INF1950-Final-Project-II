@@ -38,6 +38,7 @@ public:
     
     RAItem * getItemAtSlot(int slot);
     void removeItemAtSlot(int slot);
+    int getMaxSlots();
     
 protected:
     int experiencePoints;

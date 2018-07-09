@@ -75,9 +75,9 @@ bool RAPlayer::isSlotFull()
 
 RAItem * RAPlayer::getItemAtSlot(int slot)
 {
-    if(slot-1 < maxSlots && slot-1 >= 0)
+    if(slot < maxSlots && slot >= 0)
     {
-        return itensSlots[slot-1];
+        return itensSlots[slot];
     }
     return nullptr;
 }
@@ -88,9 +88,15 @@ void RAPlayer::removeItemAtSlot(int slot)
     {
         if(itensSlots[slot] != nullptr)
         {
+            delete itensSlots[slot];
             itensSlots[slot] = nullptr;
             occupiedSlots--;
         }
     }
+}
+
+int RAPlayer::getMaxSlots()
+{
+    return this->maxSlots;
 }
 

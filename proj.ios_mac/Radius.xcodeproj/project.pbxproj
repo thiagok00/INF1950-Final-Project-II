@@ -435,8 +435,8 @@
 				D04B04D120F2C71B009FB450 /* Items */,
 				D04B04E020F2C71B009FB450 /* Entities */,
 				D04B04CE20F2C71B009FB450 /* RAMap.cpp */,
-				D04B04CF20F2C71B009FB450 /* RATile.hpp */,
 				D04B04D020F2C71B009FB450 /* RAMap.hpp */,
+				D04B04CF20F2C71B009FB450 /* RATile.hpp */,
 				D04B04DF20F2C71B009FB450 /* RATile.cpp */,
 			);
 			path = Model;
@@ -446,13 +446,13 @@
 			isa = PBXGroup;
 			children = (
 				D04B04D220F2C71B009FB450 /* RAItem.cpp */,
-				D04B04D320F2C71B009FB450 /* RATargetItem.cpp */,
-				D04B04D420F2C71B009FB450 /* RAAreaItem.hpp */,
-				D04B04D520F2C71B009FB450 /* RASelfUseItem.hpp */,
 				D04B04D620F2C71B009FB450 /* RAItem.hpp */,
+				D04B04D320F2C71B009FB450 /* RATargetItem.cpp */,
 				D04B04D720F2C71B009FB450 /* RATargetItem.hpp */,
 				D04B04D820F2C71B009FB450 /* RAAreaItem.cpp */,
+				D04B04D420F2C71B009FB450 /* RAAreaItem.hpp */,
 				D04B04D920F2C71B009FB450 /* RASelfUseItem.cpp */,
+				D04B04D520F2C71B009FB450 /* RASelfUseItem.hpp */,
 			);
 			path = Items;
 			sourceTree = "<group>";
@@ -461,9 +461,9 @@
 			isa = PBXGroup;
 			children = (
 				D04B04DB20F2C71B009FB450 /* RAGameEngine.cpp */,
-				D04B04DC20F2C71B009FB450 /* RALevelGenerator.hpp */,
-				D04B04DD20F2C71B009FB450 /* RALevelGenerator.cpp */,
 				D04B04DE20F2C71B009FB450 /* RAGameEngine.hpp */,
+				D04B04DD20F2C71B009FB450 /* RALevelGenerator.cpp */,
+				D04B04DC20F2C71B009FB450 /* RALevelGenerator.hpp */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -471,11 +471,11 @@
 		D04B04E020F2C71B009FB450 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				D04B04E420F2C71B009FB450 /* RAPlayer.cpp */,
 				D04B04E120F2C71B009FB450 /* RAPlayer.hpp */,
+				D04B04E520F2C71B009FB450 /* RAEntity.cpp */,
 				D04B04E220F2C71B009FB450 /* RAEntity.hpp */,
 				D04B04E320F2C71B009FB450 /* RACreature.cpp */,
-				D04B04E420F2C71B009FB450 /* RAPlayer.cpp */,
-				D04B04E520F2C71B009FB450 /* RAEntity.cpp */,
 				D04B04E620F2C71B009FB450 /* RACreature.hpp */,
 			);
 			path = Entities;

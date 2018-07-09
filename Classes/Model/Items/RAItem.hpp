@@ -23,10 +23,10 @@ protected:
     int charges;
     ItemID id;
     RAItem(ItemID id, int charges);
-    virtual ~RAItem() {}
     
 public:
     int getCharges();
     ItemID getItemID();
+    virtual ~RAItem() {}
 };
 #endif /* RAItem_hpp */

@@ -45,12 +45,17 @@ bool RAGameScene::init(int gameMode)
     {
         return false;
     }
-   
+    
+    //////////////////////////////
+    // 2. init vars
+    player1Node.pSprite = nullptr;
+    player2Node.pSprite = nullptr;
+    
     //SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Untitled.plist");
-
+    
     varScreenSize = this->getContentSize();//Director::getInstance()->getVisibleSize();
     //Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
+    
     varBackLayer = LayerColor::create(Color4B(97, 24, 22, 255), varScreenSize.width, varScreenSize.height);
     varBackLayer->setAnchorPoint(Vec2(0,0));
     varBackLayer->setPosition(Vec2(0,0));
@@ -86,11 +91,28 @@ bool RAGameScene::init(int gameMode)
     manaBar->setPosition(Vec2(0,0));
     manaBarBase->addChild(manaBar);
     
+    //ITEM SLOT BUTTONS
+    Size slotBtnSize = Size(varScreenSize.width*0.1, varScreenSize.width*0.1);
     
-    if(gameMode == kGAMEMODE_SINGLEPLAYER)
+    Vec2 pos[6];
+    pos[0] = Vec2(slotBtnSize.width/2.0f, slotBtnSize.height + slotBtnSize.height/2.0f);
+    pos[1] = Vec2(pos[0].x + slotBtnSize.width, pos[0].y);
+    pos[2] = Vec2(pos[1].x + slotBtnSize.width, pos[0].y);
+    pos[3] = Vec2(pos[0].x, pos[0].y - slotBtnSize.height);
+    pos[4] = Vec2(pos[3].x + slotBtnSize.width, pos[3].y);
+    pos[5] = Vec2(pos[4].x + slotBtnSize.width, pos[3].y);
+    
+    for(int i = 0; i < 6; i++)
     {
-        gameController = new RASinglePlayerGameController(this);
-        gameController->startGame();
+        auto btn = ui::Button::create("placeholderButton.png");
+        btn->setAnchorPoint(Vec2(0.5, 0.5));
+        btn->setPosition(pos[i]);
+        btn->setScale9Enabled(true);
+        btn->setScale(slotBtnSize.width/btn->getContentSize().width, slotBtnSize.height/btn->getContentSize().height);
+        btn->_ID = i;
+        btn->addTouchEventListener(CC_CALLBACK_2(RAGameScene::useItemSlotButton, this));
+        varBackLayer->addChild(btn, zORDER_HUD);
+        varItensSlotButtons.push_back(btn);
     }
     
     //touch events
@@ -106,40 +128,14 @@ bool RAGameScene::init(int gameMode)
     initialTouchPos[1] = 0;
     this->scheduleUpdate();
     /*************/
-
+    
     varBackLayer->addChild(varExperienceLabel);
-
     
-    //ITEM SLOT BUTTONS
-    Size slotBtnSize = Size(varScreenSize.width*0.1, varScreenSize.width*0.1);
-
-    ui::Button* btnVec[6];
-    Vec2 pos[6];
-    pos[0] = Vec2(slotBtnSize.width/2.0f, slotBtnSize.height + slotBtnSize.height/2.0f);
-    pos[1] = Vec2(pos[0].x + slotBtnSize.width, pos[0].y);
-    pos[2] = Vec2(pos[1].x + slotBtnSize.width, pos[0].y);
-    pos[3] = Vec2(pos[0].x, pos[0].y - slotBtnSize.height);
-    pos[4] = Vec2(pos[3].x + slotBtnSize.width, pos[3].y);
-    pos[5] = Vec2(pos[4].x + slotBtnSize.width, pos[3].y);
-    
-    for(int i = 0; i < 6; i++)
+    if(gameMode == kGAMEMODE_SINGLEPLAYER)
     {
-        btnVec[i] = ui::Button::create("placeholderButton.png");
-        btnVec[i]->setAnchorPoint(Vec2(0.5, 0.5));
-        btnVec[i]->setPosition(pos[i]);
-        btnVec[i]->setScale9Enabled(true);
-        btnVec[i]->setScale(slotBtnSize.width/btnVec[i]->getContentSize().width, slotBtnSize.height/btnVec[i]->getContentSize().height);
-        btnVec[i]->_ID = i+1;
-        btnVec[i]->addTouchEventListener(CC_CALLBACK_2(RAGameScene::useItemSlotButton, this));
-        varBackLayer->addChild(btnVec[i], zORDER_HUD);
+        gameController = new RASinglePlayerGameController(this);
+        gameController->startGame();
     }
-    varItemSlot1Button = btnVec[0];
-    varItemSlot2Button = btnVec[1];
-    varItemSlot3Button = btnVec[2];
-    varItemSlot4Button = btnVec[3];
-    varItemSlot5Button = btnVec[4];
-    varItemSlot6Button = btnVec[5];
-
     return true;
 }
 
@@ -171,7 +167,7 @@ void RAGameScene::auxUpdateManaBar(float manaPercentage)
     manaBar = LayerColor::create(Color4B::BLUE, healthBarBaseSize.width*manaPercentage, healthBarBaseSize.height);
     manaBar->setAnchorPoint(Vec2(0.5,0.5));
     manaBar->setPosition(Vec2(0,0));
-    manaBarBase->addChild(healthBar);
+    manaBarBase->addChild(manaBar);
 }
 
 
@@ -197,6 +193,23 @@ Label* RAGameScene::auxCreateDamageLabel(int damage, Color4B textColor, Vec2 pos
     return damageLabel;
 }
 
+void RAGameScene::auxUpdatePlayerItensSlots(RAPlayer* player)
+{
+    int maxSlots = player->getMaxSlots();
+    
+    for(int i = 0; i < maxSlots; i++)
+    {
+        if(auto item = player->getItemAtSlot(i))
+        {
+            varItensSlotButtons[i]->setColor(Color3B::MAGENTA);
+        }
+        else
+        {
+            varItensSlotButtons[i]->setColor(Color3B::RED);
+        }
+    }
+}
+
 
 //
 //  MARK: RASceneProtocol Methods
@@ -204,100 +217,106 @@ Label* RAGameScene::auxCreateDamageLabel(int damage, Color4B textColor, Vec2 pos
 void RAGameScene::loadMap (RAMap* map)
 {
     printf("RAGameScene: Rendering Map\n");
-
+    
     tileSize.width = varScreenSize.width/MAP_MAX_ROW;
     tileSize.height = tileSize.width;
-    
-    int xPos;
-    int yPos = varScreenSize.height*0.3;
-    
-    for(int i = 0; i < MAP_MAX_ROW; i++)
+    if(mapSprites.size() == 0)
     {
-        xPos = tileSize.width/2.0f;
-        for(int j = 0; j < MAP_MAX_COL; j++)
+        int xPos;
+        int yPos = varScreenSize.height*0.3;
+        
+        for(int i = 0; i < MAP_MAX_ROW; i++)
         {
-            RATile *t;
-            t = map->getTile(i, j);
-            
-            //temp
-            Sprite *tileSprite = Sprite::create("cave_ground.png");
-            tileSprite->setScale(tileSize.width/tileSprite->getContentSize().width);
-            tileSprite->setAnchorPoint(Vec2(0.5,0.5));
-            tileSprite->setPosition(xPos,yPos);
-
-            //render creature of tile
-            if(t->creature != nullptr)
+            xPos = tileSize.width/2.0f;
+            for(int j = 0; j < MAP_MAX_COL; j++)
             {
-                Sprite *creatureSprite;
-                Size creatureSize = tileSize;
-                switch(t->creature->id)
+                RATile *t;
+                t = map->getTile(i, j);
+                
+                //temp
+                Sprite *tileSprite = Sprite::create("cave_ground.png");
+                tileSprite->setScale(tileSize.width/tileSprite->getContentSize().width);
+                tileSprite->setAnchorPoint(Vec2(0.5,0.5));
+                tileSprite->setPosition(xPos,yPos);
+                
+                //render creature of tile
+                if(t->creature != nullptr)
                 {
-                    case Rat:
-                        creatureSprite = Sprite::create("creature_example.png");
-                        break;
-                    case Cave_rat:
-                        creatureSprite = Sprite::create("creature_example.png");
-                        break;
+                    Sprite *creatureSprite;
+                    Size creatureSize = tileSize;
+                    switch(t->creature->id)
+                    {
+                        case Rat:
+                            creatureSprite = Sprite::create("creature_example.png");
+                            break;
+                        case Cave_rat:
+                            creatureSprite = Sprite::create("creature_example.png");
+                            break;
+                    }
+                    this->creatureExample.cSprite = creatureSprite;
+                    this->creatureExample.cController = t->creature;
+                    
+                    creatureSprite->setScale(creatureSize.width/creatureSprite->getContentSize().width);
+                    creatureSprite->setAnchorPoint(Vec2(0.5,0.5));
+                    creatureSprite->setPosition(xPos,yPos);
+                    varBackLayer->addChild(creatureSprite,zORDER_CREATURE);
                 }
-                this->creatureExample.cSprite = creatureSprite;
-                this->creatureExample.cController = t->creature;
                 
-                creatureSprite->setScale(creatureSize.width/creatureSprite->getContentSize().width);
-                creatureSprite->setAnchorPoint(Vec2(0.5,0.5));
-                creatureSprite->setPosition(xPos,yPos);
-                varBackLayer->addChild(creatureSprite,zORDER_CREATURE);
-            }
-            
-            //render item
-            if(t->droppedItem != nullptr)
-            {
-                Color4B color;
-                color = Color4B::MAGENTA;
-                LayerColor* itemSpr = LayerColor::create(color, tileSize.width*0.6, tileSize.height*0.6);
-                itemSpr->setAnchorPoint(Vec2(0.5, 0.5));
-                tileSprite->addChild(itemSpr, zORDER_ITEM);
+                //render item
+                if(t->droppedItem != nullptr)
+                {
+                    Color4B color;
+                    color = Color4B::MAGENTA;
+                    LayerColor* itemSpr = LayerColor::create(color, tileSize.width*0.6, tileSize.height*0.6);
+                    itemSpr->setAnchorPoint(Vec2(0.5, 0.5));
+                    tileSprite->addChild(itemSpr, zORDER_ITEM);
+                    
+                    itemExample.iSprite = itemSpr;
+                    itemExample.iController = t->droppedItem;
+                }
                 
-                itemExample.iSprite = itemSpr;
-                itemExample.iController = t->droppedItem;
+                mapSprites.push_back(tileSprite);
+                
+                varBackLayer->addChild(tileSprite,zORDER_TILE);
+                xPos += tileSize.width;
             }
-            
-            mapSprites.push_back(tileSprite);
-            
-            varBackLayer->addChild(tileSprite,zORDER_TILE);
-            xPos += tileSize.width;
+            yPos += tileSize.height;
         }
-        yPos += tileSize.height;
     }
 }
 
 void RAGameScene::loadPlayer (RAPlayer* player)
 {
-    Size playerSize;
-    playerSize.width = varScreenSize.width/MAP_MAX_ROW;
-    playerSize.height = playerSize.width;
+    if(player1Node.pSprite == nullptr)
+    {
+        Size playerSize;
+        playerSize.width = varScreenSize.width/MAP_MAX_ROW;
+        playerSize.height = playerSize.width;
+        
+        player1Node.pSprite = Sprite::create("player_idle_south.png");
+        
+        player1Node.pSprite->setScale(playerSize.width/player1Node.pSprite->getContentSize().width);
+        player1Node.pSprite->setAnchorPoint(Vec2(0.5,0.5));
+        varBackLayer->addChild(player1Node.pSprite,zORDER_PLAYER);
+    }
     
-    Sprite *playerSprite = Sprite::create("player_idle_south.png");
-
-    playerSprite->setScale(playerSize.width/playerSprite->getContentSize().width);
-    playerSprite->setAnchorPoint(Vec2(0.5,0.5));
-    
-    playerSprite->setPosition(mapSprites.at(MAP_MAX_ROW*player->tile->getRow() + player->tile->getCol())->getPosition());
-    varBackLayer->addChild(playerSprite,zORDER_PLAYER);
-    
-    player1Node.pSprite = playerSprite;
     player1Node.pController = player;
+    player1Node.pSprite->setPosition(mapSprites.at(MAP_MAX_ROW*player->tile->getRow() + player->tile->getCol())->getPosition());
     
     auxUpdateExperienceLabelText(player->getExperiencePoints());
+    auxUpdateHealthBar((float)player->healthPoints/(float)player->maxHealthPoints);
+    auxUpdateManaBar((float)player->manaPoints/(float)player->maxManaPoints);
+    auxUpdatePlayerItensSlots(player);
 }
 
 void RAGameScene::playerMoved(RAPlayer* player, RATile * tile)
 {
     Sprite *playerSprite;
-
+    
     playerSprite = player1Node.pSprite;
     
     Vec2 destination = mapSprites.at(MAP_MAX_ROW*tile->getRow() + tile->getCol())->getPosition();
-
+    
     auto moveAction = MoveTo::create(0.3, destination);
     
     moveAction->setTag(MOVE_ACTION_TAG);
@@ -310,9 +329,7 @@ void RAGameScene::playerMovedAndCaughtItem (RAPlayer* player, RATile * tile, RAI
     
     //TODO: implement this right
     this->itemExample.iSprite->removeFromParentAndCleanup(true);
-    this->varItemSlot1Button->setColor(Color3B::MAGENTA);
-    
-    
+    auxUpdatePlayerItensSlots(player);
 }
 
 void RAGameScene::playerAttackedCreature (RAPlayer* player, RACreature *creature, int damage, bool died)
@@ -322,10 +339,7 @@ void RAGameScene::playerAttackedCreature (RAPlayer* player, RACreature *creature
     
     //Damage Feedback
     auxCreateDamageLabel(damage,Color4B::YELLOW,creatureExample.cSprite->getPosition());
-    
 
-    
-    
     if (died)
     {
         //creature died, do something
@@ -378,7 +392,7 @@ void RAGameScene::onTouchMoved(Touch *touch, Event *event)
 {
     currentTouchPos[0] = touch->getLocation().x;
     currentTouchPos[1] = touch->getLocation().y;
-
+    
 }
 
 void RAGameScene::onTouchCancelled(Touch *touch, Event *event)
@@ -404,31 +418,31 @@ void RAGameScene::update(float dt)
             CCLOG("SWIPED LEFT");
             isTouchDown = false;
             
-            gameController->playerAction(LEFT);
+            gameController->doPlayerAction(player1Node.pController, LEFT);
         }
         else if (initialTouchPos[0] - currentTouchPos[0] < - varScreenSize.width * 0.05)
         {
             CCLOG("SWIPED RIGHT");
             isTouchDown = false;
             
-            gameController->playerAction(RIGHT);
-
+            gameController->doPlayerAction(player1Node.pController, RIGHT);
+            
         }
         else if (initialTouchPos[1] - currentTouchPos[1] > varScreenSize.width * 0.05)
         {
             CCLOG("SWIPED DOWN");
             isTouchDown = false;
             
-            gameController->playerAction(DOWN);
-
+            gameController->doPlayerAction(player1Node.pController, DOWN);
+            
         }
         else if (initialTouchPos[1] - currentTouchPos[1] < - varScreenSize.width * 0.05)
         {
             CCLOG("SWIPED UP");
             isTouchDown = false;
             
-            gameController->playerAction(UP);
-
+            gameController->doPlayerAction(player1Node.pController, UP);
+            
         }
     }
 }
@@ -436,17 +450,10 @@ void RAGameScene::update(float dt)
 void RAGameScene::useItemSlotButton(Ref* pSender, cocos2d::ui::Widget::TouchEventType type)
 {
     int slot = (int) pSender->_ID;
-    
-    RAPlayer *player = player1Node.pController;
-
     switch(type)
     {
         case cocos2d::ui::Widget::TouchEventType::ENDED:
-            CCLOG("clicked button tag %u", pSender->_ID);
-            if(gameController->playerUseItem(player1Node.pController, slot))
-                varItemSlot1Button->setColor(Color3B::RED);
-            //FIXME: tirar essa linha
-            this->auxUpdateHealthBar((float)player->healthPoints/(float)player->maxHealthPoints);
+            gameController->doPlayerUseItem(player1Node.pController, slot);
             break;
         default:
             break;

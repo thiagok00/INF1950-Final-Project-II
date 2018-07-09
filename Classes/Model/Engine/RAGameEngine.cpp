@@ -53,6 +53,8 @@ RAGameEngine* RAGameEngine::createGame(int gameMode, RASceneProtocol *gameListen
     eng->turnOrder = PLAYER1_TURN;
     eng->player1->resetTurn();
     
+    gameListener->loadMap(eng->gameMap);
+    gameListener->loadPlayer(eng->player1);
     return eng;
 }
 
@@ -169,7 +171,8 @@ bool RAGameEngine::doPlayerUseItem(RAPlayer *player, int slot)
                 case idItemSelfUse:
                     if(RASelfUseItem *item = dynamic_cast<RASelfUseItem*>(baseItem))
                     {
-                        item->doAction(player);
+                        if(!item->doAction(player))
+                            return false;
                     }
                     break;
                 case idItemAreaItem:
@@ -177,11 +180,11 @@ bool RAGameEngine::doPlayerUseItem(RAPlayer *player, int slot)
                     break;
             }
             player->actionPoints--;
-            
             if (baseItem->getCharges() <= 0)
             {
                 player->removeItemAtSlot(slot);
             }
+            gameListener->loadPlayer(player);
             return true;
         }
     }

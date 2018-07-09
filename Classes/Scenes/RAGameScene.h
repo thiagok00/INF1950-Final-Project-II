@@ -30,9 +30,9 @@ protected:
     void auxUpdateHealthBar(float healthPercentage);
     void auxUpdateManaBar(float manaPercentage);
 
-    
     cocos2d::Label* auxCreateDamageLabel(int damage, cocos2d::Color4B textColor, cocos2d::Vec2 pos);
-    
+
+    void auxUpdatePlayerItensSlots(RAPlayer* player);
     cocos2d::Size tileSize;
 public:
     static cocos2d::Scene* createScene(int gameMode);
@@ -73,12 +73,7 @@ public:
     //CREATE_FUNC(RAGameScene);
     
     //itens slots
-    cocos2d::ui::Button *varItemSlot1Button;
-    cocos2d::ui::Button *varItemSlot2Button;
-    cocos2d::ui::Button *varItemSlot3Button;
-    cocos2d::ui::Button *varItemSlot4Button;
-    cocos2d::ui::Button *varItemSlot5Button;
-    cocos2d::ui::Button *varItemSlot6Button;
+    std::vector<cocos2d::ui::Button*> varItensSlotButtons;
     
     void useItemSlotButton(Ref* pSender, cocos2d::ui::Widget::TouchEventType type);
     
