@@ -8,9 +8,9 @@
 #include "RAItem.hpp"
 
 
-RAItem::RAItem(ItemID id, int charge)
+RAItem::RAItem(ItemID itemType, int charge)
 {
-    this->id = id;
+    this->itemType = itemType;
     this->charges = charge;
 }
 
@@ -20,8 +20,8 @@ int RAItem::getCharges()
     return this->charges;
 }
 
-ItemID RAItem::getItemID()
+ItemID RAItem::getItemType()
 {
-    return this->id;
+    return this->itemType;
 }
 

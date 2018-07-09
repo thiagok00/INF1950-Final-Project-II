@@ -27,14 +27,16 @@ public:
     RAPlayer* player2;
     RASceneProtocol *gameListener;
     
-    bool doPlayerAction(RAPlayer *player, RADirection direction);
-    bool doPlayerUseItem(RAPlayer *player, int slot);
+    bool doPlayerAction(int playerID, RADirection direction);
+    bool doPlayerUseItem(int playerID, int slot);
 protected:
 
     int gameMode;
     int turnOrder;
     
     void switchTurn();
+    
+    RAPlayer* auxGetPlayerById(int playerID);
     
 };
 

@@ -58,8 +58,9 @@ RAGameEngine* RAGameEngine::createGame(int gameMode, RASceneProtocol *gameListen
     return eng;
 }
 
-bool RAGameEngine::doPlayerAction(RAPlayer *player, RADirection direction)
+bool RAGameEngine::doPlayerAction(int playerID, RADirection direction)
 {
+    RAPlayer *player = auxGetPlayerById(playerID);
     if(player == nullptr)
         return false;
     
@@ -99,7 +100,7 @@ bool RAGameEngine::doPlayerAction(RAPlayer *player, RADirection direction)
     if(destTile->creature != nullptr && !destTile->creature->isDead())
     {
         //attack
-        if(player1->actionPoints > 0)
+        if(player->actionPoints > 0)
         {
             CCLOG("ATTACK!");
             int damageTook = destTile->creature->inflictDamage(player->getAtkDamage());
@@ -112,10 +113,11 @@ bool RAGameEngine::doPlayerAction(RAPlayer *player, RADirection direction)
             }
             player->actionPoints--;
 
-            gameListener->playerAttackedCreature(player,
-                                                 destTile->creature,
+            gameListener->playerAttackedCreature(player->playerID,
+                                                 destTile->creature->id,
                                                  damageTook,
-                                                 isDead
+                                                 isDead,
+                                                 player->getExperiencePoints()
                                                  );
             return true;
         }
@@ -132,19 +134,28 @@ bool RAGameEngine::doPlayerAction(RAPlayer *player, RADirection direction)
         player->tile = destTile;
         player->speed--;
         
-        if(destTile->droppedItem != nullptr && player->addItemToSlot(destTile->droppedItem))
+        
+        if(destTile->droppedItem != nullptr)
         {
-            //player caught item
-            RAItem *caughtItem = destTile->droppedItem;
-            destTile->droppedItem = nullptr;
-            if (gameListener != nullptr)
+            int slot = player->addItemToSlot(destTile->droppedItem);
+            if (slot < 0 && gameListener != nullptr)
+            { //full slots, just move
+                gameListener->playerMoved(player->playerID, destTile->getRow(), destTile->getCol());
+            }
+            else
             {
-                gameListener->playerMovedAndCaughtItem(player, destTile, caughtItem);
+                //player caught item
+                RAItem *caughtItem = destTile->droppedItem;
+                destTile->droppedItem = nullptr;
+                if (gameListener != nullptr)
+                {
+                    gameListener->playerMovedAndCaughtItem(player->playerID, destTile->getRow(), destTile->getCol(), slot, caughtItem->getItemType(), caughtItem->getCharges());
+                }
             }
         }
         else if(gameListener != nullptr)
         {
-            gameListener->playerMoved(player, destTile);
+            gameListener->playerMoved(player->playerID, destTile->getRow(), destTile->getCol());
         }
     }
     if (player->speed == 0 || player->actionPoints == 0)
@@ -155,8 +166,13 @@ bool RAGameEngine::doPlayerAction(RAPlayer *player, RADirection direction)
     
 }
 
-bool RAGameEngine::doPlayerUseItem(RAPlayer *player, int slot)
+bool RAGameEngine::doPlayerUseItem(int playerID, int slot)
 {
+    RAPlayer *player = auxGetPlayerById(playerID);
+    
+    if(player == nullptr)
+        return false;
+    
     if(turnOrder == PLAYER1_TURN)
     {
         if(player->actionPoints > 0)
@@ -164,7 +180,7 @@ bool RAGameEngine::doPlayerUseItem(RAPlayer *player, int slot)
             auto baseItem = player->getItemAtSlot(slot);
             if (baseItem == nullptr)
                 return false;
-            switch (baseItem->getItemID()) {
+            switch (baseItem->getItemType()) {
                 case idItemTarget:
                     
                     break;
@@ -184,6 +200,7 @@ bool RAGameEngine::doPlayerUseItem(RAPlayer *player, int slot)
             {
                 player->removeItemAtSlot(slot);
             }
+            //TODO: send right message for the client
             gameListener->loadPlayer(player);
             return true;
         }
@@ -245,13 +262,13 @@ void RAGameEngine::switchTurn()
                 {
                     //player standing in destiny tile, so attack
                     int damageTook = player1->inflictDamage(cr->getAtkDamage());
-                    gameListener->creatureAttackedPlayer(cr, player1, damageTook);
+                    gameListener->creatureAttackedPlayer(cr->id, player1->playerID, damageTook);
                 }
                 else
                 {
                     //just move
                     gameMap->moveCreatureToTile(cr, row, col);
-                    gameListener->creatureMoved(cr, row, col);
+                    gameListener->creatureMoved(cr->id, row, col);
                 }
                 
                 
@@ -261,3 +278,13 @@ void RAGameEngine::switchTurn()
         switchTurn();
     }
 }
+
+RAPlayer* RAGameEngine::auxGetPlayerById(int playerID)
+{
+    if(player1 != nullptr && player1->playerID == playerID)
+        return player1;
+    if(player2 != nullptr && player2->playerID == playerID)
+        return player2;
+    return nullptr;
+}
+

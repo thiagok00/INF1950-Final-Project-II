@@ -32,7 +32,6 @@ RAMap* RALevelGenerator::generateLevel(int difficulty)
     map->player2RespawnTile = map->getTile(1, 2);
 
     RASelfUseItem * item = RAHealItem::createHealthRune();
-    int adfa = item->getCharges();
     map->addItemToTile(item, 2, 2);
     return map;
 }

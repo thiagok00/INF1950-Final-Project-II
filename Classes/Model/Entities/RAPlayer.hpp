@@ -33,7 +33,7 @@ public:
     int maxManaPoints;
     
     //Slots Methods
-    bool addItemToSlot(RAItem* item);
+    int addItemToSlot(RAItem* item);
     bool isSlotFull();
     
     RAItem * getItemAtSlot(int slot);

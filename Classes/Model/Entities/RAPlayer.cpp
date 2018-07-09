@@ -48,10 +48,10 @@ bool RAPlayer::addExperiencePoints(int experience)
 
 //MARK: Slots Methods
 
-bool RAPlayer::addItemToSlot(RAItem* item)
+int RAPlayer::addItemToSlot(RAItem* item)
 {
     if(isSlotFull())
-        return false;
+        return -1;
     
     for(int i = 0; i < this->maxSlots; i++)
     {
@@ -59,11 +59,11 @@ bool RAPlayer::addItemToSlot(RAItem* item)
         {
             itensSlots[i] = item;
             occupiedSlots++;
-            return true;
+            return i;
         }
     }
     //should not reach here
-    return false;
+    return -1;
 }
 
 bool RAPlayer::isSlotFull()

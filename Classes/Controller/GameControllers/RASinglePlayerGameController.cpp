@@ -18,37 +18,37 @@ void RASinglePlayerGameController::startGame()
     gameEngine = RAGameEngine::createGame(kGAMEMODE_SINGLEPLAYER, gameScene);
 }
 
-void RASinglePlayerGameController::doPlayerAction(RAPlayer* player, RADirection direction)
+void RASinglePlayerGameController::doPlayerAction(int playerID, RADirection direction)
 {
-    gameEngine->doPlayerAction(player, direction);
+    gameEngine->doPlayerAction(playerID, direction);
 }
 
-void RASinglePlayerGameController::doPlayerUseItem(RAPlayer *player, int slot)
+void RASinglePlayerGameController::doPlayerUseItem(int playerID, int slot)
 {
-    gameEngine->doPlayerUseItem(player, slot);
+    gameEngine->doPlayerUseItem(playerID, slot);
 }
 
-void RASinglePlayerGameController::playerMoved (RAPlayer* player, RATile * tile)
+void RASinglePlayerGameController::playerMoved (int playerID, int row, int col)
 {
-    gameScene->playerMoved(player, tile);
+    gameScene->playerMoved(playerID, row, col);
 }
 
-void RASinglePlayerGameController::playerAttackedCreature (RAPlayer* player, RACreature *creature, int damage, bool died)
+void RASinglePlayerGameController::playerAttackedCreature (int playerID, int creatureID, int damage, bool died, int playerExperience)
 {
-    gameScene->playerAttackedCreature(player, creature, damage, died);
+    gameScene->playerAttackedCreature(playerID, creatureID, damage, died, playerExperience);
 }
 
-void RASinglePlayerGameController::creatureMoved(RACreature *creature, int row, int col)
+void RASinglePlayerGameController::creatureMoved(int creatureID, int row, int col)
 {
-    gameScene->creatureMoved(creature, row, col);
+    gameScene->creatureMoved(creatureID, row, col);
 }
 
-void RASinglePlayerGameController::creatureAttackedPlayer(RACreature *creature, RAPlayer * player, int damage)
+void RASinglePlayerGameController::creatureAttackedPlayer(int creatureID, int playerID, int damage)
 {
-    gameScene->creatureAttackedPlayer(creature, player, damage);
+    gameScene->creatureAttackedPlayer(creatureID, playerID, damage);
 }
 
-void RASinglePlayerGameController::playerMovedAndCaughtItem (RAPlayer* player, RATile * tile, RAItem *item)
+void RASinglePlayerGameController::playerMovedAndCaughtItem (int playerID, int row, int col, int atSlot, ItemID itemType, int charges)
 {
-    gameScene->playerMovedAndCaughtItem(player, tile, item);
+    gameScene->playerMovedAndCaughtItem(playerID, row, col, atSlot, itemType, charges);
 }

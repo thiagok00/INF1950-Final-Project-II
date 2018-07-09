@@ -11,9 +11,58 @@
 #include "RASinglePlayerGameController.hpp"
 #include "ui/CocosGUI.h"
 
-
 class RAGameScene : public cocos2d::Scene, public RASceneProtocol
 {
+public:
+   
+    struct ItemNode
+    {
+        ItemID itemType;
+        int charges;
+        cocos2d::LayerColor* iSprite;
+    };
+    
+    struct InventaryItemNode
+    {
+        ItemID itemType;
+        int slot;
+        int charges;
+        cocos2d::Sprite* iSprite;
+    };
+    
+    
+    struct CreatureNode
+    {
+        int creatureID;
+        bool isDead;
+        cocos2d::Sprite* cSprite;
+        cocos2d::Size size;
+    };
+
+    struct PlayerNode
+    {
+        RAPlayer* pController;
+        cocos2d::Sprite* pSprite;
+        std::vector<InventaryItemNode*> items;
+        int occupiedSlots = 0;
+        int maxSlots;
+    };
+    
+    struct TileNode
+    {
+        int row;
+        int col;
+        bool walkable;
+        CreatureNode * cr;
+        cocos2d::Sprite * sprite;
+        ItemNode* droppedItem;
+    };
+    
+    struct MapNode
+    {
+        std::vector<TileNode*> tiles;
+    };
+    
 protected:
     //HUD
     cocos2d::Label *varExperienceLabel;
@@ -32,7 +81,12 @@ protected:
 
     cocos2d::Label* auxCreateDamageLabel(int damage, cocos2d::Color4B textColor, cocos2d::Vec2 pos);
 
-    void auxUpdatePlayerItensSlots(RAPlayer* player);
+    void auxUpdatePlayerItensSlots();
+    
+    PlayerNode* auxGetPlayerNodeById(int playerID);
+    
+    int auxGetTileIndex(int row, int col);
+    
     cocos2d::Size tileSize;
 public:
     static cocos2d::Scene* createScene(int gameMode);
@@ -44,14 +98,11 @@ public:
     /* RASceneProtocol Methods */
     void loadMap (RAMap* map);
     void loadPlayer (RAPlayer *player);
-    void playerMoved (RAPlayer* player, RATile * tile);
-    void playerMovedAndCaughtItem (RAPlayer* player, RATile * tile, RAItem *item);
-    void playerAttackedCreature (RAPlayer* player, RACreature *creature, int damage, bool died);
-    void creatureMoved(RACreature *creature, int row, int col);
-    void creatureAttackedPlayer(RACreature *creature, RAPlayer * player, int damage);
-
-
-    std::vector<cocos2d::Sprite*> mapSprites;
+    void playerMoved (int playerID, int row, int col);
+    void playerMovedAndCaughtItem (int playerID, int row, int col,int atSlot, ItemID itemType, int charges);
+    void playerAttackedCreature (int playerID, int creatureID, int damage, bool died, int playerExperience);
+    void creatureMoved(int creatureID, int row, int col);
+    void creatureAttackedPlayer(int creatureID, int playerID, int damage);
     
     cocos2d::LayerColor *varBackLayer;
     cocos2d::Size varScreenSize;
@@ -78,30 +129,13 @@ public:
     void useItemSlotButton(Ref* pSender, cocos2d::ui::Widget::TouchEventType type);
     
     
-    struct PlayerNode
-    {
-        RAPlayer* pController;
-        cocos2d::Sprite* pSprite;
-    };
     
-    PlayerNode player1Node;
-    PlayerNode player2Node;
+    PlayerNode *player1Node;
+    PlayerNode *player2Node;
     
-    struct CreatureNode
-    {
-        RACreature* cController;
-        cocos2d::Sprite* cSprite;
-    };
+    MapNode *mapNode;
     
-    CreatureNode creatureExample;
-    
-    struct ItemNode
-    {
-        RAItem *iController;
-        cocos2d::LayerColor* iSprite;
-    };
-    
-    ItemNode itemExample;
+    std::map<int, CreatureNode*> varCreaturesMap;
 };
 
 #endif // __RAGameScene_SCENE_H__

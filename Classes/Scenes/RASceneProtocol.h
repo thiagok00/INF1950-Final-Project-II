@@ -16,11 +16,11 @@ class RASceneProtocol
 public:
     virtual void loadMap (RAMap* map) {}
     virtual void loadPlayer (RAPlayer *player) {}
-    virtual void playerMoved (RAPlayer* player, RATile * tile) {}
-    virtual void playerMovedAndCaughtItem (RAPlayer* player, RATile * tile, RAItem *item) {}
-    virtual void playerAttackedCreature (RAPlayer* player, RACreature *creature, int damage, bool died) {}
-    virtual void creatureMoved(RACreature *creature, int row, int col) {}
-    virtual void creatureAttackedPlayer(RACreature *creature, RAPlayer * player, int damage) {}
+    virtual void playerMoved (int playerID, int row, int col) {}
+    virtual void playerMovedAndCaughtItem (int playerID, int row, int col, int atSlot, ItemID itemType, int charges) {}
+    virtual void playerAttackedCreature (int playerID, int creatureID, int damage, bool died, int playerExperience) {}
+    virtual void creatureMoved(int creatureID, int row, int col) {}
+    virtual void creatureAttackedPlayer(int creatureID, int playerID, int damage) {}
 
 };
 

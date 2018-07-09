@@ -48,8 +48,9 @@ bool RAGameScene::init(int gameMode)
     
     //////////////////////////////
     // 2. init vars
-    player1Node.pSprite = nullptr;
-    player2Node.pSprite = nullptr;
+    player1Node = nullptr;
+    player2Node = nullptr;
+    mapNode = nullptr;
     
     //SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Untitled.plist");
     
@@ -193,21 +194,39 @@ Label* RAGameScene::auxCreateDamageLabel(int damage, Color4B textColor, Vec2 pos
     return damageLabel;
 }
 
-void RAGameScene::auxUpdatePlayerItensSlots(RAPlayer* player)
+void RAGameScene::auxUpdatePlayerItensSlots()
 {
-    int maxSlots = player->getMaxSlots();
-    
-    for(int i = 0; i < maxSlots; i++)
+    for(auto btn :varItensSlotButtons)
     {
-        if(auto item = player->getItemAtSlot(i))
-        {
-            varItensSlotButtons[i]->setColor(Color3B::MAGENTA);
-        }
-        else
-        {
-            varItensSlotButtons[i]->setColor(Color3B::RED);
-        }
+        btn->setColor(Color3B::RED);
     }
+    
+    for(auto iNode : player1Node->items)
+    {
+        varItensSlotButtons.at(iNode->slot)->setColor(Color3B::MAGENTA);
+    }
+}
+
+RAGameScene::PlayerNode* RAGameScene::auxGetPlayerNodeById(int playerID)
+{
+    if (player1Node != nullptr &&  player1Node->pController != nullptr && player1Node->pController->playerID == playerID)
+    {
+        return player1Node;
+    }
+    else if (player2Node != nullptr && player2Node->pController != nullptr && player2Node->pController->playerID == playerID)
+    {
+        return player2Node;
+    }
+    else
+    {
+        CCASSERT(1, "ERROR - PLAYER NOT FOUND");
+        return player1Node;
+    }
+}
+
+int RAGameScene::auxGetTileIndex(int row, int col)
+{
+    return MAP_MAX_ROW*row + col;
 }
 
 
@@ -220,8 +239,9 @@ void RAGameScene::loadMap (RAMap* map)
     
     tileSize.width = varScreenSize.width/MAP_MAX_ROW;
     tileSize.height = tileSize.width;
-    if(mapSprites.size() == 0)
+    if(mapNode == nullptr)
     {
+        mapNode = new MapNode();
         int xPos;
         int yPos = varScreenSize.height*0.3;
         
@@ -230,54 +250,63 @@ void RAGameScene::loadMap (RAMap* map)
             xPos = tileSize.width/2.0f;
             for(int j = 0; j < MAP_MAX_COL; j++)
             {
-                RATile *t;
-                t = map->getTile(i, j);
+                RATile* tile = map->getTile(i, j);
+                TileNode *t = new TileNode();
+                t->row = tile->getRow();
+                t->col = tile->getCol();
+                t->walkable = tile->isWakable();
                 
                 //temp
-                Sprite *tileSprite = Sprite::create("cave_ground.png");
-                tileSprite->setScale(tileSize.width/tileSprite->getContentSize().width);
-                tileSprite->setAnchorPoint(Vec2(0.5,0.5));
-                tileSprite->setPosition(xPos,yPos);
+                t->sprite = Sprite::create("cave_ground.png");
+                t->sprite->setScale(tileSize.width/t->sprite->getContentSize().width);
+                t->sprite->setAnchorPoint(Vec2(0.5,0.5));
+                t->sprite->setPosition(xPos,yPos);
                 
                 //render creature of tile
-                if(t->creature != nullptr)
+                if(tile->creature != nullptr)
                 {
-                    Sprite *creatureSprite;
-                    Size creatureSize = tileSize;
-                    switch(t->creature->id)
+                    CreatureNode * creature = new CreatureNode();
+                    creature->size = tileSize;
+                    creature->isDead = tile->creature->isDead();
+                    creature->creatureID = tile->creature->id;
+                    switch(creature->creatureID)
                     {
                         case Rat:
-                            creatureSprite = Sprite::create("creature_example.png");
+                            creature->cSprite = Sprite::create("creature_example.png");
                             break;
                         case Cave_rat:
-                            creatureSprite = Sprite::create("creature_example.png");
+                            creature->cSprite = Sprite::create("creature_example.png");
                             break;
                     }
-                    this->creatureExample.cSprite = creatureSprite;
-                    this->creatureExample.cController = t->creature;
                     
-                    creatureSprite->setScale(creatureSize.width/creatureSprite->getContentSize().width);
-                    creatureSprite->setAnchorPoint(Vec2(0.5,0.5));
-                    creatureSprite->setPosition(xPos,yPos);
-                    varBackLayer->addChild(creatureSprite,zORDER_CREATURE);
+                    creature->cSprite->setScale(creature->size.width/creature->cSprite->getContentSize().width);
+                    creature->cSprite->setAnchorPoint(Vec2(0.5,0.5));
+                    creature->cSprite->setPosition(xPos,yPos);
+                    varBackLayer->addChild(creature->cSprite,zORDER_CREATURE);
+                    varCreaturesMap.insert(std::make_pair(creature->creatureID, creature));
                 }
                 
                 //render item
-                if(t->droppedItem != nullptr)
+                if(tile->droppedItem != nullptr)
                 {
-                    Color4B color;
-                    color = Color4B::MAGENTA;
-                    LayerColor* itemSpr = LayerColor::create(color, tileSize.width*0.6, tileSize.height*0.6);
-                    itemSpr->setAnchorPoint(Vec2(0.5, 0.5));
-                    tileSprite->addChild(itemSpr, zORDER_ITEM);
+                    ItemNode *item = new ItemNode();
+                    item->itemType = tile->droppedItem->getItemType();
+                    item->charges = tile->droppedItem->getCharges();
                     
-                    itemExample.iSprite = itemSpr;
-                    itemExample.iController = t->droppedItem;
+                    //TODO: sprites of itens
+                    //temporary "sprite"
+                    Color4B color = Color4B::MAGENTA;
+                    item->iSprite = LayerColor::create(color, tileSize.width*0.6, tileSize.height*0.6);
+                    item->iSprite->setAnchorPoint(Vec2(0.5, 0.5));
+                    t->sprite->addChild(item->iSprite, zORDER_ITEM);
+                    
+                    t->droppedItem = item;
+                    item->iSprite = item->iSprite;
                 }
                 
-                mapSprites.push_back(tileSprite);
+                mapNode->tiles.push_back(t);
                 
-                varBackLayer->addChild(tileSprite,zORDER_TILE);
+                varBackLayer->addChild(t->sprite,zORDER_TILE);
                 xPos += tileSize.width;
             }
             yPos += tileSize.height;
@@ -287,35 +316,40 @@ void RAGameScene::loadMap (RAMap* map)
 
 void RAGameScene::loadPlayer (RAPlayer* player)
 {
-    if(player1Node.pSprite == nullptr)
+    if(player1Node == nullptr)
     {
+        player1Node = new PlayerNode();
         Size playerSize;
         playerSize.width = varScreenSize.width/MAP_MAX_ROW;
         playerSize.height = playerSize.width;
         
-        player1Node.pSprite = Sprite::create("player_idle_south.png");
+        player1Node->pSprite = Sprite::create("player_idle_south.png");
         
-        player1Node.pSprite->setScale(playerSize.width/player1Node.pSprite->getContentSize().width);
-        player1Node.pSprite->setAnchorPoint(Vec2(0.5,0.5));
-        varBackLayer->addChild(player1Node.pSprite,zORDER_PLAYER);
+        player1Node->pSprite->setScale(playerSize.width/player1Node->pSprite->getContentSize().width);
+        player1Node->pSprite->setAnchorPoint(Vec2(0.5,0.5));
+        varBackLayer->addChild(player1Node->pSprite,zORDER_PLAYER);
+        player1Node->occupiedSlots = 0;
+        player1Node->maxSlots = player->getMaxSlots();
+        
     }
     
-    player1Node.pController = player;
-    player1Node.pSprite->setPosition(mapSprites.at(MAP_MAX_ROW*player->tile->getRow() + player->tile->getCol())->getPosition());
+    player1Node->pController = player;
+    player1Node->pSprite->setPosition(mapNode->tiles.at(MAP_MAX_ROW*player->tile->getRow() + player->tile->getCol())->sprite->getPosition());
     
     auxUpdateExperienceLabelText(player->getExperiencePoints());
     auxUpdateHealthBar((float)player->healthPoints/(float)player->maxHealthPoints);
     auxUpdateManaBar((float)player->manaPoints/(float)player->maxManaPoints);
-    auxUpdatePlayerItensSlots(player);
+    
+    auxUpdatePlayerItensSlots();
 }
 
-void RAGameScene::playerMoved(RAPlayer* player, RATile * tile)
+void RAGameScene::playerMoved(int playerID, int row, int col)
 {
     Sprite *playerSprite;
     
-    playerSprite = player1Node.pSprite;
+    playerSprite = player1Node->pSprite;
     
-    Vec2 destination = mapSprites.at(MAP_MAX_ROW*tile->getRow() + tile->getCol())->getPosition();
+    Vec2 destination = mapNode->tiles.at(MAP_MAX_ROW*row + col)->sprite->getPosition();
     
     auto moveAction = MoveTo::create(0.3, destination);
     
@@ -323,22 +357,40 @@ void RAGameScene::playerMoved(RAPlayer* player, RATile * tile)
     playerSprite->runAction(moveAction);
 }
 
-void RAGameScene::playerMovedAndCaughtItem (RAPlayer* player, RATile * tile, RAItem *item)
+void RAGameScene::playerMovedAndCaughtItem (int playerID, int row, int col, int atSlot, ItemID itemType, int charges)
 {
-    playerMoved(player, tile);
+    playerMoved(playerID, row, col);
     
-    //TODO: implement this right
-    this->itemExample.iSprite->removeFromParentAndCleanup(true);
-    auxUpdatePlayerItensSlots(player);
+    TileNode *tNode = mapNode->tiles.at(auxGetTileIndex(row, col));
+    PlayerNode *playerNode = auxGetPlayerNodeById(playerID);
+    
+    InventaryItemNode *iNode = new InventaryItemNode();
+    iNode->itemType = itemType;
+    iNode->charges = charges;
+    iNode->slot = atSlot;
+    //TODO: add iventary item sprite
+    //iNode->iSprite = Sprite::create
+    
+    playerNode->items.push_back(iNode);
+    
+    //removing item from the floor
+    tNode->droppedItem->iSprite->removeFromParentAndCleanup(true);
+    tNode->droppedItem = nullptr;
+    delete tNode->droppedItem;
+    
+    auxUpdatePlayerItensSlots();
 }
 
-void RAGameScene::playerAttackedCreature (RAPlayer* player, RACreature *creature, int damage, bool died)
+void RAGameScene::playerAttackedCreature (int playerID, int creatureID, int damage, bool died, int playerExperience)
 {
+    RAPlayer *player = auxGetPlayerNodeById(playerID)->pController;
     auto blinkAction = Blink::create(0.5, 3);
-    creatureExample.cSprite->runAction(blinkAction);
+    
+    Sprite *cSprite = varCreaturesMap.find(creatureID)->second->cSprite;
+    cSprite->runAction(blinkAction);
     
     //Damage Feedback
-    auxCreateDamageLabel(damage,Color4B::YELLOW,creatureExample.cSprite->getPosition());
+    auxCreateDamageLabel(damage,Color4B::YELLOW, cSprite->getPosition());
 
     if (died)
     {
@@ -347,28 +399,31 @@ void RAGameScene::playerAttackedCreature (RAPlayer* player, RACreature *creature
     }
 }
 
-void RAGameScene::creatureMoved(RACreature *creature, int row, int col)
+void RAGameScene::creatureMoved(int creatureID, int row, int col)
 {
-    Sprite * creatureSprite = creatureExample.cSprite;
-    Vec2 destination = mapSprites[col + row*MAP_MAX_COL]->getPosition();
+    Sprite *cSprite = varCreaturesMap.find(creatureID)->second->cSprite;
+    Vec2 destination = mapNode->tiles[auxGetTileIndex(row, col)]->sprite->getPosition();
     
     auto moveAction = MoveTo::create(0.3, destination);
     
     moveAction->setTag(MOVE_ACTION_TAG);
-    creatureSprite->runAction(moveAction);
+    cSprite->runAction(moveAction);
 }
 
-void RAGameScene::creatureAttackedPlayer(RACreature *creature, RAPlayer * player, int damage)
+void RAGameScene::creatureAttackedPlayer(int creatureID, int playerID, int damage)
 {
+    RAPlayer *player = auxGetPlayerNodeById(playerID)->pController;
     auto rt = RotateBy::create(0.5, 0.8);
     auto rt2 = rt->reverse();
     auto seq = Sequence::create(rt,rt2, NULL);
-    this->creatureExample.cSprite->runAction(seq);
     
-    auxCreateDamageLabel(damage, Color4B::RED, player1Node.pSprite->getPosition());
+    Sprite *cSprite = varCreaturesMap.find(creatureID)->second->cSprite;
+    cSprite->runAction(seq);
+    
+    auxCreateDamageLabel(damage, Color4B::RED, player1Node->pSprite->getPosition());
     
     auto blinkAction = Blink::create(0.5, 3);
-    player1Node.pSprite->runAction(blinkAction);
+    player1Node->pSprite->runAction(blinkAction);
     
     auxUpdateHealthBar((float)player->healthPoints/(float)player->maxHealthPoints);
 }
@@ -410,7 +465,7 @@ void RAGameScene::update(float dt)
     if (true == isTouchDown)
     {
         
-        if(player1Node.pSprite->getActionByTag(MOVE_ACTION_TAG) != nullptr)
+        if(player1Node->pSprite->getActionByTag(MOVE_ACTION_TAG) != nullptr)
             return;
         
         if (initialTouchPos[0] - currentTouchPos[0] > varScreenSize.width * 0.05)
@@ -418,14 +473,14 @@ void RAGameScene::update(float dt)
             CCLOG("SWIPED LEFT");
             isTouchDown = false;
             
-            gameController->doPlayerAction(player1Node.pController, LEFT);
+            gameController->doPlayerAction(player1Node->pController->playerID, LEFT);
         }
         else if (initialTouchPos[0] - currentTouchPos[0] < - varScreenSize.width * 0.05)
         {
             CCLOG("SWIPED RIGHT");
             isTouchDown = false;
             
-            gameController->doPlayerAction(player1Node.pController, RIGHT);
+            gameController->doPlayerAction(player1Node->pController->playerID, RIGHT);
             
         }
         else if (initialTouchPos[1] - currentTouchPos[1] > varScreenSize.width * 0.05)
@@ -433,7 +488,7 @@ void RAGameScene::update(float dt)
             CCLOG("SWIPED DOWN");
             isTouchDown = false;
             
-            gameController->doPlayerAction(player1Node.pController, DOWN);
+            gameController->doPlayerAction(player1Node->pController->playerID, DOWN);
             
         }
         else if (initialTouchPos[1] - currentTouchPos[1] < - varScreenSize.width * 0.05)
@@ -441,7 +496,7 @@ void RAGameScene::update(float dt)
             CCLOG("SWIPED UP");
             isTouchDown = false;
             
-            gameController->doPlayerAction(player1Node.pController, UP);
+            gameController->doPlayerAction(player1Node->pController->playerID, UP);
             
         }
     }
@@ -453,7 +508,7 @@ void RAGameScene::useItemSlotButton(Ref* pSender, cocos2d::ui::Widget::TouchEven
     switch(type)
     {
         case cocos2d::ui::Widget::TouchEventType::ENDED:
-            gameController->doPlayerUseItem(player1Node.pController, slot);
+            gameController->doPlayerUseItem(player1Node->pController->playerID, slot);
             break;
         default:
             break;

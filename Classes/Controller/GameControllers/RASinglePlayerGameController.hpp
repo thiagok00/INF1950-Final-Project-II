@@ -19,18 +19,18 @@ public:
     RASinglePlayerGameController(RASceneProtocol *gs);
     ~RASinglePlayerGameController();
     void startGame();
-    void doPlayerAction(RAPlayer *player, RADirection direction);
-    void doPlayerUseItem(RAPlayer *player, int slot);
+    void doPlayerAction(int playerID, RADirection direction);
+    void doPlayerUseItem(int playerID, int slot);
 
 
     
     //virtual void renderMap (RAMap* map) {}
     //virtual void loadPlayer (RAPlayer *player) {}
-    void playerMoved (RAPlayer* player, RATile * tile);
-    void playerMovedAndCaughtItem (RAPlayer* player, RATile * tile, RAItem *item);
-    void playerAttackedCreature (RAPlayer* player, RACreature *creature, int damage, bool died);
-    void creatureMoved(RACreature *creature, int row, int col);
-    void creatureAttackedPlayer(RACreature *creature, RAPlayer * player, int damage);
+    void playerMoved (int playerID, int row, int col);
+    void playerMovedAndCaughtItem (int playerID, int row, int col,int atSlot, ItemID itemType, int charges);
+    void playerAttackedCreature (int playerID, int creatureID, int damage, bool died, int playerExperience);
+    void creatureMoved(int creatureID, int row, int col);
+    void creatureAttackedPlayer(int creatureID, int playerID, int damage);
 
 protected:
     
