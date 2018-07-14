@@ -335,18 +335,25 @@ void RAGameScene::loadPlayer (RAPlayer* player)
         playerSize.width = varScreenSize.width/MAP_MAX_ROW;
         playerSize.height = playerSize.width;
         
+        player1Node->node = Node::create();
+        player1Node->node->setContentSize(playerSize);
+        
+        player1Node->playerSize = playerSize;
+        
         player1Node->pSprite = Sprite::create("player_idle_south.png");
         
         player1Node->pSprite->setScale(playerSize.width/player1Node->pSprite->getContentSize().width);
         player1Node->pSprite->setAnchorPoint(Vec2(0.5,0.5));
-        varBackLayer->addChild(player1Node->pSprite,zORDER_PLAYER);
+        varBackLayer->addChild(player1Node->node,zORDER_PLAYER);
+        player1Node->node->addChild(player1Node->pSprite);
         player1Node->occupiedSlots = 0;
         player1Node->maxSlots = player->getMaxSlots();
         
     }
     
     player1Node->pController = player;
-    player1Node->pSprite->setPosition(mapNode->tiles.at(MAP_MAX_ROW*player->tile->getRow() + player->tile->getCol())->sprite->getPosition());
+   // player1Node->pSprite->setPosition(mapNode->tiles.at(MAP_MAX_ROW*player->tile->getRow() + player->tile->getCol())->sprite->getPosition());
+    player1Node->node->setPosition(mapNode->tiles.at(MAP_MAX_ROW*player->tile->getRow() + player->tile->getCol())->sprite->getPosition());
     
     auxUpdateExperienceLabelText(player->getExperiencePoints());
     auxUpdateHealthBar((float)player->healthPoints/(float)player->maxHealthPoints);
@@ -357,16 +364,14 @@ void RAGameScene::loadPlayer (RAPlayer* player)
 
 void RAGameScene::playerMoved(int playerID, int row, int col)
 {
-    Sprite *playerSprite;
-    
-    playerSprite = player1Node->pSprite;
+    auto player = auxGetPlayerNodeById(playerID);
     
     Vec2 destination = mapNode->tiles.at(MAP_MAX_ROW*row + col)->sprite->getPosition();
     
     auto moveAction = MoveTo::create(0.3, destination);
     
     moveAction->setTag(MOVE_ACTION_TAG);
-    playerSprite->runAction(moveAction);
+    player->node->runAction(moveAction);
 }
 
 void RAGameScene::playerMovedAndCaughtItem (int playerID, int row, int col, int atSlot, ItemID itemType, int charges)
@@ -445,6 +450,26 @@ void RAGameScene::playerBadStatus(int playerID, Status_ID statusID, int damage)
     auto playerNode = auxGetPlayerNodeById(playerID);
     RAPlayer *player = playerNode->pController;
     
+    Sprite* statusSpr;
+    
+    switch(statusID)
+    {
+        case BURNING:
+            statusSpr = Sprite::create("burn_1.png");
+            break;
+        case POISONED:
+            statusSpr = Sprite::create("poison_1.png");
+            break;
+    }
+    
+    statusSpr->setScale(playerNode->playerSize.width/statusSpr->getBoundingBox().size.width);
+    statusSpr->setPosition(Vec2(0,0
+                        ));
+
+    playerNode->node->addChild(statusSpr,9999333);
+    //FIXME: memory leak burnSpr
+    statusSpr->runAction(FadeOut::create(1.5));
+
     auxUpdateHealthBar((float)player->healthPoints/(float)player->maxHealthPoints);
 }
 
@@ -485,7 +510,7 @@ void RAGameScene::update(float dt)
     if (true == isTouchDown)
     {
         
-        if(player1Node->pSprite->getActionByTag(MOVE_ACTION_TAG) != nullptr)
+        if(player1Node->node->getActionByTag(MOVE_ACTION_TAG) != nullptr)
             return;
         
         if (initialTouchPos[0] - currentTouchPos[0] > varScreenSize.width * 0.05)
