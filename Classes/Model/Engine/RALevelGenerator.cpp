@@ -19,7 +19,11 @@ RAMap* RALevelGenerator::generateLevel(int difficulty)
     {
         for (j = 0; j < MAP_MAX_COL; j++)
         {
-            RATile *tile = new RATile(i,j,true);
+            TileType type = Normal;
+            if(i == 4 && j == 2) type = Fire;
+            if(i == 7 && j == 5) type = Poison;
+            if(i == 6 && j == 6) type = Stairs;
+            RATile *tile = new RATile(type, i , j, true);
             tile->creature = nullptr;
             map->setTile(i,j,tile);
         }
@@ -27,6 +31,10 @@ RAMap* RALevelGenerator::generateLevel(int difficulty)
     
     RACreature *rat = new RACreature(Rat , 5, 6, 10, 0);
     map->addCreatureToTile(rat, MAP_MAX_ROW-1, MAP_MAX_COL-1);
+    RACreature *caveRat = new RACreature(Cave_Rat , 5, 6, 10, 0);
+
+    map->addCreatureToTile(caveRat, 3, MAP_MAX_COL);
+
     
     map->player1RespawnTile = map->getTile(1, 1);
     map->player2RespawnTile = map->getTile(1, 2);

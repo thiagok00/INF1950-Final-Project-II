@@ -7,8 +7,9 @@
 
 #include "RATile.hpp"
 
-RATile::RATile(int row, int col, bool walkable)
+RATile::RATile(TileType type, int row, int col, bool walkable)
 {
+    this->type = type;
     this->row = row;
     this->col = col;
     this->walkable = walkable;
@@ -34,4 +35,19 @@ int RATile::getCol()
 bool RATile::isWakable()
 {
     return this->walkable;
+}
+
+int RATile::getType()
+{
+    return this->type;
+}
+
+void RATile::setFire()
+{
+    this->type = Fire;
+}
+
+void RATile::setPoison()
+{
+    this->type = Poison;
 }

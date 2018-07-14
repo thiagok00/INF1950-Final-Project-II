@@ -10,6 +10,12 @@
 
 #include <stdio.h>
 
+enum Status_ID
+{
+    BURNING,
+    POISONED
+};
+
 class RAEntity
 {
 public:
@@ -30,10 +36,19 @@ public:
     int row;
     int col;
     
+    //bad status
+    bool isBurning();
+    bool isPoisoned();
+    int burn();
+    int poison();
+    int burningTick;
+    int poisonTick;
+    
     //returns real damage took (damage - armor)
     int inflictDamage(int damage);
     int getAtkDamage();
-    
+    virtual ~RAEntity() {}
+
 protected:
     bool dead;
     int baseAtkDamage;

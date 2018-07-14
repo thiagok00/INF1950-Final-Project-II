@@ -103,7 +103,8 @@ public:
     void playerAttackedCreature (int playerID, int creatureID, int damage, bool died, int playerExperience);
     void creatureMoved(int creatureID, int row, int col);
     void creatureAttackedPlayer(int creatureID, int playerID, int damage);
-    
+    void playerBadStatus(int playerID, Status_ID statusID, int damage);
+
     cocos2d::LayerColor *varBackLayer;
     cocos2d::Size varScreenSize;
     
