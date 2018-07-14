@@ -22,7 +22,6 @@ public:
     virtual void creatureMoved(int creatureID, int row, int col) {}
     virtual void creatureAttackedPlayer(int creatureID, int playerID, int damage) {}
     virtual void playerBadStatus(int playerID, Status_ID statusID, int damage) {}
-
 };
 
 #endif /* RASceneProtocol_h */

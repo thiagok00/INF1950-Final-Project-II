@@ -28,6 +28,7 @@ public:
     virtual void startGame() {}
     virtual void doPlayerAction(int playerID, RADirection direction) {}
     virtual void doPlayerUseItem(int playerID, int slot) {}
+    virtual void playerPassTurn(int playerID) {}
 
 
 protected:

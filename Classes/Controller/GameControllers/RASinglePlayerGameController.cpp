@@ -28,6 +28,13 @@ void RASinglePlayerGameController::doPlayerUseItem(int playerID, int slot)
     gameEngine->doPlayerUseItem(playerID, slot);
 }
 
+void RASinglePlayerGameController::playerPassTurn(int playerID)
+{
+    gameEngine->doPlayerPassTurn(playerID);
+}
+
+
+//Not using anymore
 void RASinglePlayerGameController::playerMoved (int playerID, int row, int col)
 {
     gameScene->playerMoved(playerID, row, col);

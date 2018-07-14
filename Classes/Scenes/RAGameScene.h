@@ -133,7 +133,9 @@ public:
     
     void useItemSlotButton(Ref* pSender, cocos2d::ui::Widget::TouchEventType type);
     
-    
+    void passTurnButtonCallback(Ref* pSender, cocos2d::ui::Widget::TouchEventType type);
+
+    bool isTurnHappening();
     
     PlayerNode *player1Node;
     PlayerNode *player2Node;

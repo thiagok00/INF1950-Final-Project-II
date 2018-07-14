@@ -29,6 +29,7 @@ public:
     
     bool doPlayerAction(int playerID, RADirection direction);
     bool doPlayerUseItem(int playerID, int slot);
+    bool doPlayerPassTurn(int playerID);
 protected:
     
     int gameMode;
