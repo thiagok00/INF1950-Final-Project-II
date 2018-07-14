@@ -163,7 +163,7 @@ bool RAGameEngine::doPlayerAction(int playerID, RADirection direction)
             gameListener->playerMoved(player->playerID, destTile->getRow(), destTile->getCol());
         }
     }
-    if (player->speed == 0 || player->actionPoints == 0)
+    if (player->speed == 0 && player->actionPoints == 0)
     {
         switchTurn();
     }
@@ -213,6 +213,17 @@ bool RAGameEngine::doPlayerUseItem(int playerID, int slot)
     return false;
 }
 
+
+bool RAGameEngine::doPlayerPassTurn(int playerID)
+{
+    if(turnOrder == playerID)
+    {
+        //auto player = auxGetPlayerById(playerID);
+        switchTurn();
+        return true;
+    }
+    return false;
+}
 
 void RAGameEngine::switchTurn()
 {

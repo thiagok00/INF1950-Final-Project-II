@@ -4,6 +4,8 @@
 USING_NS_CC;
 
 #define MOVE_ACTION_TAG 1000
+#define ATK_ACTION_TAG  1001
+#define HURT_ACTION_TAG 1002
 
 #define zORDER_CREATURE 110
 #define zORDER_PLAYER 111
@@ -115,6 +117,16 @@ bool RAGameScene::init(int gameMode)
         varBackLayer->addChild(btn, zORDER_HUD);
         varItensSlotButtons.push_back(btn);
     }
+    
+    //pass turn button
+    auto passTurnButton = ui::Button::create("placeholderButton.png");
+    passTurnButton->setAnchorPoint(Vec2(0.5, 0.5));
+    passTurnButton->setPosition(Vec2(varScreenSize.width/2.0f, varScreenSize.height*0.23));
+    Size passTurnBtnSize = Size(varScreenSize.width*0.6, varScreenSize.height*0.05);
+    passTurnButton->setScale(passTurnBtnSize.width/passTurnButton->getContentSize().width, passTurnBtnSize.height/passTurnButton->getContentSize().height);
+    passTurnButton->addTouchEventListener(CC_CALLBACK_2(RAGameScene::passTurnButtonCallback, this));
+    
+    varBackLayer->addChild(passTurnButton, zORDER_HUD);
     
     //touch events
     auto listener1 = EventListenerTouchOneByOne::create();
@@ -402,8 +414,11 @@ void RAGameScene::playerAttackedCreature (int playerID, int creatureID, int dama
 {
     RAPlayer *player = auxGetPlayerNodeById(playerID)->pController;
     auto blinkAction = Blink::create(0.5, 3);
+    blinkAction->setTag(HURT_ACTION_TAG);
     
     Sprite *cSprite = varCreaturesMap.find(creatureID)->second->cSprite;
+    
+    cSprite->stopActionByTag(HURT_ACTION_TAG);
     cSprite->runAction(blinkAction);
     
     //Damage Feedback
@@ -440,6 +455,9 @@ void RAGameScene::creatureAttackedPlayer(int creatureID, int playerID, int damag
     auxCreateDamageLabel(damage, Color4B::RED, player1Node->pSprite->getPosition());
     
     auto blinkAction = Blink::create(0.5, 3);
+    blinkAction->setTag(HURT_ACTION_TAG);
+    player1Node->pSprite->stopActionByTag(HURT_ACTION_TAG);
+
     player1Node->pSprite->runAction(blinkAction);
     
     auxUpdateHealthBar((float)player->healthPoints/(float)player->maxHealthPoints);
@@ -558,4 +576,33 @@ void RAGameScene::useItemSlotButton(Ref* pSender, cocos2d::ui::Widget::TouchEven
         default:
             break;
     }
+}
+
+void RAGameScene::passTurnButtonCallback(Ref* pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+    if(!isTurnHappening())
+    {
+        gameController->playerPassTurn(player1Node->pController->playerID);
+    }
+}
+
+bool RAGameScene::isTurnHappening()
+{
+    if(player1Node != nullptr)
+    {
+        if(player1Node->node->getActionByTag(MOVE_ACTION_TAG) != nullptr)
+            return true;
+        if(player1Node->pSprite->getActionByTag(ATK_ACTION_TAG) != nullptr)
+            return true;
+    }
+    for (auto cr : varCreaturesMap)
+    {
+        auto creatureSprite = cr.second->cSprite;
+        if( creatureSprite->getActionByTag(MOVE_ACTION_TAG) != nullptr)
+            return true;
+        if(creatureSprite->getActionByTag(ATK_ACTION_TAG) != nullptr)
+            return true;
+    }
+    
+        return false;
 }

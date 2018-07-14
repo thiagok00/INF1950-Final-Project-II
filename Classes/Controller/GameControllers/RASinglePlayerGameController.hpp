@@ -21,6 +21,7 @@ public:
     void startGame();
     void doPlayerAction(int playerID, RADirection direction);
     void doPlayerUseItem(int playerID, int slot);
+    void playerPassTurn(int playerID);
 
 
     
