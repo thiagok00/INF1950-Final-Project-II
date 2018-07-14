@@ -43,9 +43,13 @@ public:
     {
         RAPlayer* pController;
         cocos2d::Sprite* pSprite;
+        cocos2d::Node* node;
+
         std::vector<InventaryItemNode*> items;
         int occupiedSlots = 0;
         int maxSlots;
+        cocos2d::Size playerSize;
+        
     };
     
     struct TileNode
