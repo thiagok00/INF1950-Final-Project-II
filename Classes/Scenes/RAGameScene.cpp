@@ -261,6 +261,18 @@ void RAGameScene::loadMap (RAMap* map)
                 t->sprite->setScale(tileSize.width/t->sprite->getContentSize().width);
                 t->sprite->setAnchorPoint(Vec2(0.5,0.5));
                 t->sprite->setPosition(xPos,yPos);
+                if(tile->getType() == Fire)
+                {
+                    t->sprite->setColor(Color3B::RED);
+                }
+                else if (tile->getType() == Poison)
+                {
+                    t->sprite->setColor(Color3B::GREEN);
+                }
+                else if (tile->getType() == Stairs)
+                {
+                    t->sprite->setColor(Color3B::GRAY);
+                }
                 
                 //render creature of tile
                 if(tile->creature != nullptr)
@@ -274,7 +286,7 @@ void RAGameScene::loadMap (RAMap* map)
                         case Rat:
                             creature->cSprite = Sprite::create("creature_example.png");
                             break;
-                        case Cave_rat:
+                        case Cave_Rat:
                             creature->cSprite = Sprite::create("creature_example.png");
                             break;
                     }
@@ -424,6 +436,14 @@ void RAGameScene::creatureAttackedPlayer(int creatureID, int playerID, int damag
     
     auto blinkAction = Blink::create(0.5, 3);
     player1Node->pSprite->runAction(blinkAction);
+    
+    auxUpdateHealthBar((float)player->healthPoints/(float)player->maxHealthPoints);
+}
+
+void RAGameScene::playerBadStatus(int playerID, Status_ID statusID, int damage)
+{
+    auto playerNode = auxGetPlayerNodeById(playerID);
+    RAPlayer *player = playerNode->pController;
     
     auxUpdateHealthBar((float)player->healthPoints/(float)player->maxHealthPoints);
 }

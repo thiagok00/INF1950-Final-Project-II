@@ -21,6 +21,9 @@ RAEntity::RAEntity(int maxHealth, int baseAtkDamage, int maxSpeed, int maxAction
     this->speed = 0;
     
     this->armor = armor;
+    
+    this->burningTick = 0;
+    this->poisonTick = 0;
 }
 
 bool RAEntity::isDead()
@@ -51,4 +54,50 @@ int RAEntity::inflictDamage(int damage)
 int RAEntity::getAtkDamage()
 {
     return this->baseAtkDamage;
+}
+
+bool RAEntity::isBurning()
+{
+    if(burningTick > 0)
+        return true;
+    return false;
+}
+bool RAEntity::isPoisoned()
+{
+   if(poisonTick > 0)
+       return true;
+    return false;
+}
+
+int RAEntity::burn()
+{
+    if (isBurning())
+    {
+        const int burnDamage = 10;
+        this->healthPoints -= burnDamage;
+        if( healthPoints <= 0)
+        {
+            //Entity died
+            this->dead = true;
+        }
+        burningTick--;
+        return burnDamage;
+    }
+    return 0;
+}
+
+int RAEntity::poison()
+{
+    if(isPoisoned())
+    {
+        const int poisonDamage = (poisonTick-1)/3 + 1;
+        this->healthPoints -= poisonDamage;
+        if( healthPoints <= 0)
+        {
+            //Entity died
+            this->dead = true;
+        }
+        poisonTick--;
+    }
+    return 0;
 }

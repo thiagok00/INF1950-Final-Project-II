@@ -129,29 +129,34 @@ bool RAGameEngine::doPlayerAction(int playerID, RADirection direction)
         }
     }
     //CCLOG("MOVING FROM: %dx%d TO %dx%d",player->tile->getRow(),player->tile->getCol(),destTile->getRow(),destTile->getCol());
-    if (player->speed > 0 )
+    if (player->speed > 0 && destTile->isWakable())
     {
         player->tile = destTile;
         player->speed--;
         
-        
-        if(destTile->droppedItem != nullptr)
+        if(destTile->getType() == Fire)
         {
-            int slot = player->addItemToSlot(destTile->droppedItem);
-            if (slot < 0 && gameListener != nullptr)
-            { //full slots, just move
-                gameListener->playerMoved(player->playerID, destTile->getRow(), destTile->getCol());
-            }
-            else
+            player->burningTick = 5;
+        }
+        if(destTile->getType() == Poison)
+        {
+            player->poisonTick = 9;
+        }
+        
+        int slot = -1;
+        if( destTile->droppedItem != nullptr)
+            slot = player->addItemToSlot(destTile->droppedItem);
+        
+        if(slot >= 0)
+        {
+            //player caught item
+            RAItem *caughtItem = destTile->droppedItem;
+            destTile->droppedItem = nullptr;
+            if (gameListener != nullptr)
             {
-                //player caught item
-                RAItem *caughtItem = destTile->droppedItem;
-                destTile->droppedItem = nullptr;
-                if (gameListener != nullptr)
-                {
-                    gameListener->playerMovedAndCaughtItem(player->playerID, destTile->getRow(), destTile->getCol(), slot, caughtItem->getItemType(), caughtItem->getCharges());
-                }
+                gameListener->playerMovedAndCaughtItem(player->playerID, destTile->getRow(), destTile->getCol(), slot, caughtItem->getItemType(), caughtItem->getCharges());
             }
+            
         }
         else if(gameListener != nullptr)
         {
@@ -242,9 +247,15 @@ void RAGameEngine::switchTurn()
     turnOrder = nextTurn;
 
     if(turnOrder == PLAYER1_TURN)
+    {
         player1->resetTurn();
+        checkNewTurnConditions(player1);
+    }
     if(turnOrder == PLAYER2_TURN)
+    {
         player2->resetTurn();
+        checkNewTurnConditions(player2);
+    }
     if(turnOrder == CREATURE_TURN)
     {
         //creature actions...
@@ -253,6 +264,7 @@ void RAGameEngine::switchTurn()
             //TODO: creature AI
             if (!cr->isDead())
             {
+                checkNewTurnConditions(cr);
                 int row, col;
                 row = cr->row - 1;
                 col = cr->col;
@@ -276,6 +288,29 @@ void RAGameEngine::switchTurn()
             }
         }
         switchTurn();
+    }
+}
+
+void RAGameEngine::checkNewTurnConditions(RAEntity* entity)
+{
+    bool burned = entity->isBurning();
+    bool poisoned = entity->isPoisoned();
+    RAPlayer* player = dynamic_cast<RAPlayer*>(entity);
+    if(burned)
+    {
+        float damage = entity->burn();
+        if(player && gameListener != nullptr)
+        {
+            gameListener->playerBadStatus(player->playerID, BURNING, damage);
+        }
+    }
+    if(poisoned)
+    {
+        float damage = entity->poison();
+        if(player && gameListener != nullptr)
+        {
+            gameListener->playerBadStatus(player->playerID, POISONED, damage);
+        }
     }
 }
 

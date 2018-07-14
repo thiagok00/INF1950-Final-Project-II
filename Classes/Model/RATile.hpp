@@ -12,11 +12,19 @@
 #include "RACreature.hpp"
 #include "RAItem.hpp"
 
+enum TileType
+{
+    Normal,
+    Stairs,
+    Fire,
+    Poison
+};
+
 class RATile
 {
 public:
     
-    RATile(int row,int col, bool walkable);
+    RATile(TileType type, int row,int col, bool walkable);
     ~RATile();
     
     int getRow();
@@ -26,10 +34,16 @@ public:
     RACreature  *creature;
     RAItem      *droppedItem;
     
+    int getType();
+    
+    void setFire();
+    void setPoison();
+    
 protected:
     int row;
     int col;
     bool walkable;
+    int type;
 };
 
 #endif /* RATile_hpp */

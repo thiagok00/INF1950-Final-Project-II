@@ -30,11 +30,12 @@ public:
     bool doPlayerAction(int playerID, RADirection direction);
     bool doPlayerUseItem(int playerID, int slot);
 protected:
-
+    
     int gameMode;
     int turnOrder;
     
     void switchTurn();
+    void checkNewTurnConditions(RAEntity* entity);
     
     RAPlayer* auxGetPlayerById(int playerID);
     

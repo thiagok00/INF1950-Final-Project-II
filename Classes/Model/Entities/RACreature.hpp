@@ -14,7 +14,7 @@
 enum CreatureID
 {
     Rat,
-    Cave_rat
+    Cave_Rat
 };
 
 class RACreature: public RAEntity
