@@ -40,9 +40,9 @@ void RASinglePlayerGameController::playerMoved (int playerID, int row, int col)
     gameScene->playerMoved(playerID, row, col);
 }
 
-void RASinglePlayerGameController::playerAttackedCreature (int playerID, int creatureID, int damage, bool died, int playerExperience)
+void RASinglePlayerGameController::playerAttackedCreature (int playerID, int creatureID, int damage, bool died, int score, bool leveledUp)
 {
-    gameScene->playerAttackedCreature(playerID, creatureID, damage, died, playerExperience);
+    gameScene->playerAttackedCreature(playerID, creatureID, damage, died, score, leveledUp);
 }
 
 void RASinglePlayerGameController::creatureMoved(int creatureID, int row, int col)

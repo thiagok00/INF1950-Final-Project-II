@@ -29,9 +29,9 @@ RAMap* RALevelGenerator::generateLevel(int difficulty)
         }
     }
     
-    RACreature *rat = new RACreature(Rat , 5, 6, 10, 0);
+    RACreature *rat = new RACreature(Rat , 5, 6, 100, 0);
     map->addCreatureToTile(rat, MAP_MAX_ROW-1, MAP_MAX_COL-1);
-    RACreature *caveRat = new RACreature(Cave_Rat , 5, 6, 10, 0);
+    RACreature *caveRat = new RACreature(Cave_Rat , 5, 6, 100, 0);
 
     map->addCreatureToTile(caveRat, 3, MAP_MAX_COL);
 

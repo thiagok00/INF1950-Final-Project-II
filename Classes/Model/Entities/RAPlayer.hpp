@@ -40,6 +40,8 @@ public:
     void removeItemAtSlot(int slot);
     int getMaxSlots();
     
+    int level;
+    int score;
 protected:
     int experiencePoints;
     int experienceMultiplier;

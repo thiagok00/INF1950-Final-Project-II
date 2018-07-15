@@ -29,7 +29,7 @@ public:
     //virtual void loadPlayer (RAPlayer *player) {}
     void playerMoved (int playerID, int row, int col);
     void playerMovedAndCaughtItem (int playerID, int row, int col,int atSlot, ItemID itemType, int charges);
-    void playerAttackedCreature (int playerID, int creatureID, int damage, bool died, int playerExperience);
+    void playerAttackedCreature (int playerID, int creatureID, int damage, bool died, int score, bool leveledUp);
     void creatureMoved(int creatureID, int row, int col);
     void creatureAttackedPlayer(int creatureID, int playerID, int damage);
 
