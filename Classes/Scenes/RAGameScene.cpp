@@ -449,7 +449,6 @@ void RAGameScene::playerAttackedCreature (int playerID, int creatureID, int dama
         //FIXME: memory leak levelupSprite
         playerNode->node->addChild(levelUpSprite);
         
-        
     }
     
 }
@@ -552,7 +551,7 @@ void RAGameScene::update(float dt)
     if (true == isTouchDown)
     {
         
-        if(player1Node->node->getActionByTag(MOVE_ACTION_TAG) != nullptr)
+        if(isTurnHappening())
             return;
         
         if (initialTouchPos[0] - currentTouchPos[0] > varScreenSize.width * 0.05)
@@ -592,6 +591,9 @@ void RAGameScene::update(float dt)
 void RAGameScene::useItemSlotButton(Ref* pSender, cocos2d::ui::Widget::TouchEventType type)
 {
     int slot = (int) pSender->_ID;
+    if(isTurnHappening())
+        return;
+        
     switch(type)
     {
         case cocos2d::ui::Widget::TouchEventType::ENDED:
