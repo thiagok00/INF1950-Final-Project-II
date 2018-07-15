@@ -28,6 +28,8 @@ RAPlayer::RAPlayer() : RAEntity(PLAYER_INI_HEALTH, PLAYER_INI_DMG, PLAYER_INI_SP
         this->itensSlots[i] = nullptr;
     }
     occupiedSlots = 0;
+    this->level = 1;
+    this->score = 0;
 }
 
 RAPlayer::~RAPlayer()
@@ -42,8 +44,19 @@ int RAPlayer::getExperiencePoints()
 
 bool RAPlayer::addExperiencePoints(int experience)
 {
+    
     this->experiencePoints += experience * this->experienceMultiplier;
-    return true;
+    
+    const int nextLevel = level+1;
+    int nextLevelExpRequired = 16.67*(nextLevel*nextLevel*nextLevel - 6*(nextLevel*nextLevel + 17*nextLevel) - 12);
+    if(experiencePoints >= nextLevelExpRequired)
+    {
+        //level up
+        this->level++;
+        printf("LEVELED UP");
+        return true;
+    }
+    return false;
 }
 
 //MARK: Slots Methods

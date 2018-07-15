@@ -105,19 +105,27 @@ bool RAGameEngine::doPlayerAction(int playerID, RADirection direction)
             CCLOG("ATTACK!");
             int damageTook = destTile->creature->inflictDamage(player->getAtkDamage());
             bool isDead = destTile->creature->isDead();
+            bool leveledUp = false;
             
             //add experience
             if (destTile->creature->isDead())
             {
-                player->addExperiencePoints(destTile->creature->experience);
+                const int experience = destTile->creature->experience;
+                player->score += experience;
+
+                leveledUp = player->addExperiencePoints(experience);
+                if(leveledUp)
+                {
+                    //do something if level up
+                }
             }
             player->actionPoints--;
-
             gameListener->playerAttackedCreature(player->playerID,
                                                  destTile->creature->id,
                                                  damageTook,
                                                  isDead,
-                                                 player->getExperiencePoints()
+                                                 player->score,
+                                                 leveledUp
                                                  );
             return true;
         }

@@ -156,10 +156,10 @@ bool RAGameScene::init(int gameMode)
 //MARK: AUX Methods
 //
 
-void RAGameScene::auxUpdateExperienceLabelText(int experiencePoints)
+void RAGameScene::auxUpdateScoreLabelText(int score)
 {
     std::ostringstream oss1;
-    oss1 << experiencePoints;
+    oss1 << score;
     std::string buf = oss1.str();
     
     varExperienceLabel->setString(buf);
@@ -361,13 +361,14 @@ void RAGameScene::loadPlayer (RAPlayer* player)
         player1Node->occupiedSlots = 0;
         player1Node->maxSlots = player->getMaxSlots();
         
+        
     }
-    
+    player1Node->level = 0;
     player1Node->pController = player;
    // player1Node->pSprite->setPosition(mapNode->tiles.at(MAP_MAX_ROW*player->tile->getRow() + player->tile->getCol())->sprite->getPosition());
     player1Node->node->setPosition(mapNode->tiles.at(MAP_MAX_ROW*player->tile->getRow() + player->tile->getCol())->sprite->getPosition());
     
-    auxUpdateExperienceLabelText(player->getExperiencePoints());
+    auxUpdateScoreLabelText(player->score);
     auxUpdateHealthBar((float)player->healthPoints/(float)player->maxHealthPoints);
     auxUpdateManaBar((float)player->manaPoints/(float)player->maxManaPoints);
     
@@ -410,15 +411,15 @@ void RAGameScene::playerMovedAndCaughtItem (int playerID, int row, int col, int 
     auxUpdatePlayerItensSlots();
 }
 
-void RAGameScene::playerAttackedCreature (int playerID, int creatureID, int damage, bool died, int playerExperience)
+void RAGameScene::playerAttackedCreature (int playerID, int creatureID, int damage, bool died, int score, bool leveledUp)
 {
-    RAPlayer *player = auxGetPlayerNodeById(playerID)->pController;
     auto blinkAction = Blink::create(0.5, 3);
     blinkAction->setTag(HURT_ACTION_TAG);
     
     Sprite *cSprite = varCreaturesMap.find(creatureID)->second->cSprite;
     
     cSprite->stopActionByTag(HURT_ACTION_TAG);
+    cSprite->setVisible(true);
     cSprite->runAction(blinkAction);
     
     //Damage Feedback
@@ -427,8 +428,30 @@ void RAGameScene::playerAttackedCreature (int playerID, int creatureID, int dama
     if (died)
     {
         //creature died, do something
-        auxUpdateExperienceLabelText(player->getExperiencePoints());
+        auxUpdateScoreLabelText(score);
+        //cSprite->removeFromParentAndCleanup(true);
     }
+    if(leveledUp)
+    {
+        auto playerNode = auxGetPlayerNodeById(playerID);
+        playerNode->level++;
+        Sprite *levelUpSprite = Sprite::create("levelUp.png");
+        levelUpSprite->setScale(playerNode->playerSize.width/levelUpSprite->getBoundingBox().size.width,
+                                playerNode->playerSize.height*0.4/levelUpSprite->getBoundingBox().size.height);
+        
+        levelUpSprite->setAnchorPoint(Vec2(0.5, 0.5));
+        levelUpSprite->setPosition(Vec2(0,0));
+        auto fadeout = FadeOut::create(1.5);
+        auto moveby = MoveBy::create(1.5, Vec2(0,playerNode->playerSize.height/2.0f));
+        
+        levelUpSprite->runAction(moveby);
+        levelUpSprite->runAction(fadeout);
+        //FIXME: memory leak levelupSprite
+        playerNode->node->addChild(levelUpSprite);
+        
+        
+    }
+    
 }
 
 void RAGameScene::creatureMoved(int creatureID, int row, int col)
@@ -457,7 +480,8 @@ void RAGameScene::creatureAttackedPlayer(int creatureID, int playerID, int damag
     auto blinkAction = Blink::create(0.5, 3);
     blinkAction->setTag(HURT_ACTION_TAG);
     player1Node->pSprite->stopActionByTag(HURT_ACTION_TAG);
-
+    player1Node->pSprite->setVisible(true);
+    
     player1Node->pSprite->runAction(blinkAction);
     
     auxUpdateHealthBar((float)player->healthPoints/(float)player->maxHealthPoints);
