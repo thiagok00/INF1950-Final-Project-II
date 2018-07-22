@@ -352,7 +352,7 @@ void RAGameScene::loadPlayer (RAPlayer* player)
         
         player1Node->playerSize = playerSize;
         
-        player1Node->pSprite = Sprite::create("player_idle_south.png");
+        player1Node->pSprite = Sprite::create("hero1.png");
         
         player1Node->pSprite->setScale(playerSize.width/player1Node->pSprite->getContentSize().width);
         player1Node->pSprite->setAnchorPoint(Vec2(0.5,0.5));
@@ -474,7 +474,7 @@ void RAGameScene::creatureAttackedPlayer(int creatureID, int playerID, int damag
     Sprite *cSprite = varCreaturesMap.find(creatureID)->second->cSprite;
     cSprite->runAction(seq);
     
-    auxCreateDamageLabel(damage, Color4B::RED, player1Node->pSprite->getPosition());
+    auxCreateDamageLabel(damage, Color4B::RED, player1Node->node->getPosition());
     
     auto blinkAction = Blink::create(0.5, 3);
     blinkAction->setTag(HURT_ACTION_TAG);
@@ -497,9 +497,11 @@ void RAGameScene::playerBadStatus(int playerID, Status_ID statusID, int damage)
     {
         case BURNING:
             statusSpr = Sprite::create("burn_1.png");
+            auxCreateDamageLabel(damage, Color4B::RED, playerNode->node->getPosition());
             break;
         case POISONED:
             statusSpr = Sprite::create("poison_1.png");
+            auxCreateDamageLabel(damage, Color4B::GREEN, playerNode->node->getPosition());
             break;
     }
     

@@ -66,6 +66,10 @@
 		D03B114320D6C961003D24AD /* player_idle_south.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B114120D6C961003D24AD /* player_idle_south.png */; };
 		D03B114A20D6F17C003D24AD /* creature_example.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B114920D6F17B003D24AD /* creature_example.png */; };
 		D03B114B20D6F17C003D24AD /* creature_example.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B114920D6F17B003D24AD /* creature_example.png */; };
+		D03B6A022104943E00F5B384 /* hero.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B6A002104943E00F5B384 /* hero.png */; };
+		D03B6A032104943E00F5B384 /* hero.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B6A002104943E00F5B384 /* hero.png */; };
+		D03B6A0B2104976D00F5B384 /* hero1.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B6A0A2104976D00F5B384 /* hero1.png */; };
+		D03B6A0C2104976D00F5B384 /* hero1.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B6A0A2104976D00F5B384 /* hero1.png */; };
 		D04B04E720F2C71B009FB450 /* RAMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D04B04CE20F2C71B009FB450 /* RAMap.cpp */; };
 		D04B04E820F2C71B009FB450 /* RAItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D04B04D220F2C71B009FB450 /* RAItem.cpp */; };
 		D04B04E920F2C71B009FB450 /* RATargetItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D04B04D320F2C71B009FB450 /* RATargetItem.cpp */; };
@@ -194,6 +198,8 @@
 		D03B113B20D6BC72003D24AD /* cave_ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cave_ground.png; sourceTree = "<group>"; };
 		D03B114120D6C961003D24AD /* player_idle_south.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player_idle_south.png; sourceTree = "<group>"; };
 		D03B114920D6F17B003D24AD /* creature_example.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = creature_example.png; sourceTree = "<group>"; };
+		D03B6A002104943E00F5B384 /* hero.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hero.png; sourceTree = "<group>"; };
+		D03B6A0A2104976D00F5B384 /* hero1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hero1.png; sourceTree = "<group>"; };
 		D04B04CE20F2C71B009FB450 /* RAMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RAMap.cpp; sourceTree = "<group>"; };
 		D04B04CF20F2C71B009FB450 /* RATile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RATile.hpp; sourceTree = "<group>"; };
 		D04B04D020F2C71B009FB450 /* RAMap.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RAMap.hpp; sourceTree = "<group>"; };
@@ -357,6 +363,8 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D03B6A0A2104976D00F5B384 /* hero1.png */,
+				D03B6A002104943E00F5B384 /* hero.png */,
 				D0A6919120FAC67900BC832E /* levelUp.png */,
 				D0A6919520FAC6E800BC832E /* burn_1.png */,
 				D0A6919620FAC6E800BC832E /* poison_1.png */,
@@ -637,9 +645,11 @@
 				521A8EA919F11F5000D177D7 /* fonts in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
+				D03B6A0B2104976D00F5B384 /* hero1.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
+				D03B6A022104943E00F5B384 /* hero.png in Resources */,
 				3EACC98F19EE6D4300EB3C5E /* res in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
@@ -662,7 +672,9 @@
 				D03B114320D6C961003D24AD /* player_idle_south.png in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 				D0A6919820FAC6E900BC832E /* burn_1.png in Resources */,
+				D03B6A032104943E00F5B384 /* hero.png in Resources */,
 				3EACC99019EE6D4300EB3C5E /* res in Resources */,
+				D03B6A0C2104976D00F5B384 /* hero1.png in Resources */,
 				521A8EAA19F11F5000D177D7 /* fonts in Resources */,
 				D03B113D20D6BC73003D24AD /* cave_ground.png in Resources */,
 				D08AF04020B262D700BB9B17 /* placeholderButton.png in Resources */,
