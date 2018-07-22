@@ -144,7 +144,8 @@ bool RAGameScene::init(int gameMode)
     
     varBackLayer->addChild(varExperienceLabel);
     
-    if(gameMode == kGAMEMODE_SINGLEPLAYER)
+    this->gameMode = gameMode;
+    if(gameMode == kGAMEMODE_SINGLEPLAYER || gameMode == kGAMEMODE_OFFLINE_MULTIPLAYER)
     {
         gameController = new RASinglePlayerGameController(this);
         gameController->startGame();
@@ -156,8 +157,13 @@ bool RAGameScene::init(int gameMode)
 //MARK: AUX Methods
 //
 
-void RAGameScene::auxUpdateScoreLabelText(int score)
+void RAGameScene::auxUpdateScoreLabelText()
 {
+    int score = 0;
+    if (player1Node != nullptr)
+        score += player1Node->pController->score;
+    if (player2Node != nullptr)
+        score += player2Node->pController->score;
     std::ostringstream oss1;
     oss1 << score;
     std::string buf = oss1.str();
@@ -165,8 +171,10 @@ void RAGameScene::auxUpdateScoreLabelText(int score)
     varExperienceLabel->setString(buf);
 }
 
-void RAGameScene::auxUpdateHealthBar(float healthPercentage)
+void RAGameScene::auxUpdateHealthBar()
 {
+    RAPlayer *player = auxGetPlayerNodeById(playerRound)->pController;
+    float healthPercentage = (float)player->healthPoints/(float)player->maxHealthPoints;
     healthBar->removeFromParentAndCleanup(true);
     healthBar = LayerColor::create(Color4B::RED, healthBarBaseSize.width*healthPercentage, healthBarBaseSize.height);
     healthBar->setAnchorPoint(Vec2(0.5,0.5));
@@ -174,8 +182,10 @@ void RAGameScene::auxUpdateHealthBar(float healthPercentage)
     healthBarBase->addChild(healthBar);
 }
 
-void RAGameScene::auxUpdateManaBar(float manaPercentage)
+void RAGameScene::auxUpdateManaBar()
 {
+    RAPlayer *player = auxGetPlayerNodeById(playerRound)->pController;
+    float manaPercentage = (float)player->manaPoints/(float)player->maxManaPoints;
     manaBar->removeFromParentAndCleanup(true);
     manaBar = LayerColor::create(Color4B::BLUE, healthBarBaseSize.width*manaPercentage, healthBarBaseSize.height);
     manaBar->setAnchorPoint(Vec2(0.5,0.5));
@@ -212,8 +222,8 @@ void RAGameScene::auxUpdatePlayerItensSlots()
     {
         btn->setColor(Color3B::RED);
     }
-    
-    for(auto iNode : player1Node->items)
+    auto playerNode = auxGetPlayerNodeById(playerRound);
+    for(auto iNode : playerNode->items)
     {
         varItensSlotButtons.at(iNode->slot)->setColor(Color3B::MAGENTA);
     }
@@ -340,37 +350,53 @@ void RAGameScene::loadMap (RAMap* map)
 
 void RAGameScene::loadPlayer (RAPlayer* player)
 {
-    if(player1Node == nullptr)
+    PlayerNode * playerNode = nullptr;
+    if (player->playerID == PLAYER1_TURN && player1Node != nullptr)
     {
-        player1Node = new PlayerNode();
+        playerNode = player1Node;
+    }
+    else if (player->playerID == PLAYER2_TURN && player2Node != nullptr)
+    {
+         playerNode = player2Node;
+    }
+    if(playerNode == nullptr)
+    {
+        playerNode = new PlayerNode();
+        
+        if (player->playerID == PLAYER1_TURN)
+            player1Node = playerNode;
+        else if (player->playerID == PLAYER2_TURN)
+            player2Node = playerNode;
+
+        
         Size playerSize;
         playerSize.width = varScreenSize.width/MAP_MAX_ROW;
         playerSize.height = playerSize.width;
         
-        player1Node->node = Node::create();
-        player1Node->node->setContentSize(playerSize);
+        playerNode->node = Node::create();
+        playerNode->node->setContentSize(playerSize);
         
-        player1Node->playerSize = playerSize;
+        playerNode->playerSize = playerSize;
         
-        player1Node->pSprite = Sprite::create("hero1.png");
+        playerNode->pSprite = Sprite::create("hero3.png");
         
-        player1Node->pSprite->setScale(playerSize.width/player1Node->pSprite->getContentSize().width);
-        player1Node->pSprite->setAnchorPoint(Vec2(0.5,0.5));
-        varBackLayer->addChild(player1Node->node,zORDER_PLAYER);
-        player1Node->node->addChild(player1Node->pSprite);
-        player1Node->occupiedSlots = 0;
-        player1Node->maxSlots = player->getMaxSlots();
+        playerNode->pSprite->setScale(playerSize.width/playerNode->pSprite->getContentSize().width);
+        playerNode->pSprite->setAnchorPoint(Vec2(0.5,0.5));
+        varBackLayer->addChild(playerNode->node,zORDER_PLAYER);
+        playerNode->node->addChild(playerNode->pSprite);
+        playerNode->occupiedSlots = 0;
+        playerNode->maxSlots = player->getMaxSlots();
         
         
     }
-    player1Node->level = 0;
-    player1Node->pController = player;
-   // player1Node->pSprite->setPosition(mapNode->tiles.at(MAP_MAX_ROW*player->tile->getRow() + player->tile->getCol())->sprite->getPosition());
-    player1Node->node->setPosition(mapNode->tiles.at(MAP_MAX_ROW*player->tile->getRow() + player->tile->getCol())->sprite->getPosition());
+    playerNode->level = 0;
+    playerNode->pController = player;
+   // playerNode->pSprite->setPosition(mapNode->tiles.at(MAP_MAX_ROW*player->tile->getRow() + player->tile->getCol())->sprite->getPosition());
+    playerNode->node->setPosition(mapNode->tiles.at(MAP_MAX_ROW*player->tile->getRow() + player->tile->getCol())->sprite->getPosition());
     
-    auxUpdateScoreLabelText(player->score);
-    auxUpdateHealthBar((float)player->healthPoints/(float)player->maxHealthPoints);
-    auxUpdateManaBar((float)player->manaPoints/(float)player->maxManaPoints);
+    auxUpdateScoreLabelText();
+    auxUpdateHealthBar();
+    auxUpdateManaBar();
     
     auxUpdatePlayerItensSlots();
 }
@@ -428,7 +454,7 @@ void RAGameScene::playerAttackedCreature (int playerID, int creatureID, int dama
     if (died)
     {
         //creature died, do something
-        auxUpdateScoreLabelText(score);
+        auxUpdateScoreLabelText();
         //cSprite->removeFromParentAndCleanup(true);
     }
     if(leveledUp)
@@ -466,7 +492,8 @@ void RAGameScene::creatureMoved(int creatureID, int row, int col)
 
 void RAGameScene::creatureAttackedPlayer(int creatureID, int playerID, int damage)
 {
-    RAPlayer *player = auxGetPlayerNodeById(playerID)->pController;
+    auto playerNode = auxGetPlayerNodeById(playerID);
+    RAPlayer *player = playerNode->pController;
     auto rt = RotateBy::create(0.5, 0.8);
     auto rt2 = rt->reverse();
     auto seq = Sequence::create(rt,rt2, NULL);
@@ -474,16 +501,16 @@ void RAGameScene::creatureAttackedPlayer(int creatureID, int playerID, int damag
     Sprite *cSprite = varCreaturesMap.find(creatureID)->second->cSprite;
     cSprite->runAction(seq);
     
-    auxCreateDamageLabel(damage, Color4B::RED, player1Node->node->getPosition());
+    auxCreateDamageLabel(damage, Color4B::RED, playerNode->node->getPosition());
     
     auto blinkAction = Blink::create(0.5, 3);
     blinkAction->setTag(HURT_ACTION_TAG);
-    player1Node->pSprite->stopActionByTag(HURT_ACTION_TAG);
-    player1Node->pSprite->setVisible(true);
+    playerNode->pSprite->stopActionByTag(HURT_ACTION_TAG);
+    playerNode->pSprite->setVisible(true);
     
-    player1Node->pSprite->runAction(blinkAction);
+    playerNode->pSprite->runAction(blinkAction);
     
-    auxUpdateHealthBar((float)player->healthPoints/(float)player->maxHealthPoints);
+    auxUpdateHealthBar();
 }
 
 void RAGameScene::playerBadStatus(int playerID, Status_ID statusID, int damage)
@@ -513,7 +540,20 @@ void RAGameScene::playerBadStatus(int playerID, Status_ID statusID, int damage)
     //FIXME: memory leak burnSpr
     statusSpr->runAction(FadeOut::create(1.5));
 
-    auxUpdateHealthBar((float)player->healthPoints/(float)player->maxHealthPoints);
+    auxUpdateHealthBar();
+}
+
+void RAGameScene::switchRound(int playerID)
+{
+    prevPlayerRound = playerRound;
+    playerRound = playerID;
+    
+    if(prevPlayerRound != playerRound)
+    {
+        auxUpdateHealthBar();
+        auxUpdateManaBar();
+        auxUpdatePlayerItensSlots();
+    }
 }
 
 // MARK: Touch Events
@@ -556,19 +596,20 @@ void RAGameScene::update(float dt)
         if(isTurnHappening())
             return;
         
+        
         if (initialTouchPos[0] - currentTouchPos[0] > varScreenSize.width * 0.05)
         {
             CCLOG("SWIPED LEFT");
             isTouchDown = false;
             
-            gameController->doPlayerAction(player1Node->pController->playerID, LEFT);
+            gameController->doPlayerAction(playerRound, LEFT);
         }
         else if (initialTouchPos[0] - currentTouchPos[0] < - varScreenSize.width * 0.05)
         {
             CCLOG("SWIPED RIGHT");
             isTouchDown = false;
             
-            gameController->doPlayerAction(player1Node->pController->playerID, RIGHT);
+            gameController->doPlayerAction(playerRound, RIGHT);
             
         }
         else if (initialTouchPos[1] - currentTouchPos[1] > varScreenSize.width * 0.05)
@@ -576,7 +617,7 @@ void RAGameScene::update(float dt)
             CCLOG("SWIPED DOWN");
             isTouchDown = false;
             
-            gameController->doPlayerAction(player1Node->pController->playerID, DOWN);
+            gameController->doPlayerAction(playerRound, DOWN);
             
         }
         else if (initialTouchPos[1] - currentTouchPos[1] < - varScreenSize.width * 0.05)
@@ -584,7 +625,7 @@ void RAGameScene::update(float dt)
             CCLOG("SWIPED UP");
             isTouchDown = false;
             
-            gameController->doPlayerAction(player1Node->pController->playerID, UP);
+            gameController->doPlayerAction(playerRound, UP);
             
         }
     }
@@ -599,7 +640,7 @@ void RAGameScene::useItemSlotButton(Ref* pSender, cocos2d::ui::Widget::TouchEven
     switch(type)
     {
         case cocos2d::ui::Widget::TouchEventType::ENDED:
-            gameController->doPlayerUseItem(player1Node->pController->playerID, slot);
+            gameController->doPlayerUseItem(playerRound, slot);
             break;
         default:
             break;
@@ -608,9 +649,15 @@ void RAGameScene::useItemSlotButton(Ref* pSender, cocos2d::ui::Widget::TouchEven
 
 void RAGameScene::passTurnButtonCallback(Ref* pSender, cocos2d::ui::Widget::TouchEventType type)
 {
-    if(!isTurnHappening())
+    switch (type)
     {
-        gameController->playerPassTurn(player1Node->pController->playerID);
+        case cocos2d::ui::Widget::TouchEventType::ENDED:
+            if(!isTurnHappening())
+            {
+                gameController->playerPassTurn(playerRound);
+            }
+        default:
+            break;
     }
 }
 
@@ -621,6 +668,13 @@ bool RAGameScene::isTurnHappening()
         if(player1Node->node->getActionByTag(MOVE_ACTION_TAG) != nullptr)
             return true;
         if(player1Node->pSprite->getActionByTag(ATK_ACTION_TAG) != nullptr)
+            return true;
+    }
+    if(player2Node != nullptr)
+    {
+        if(player2Node->node->getActionByTag(MOVE_ACTION_TAG) != nullptr)
+            return true;
+        if(player2Node->pSprite->getActionByTag(ATK_ACTION_TAG) != nullptr)
             return true;
     }
     for (auto cr : varCreaturesMap)

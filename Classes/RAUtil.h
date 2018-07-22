@@ -12,4 +12,7 @@
 #define kGAMEMODE_OFFLINE_MULTIPLAYER   2
 #define kGAMEMODE_ONLINE_MULTIPLAYER    3
 
+#define PLAYER1_TURN    1
+#define PLAYER2_TURN    2
+
 #endif /* RAUtil_h */
