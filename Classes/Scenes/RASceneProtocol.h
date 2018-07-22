@@ -14,6 +14,7 @@
 class RASceneProtocol
 {
 public:
+    int gameMode;
     virtual void loadMap (RAMap* map) {}
     virtual void loadPlayer (RAPlayer *player) {}
     virtual void playerMoved (int playerID, int row, int col) {}
@@ -22,6 +23,7 @@ public:
     virtual void creatureMoved(int creatureID, int row, int col) {}
     virtual void creatureAttackedPlayer(int creatureID, int playerID, int damage) {}
     virtual void playerBadStatus(int playerID, Status_ID statusID, int damage) {}
+    virtual void switchRound(int playerID) {}
 };
 
 #endif /* RASceneProtocol_h */

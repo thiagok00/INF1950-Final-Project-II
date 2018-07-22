@@ -69,9 +69,13 @@ public:
     };
     
 protected:
+    
+    int playerRound;
+    int prevPlayerRound;
+    
     //HUD
     cocos2d::Label *varExperienceLabel;
-    void auxUpdateScoreLabelText(int score);
+    void auxUpdateScoreLabelText();
     
     cocos2d::Size healthBarBaseSize;
     cocos2d::LayerColor *healthBarBase;
@@ -81,8 +85,8 @@ protected:
     cocos2d::LayerColor *manaBar;
     
     //0.0 to 1.0
-    void auxUpdateHealthBar(float healthPercentage);
-    void auxUpdateManaBar(float manaPercentage);
+    void auxUpdateHealthBar();
+    void auxUpdateManaBar();
 
     cocos2d::Label* auxCreateDamageLabel(int damage, cocos2d::Color4B textColor, cocos2d::Vec2 pos);
 
@@ -109,6 +113,7 @@ public:
     void creatureMoved(int creatureID, int row, int col);
     void creatureAttackedPlayer(int creatureID, int playerID, int damage);
     void playerBadStatus(int playerID, Status_ID statusID, int damage);
+    void switchRound(int playerID);
 
     cocos2d::LayerColor *varBackLayer;
     cocos2d::Size varScreenSize;

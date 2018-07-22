@@ -15,7 +15,7 @@ RASinglePlayerGameController::RASinglePlayerGameController(RASceneProtocol *gs) 
 
 void RASinglePlayerGameController::startGame()
 {
-    gameEngine = RAGameEngine::createGame(kGAMEMODE_SINGLEPLAYER, gameScene);
+    gameEngine = RAGameEngine::createGame(gameScene->gameMode, gameScene);
 }
 
 void RASinglePlayerGameController::doPlayerAction(int playerID, RADirection direction)

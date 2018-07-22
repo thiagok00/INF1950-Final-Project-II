@@ -22,6 +22,8 @@ public:
     cocos2d::LayerColor *varBackLayer;
     cocos2d::Size varScreenSize;
     cocos2d::ui::Button *varSinglePlayerButton;
+    cocos2d::ui::Button *varMultiPlayerButton;
+
     // implement the "static create()" method manually
     CREATE_FUNC(RAMainMenuScene);
     void startSinglePlayerCallback(Ref* pSender, cocos2d::ui::Widget::TouchEventType type);

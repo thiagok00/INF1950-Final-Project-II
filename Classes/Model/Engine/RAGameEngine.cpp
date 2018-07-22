@@ -9,8 +9,7 @@
 #include "RALevelGenerator.hpp"
 #include "RASelfUseItem.hpp"
 
-#define PLAYER1_TURN    1
-#define PLAYER2_TURN    2
+
 #define CREATURE_TURN   3
 
 
@@ -32,6 +31,15 @@ RAGameEngine* RAGameEngine::createGame(int gameMode, RASceneProtocol *gameListen
         eng->player1 = new RAPlayer();
         eng->player1->playerID = PLAYER1_TURN;
         // ....
+    }
+    else if(gameMode == kGAMEMODE_OFFLINE_MULTIPLAYER)
+    {
+        eng->player1 = new RAPlayer();
+        eng->player1->playerID = PLAYER1_TURN;
+
+        eng->player2 = new RAPlayer();
+        eng->player2->playerID = PLAYER2_TURN;
+
     }
     else
     {
@@ -55,6 +63,11 @@ RAGameEngine* RAGameEngine::createGame(int gameMode, RASceneProtocol *gameListen
     
     gameListener->loadMap(eng->gameMap);
     gameListener->loadPlayer(eng->player1);
+    if(gameMode == kGAMEMODE_OFFLINE_MULTIPLAYER)
+        gameListener->loadPlayer(eng->player2);
+    
+    gameListener->switchRound(PLAYER1_TURN);
+
     return eng;
 }
 
@@ -196,7 +209,7 @@ bool RAGameEngine::doPlayerUseItem(int playerID, int slot)
     if(player == nullptr)
         return false;
     
-    if(turnOrder == PLAYER1_TURN)
+    if(turnOrder == playerID)
     {
         if(player->actionPoints > 0)
         {
@@ -278,11 +291,15 @@ void RAGameEngine::switchTurn()
     if(turnOrder == PLAYER1_TURN)
     {
         player1->resetTurn();
+        if (gameListener != nullptr)
+            gameListener->switchRound(player1->playerID);
         checkNewTurnConditions(player1);
     }
     if(turnOrder == PLAYER2_TURN)
     {
         player2->resetTurn();
+        if (gameListener != nullptr)
+            gameListener->switchRound(player2->playerID);
         checkNewTurnConditions(player2);
     }
     if(turnOrder == CREATURE_TURN)
