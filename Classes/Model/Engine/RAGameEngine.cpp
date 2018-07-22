@@ -26,6 +26,8 @@ RAGameEngine* RAGameEngine::createGame(int gameMode, RASceneProtocol *gameListen
 {
     RAGameEngine* eng = new RAGameEngine(gameMode, gameListener);
     
+    eng->gameMap = RALevelGenerator::generateLevel(0);
+
     if(gameMode == kGAMEMODE_SINGLEPLAYER)
     {
         eng->player1 = new RAPlayer();
@@ -46,19 +48,14 @@ RAGameEngine* RAGameEngine::createGame(int gameMode, RASceneProtocol *gameListen
         return nullptr;
     }
     
-    eng->gameMap = RALevelGenerator::generateLevel(0);
     
     if(eng->player1 != nullptr)
     {
-        int row = eng->gameMap->player1RespawnTile->getRow();
-        int col = eng->gameMap->player1RespawnTile->getCol();
-        eng->gameMap->addEntityToTile(eng->player1, row, col);
+        eng->gameMap->addEntityToTile(eng->player1, eng->gameMap->player1RespawnTile);
     }
     if(eng->player2 != nullptr)
     {
-        int row = eng->gameMap->player2RespawnTile->getRow();
-        int col = eng->gameMap->player2RespawnTile->getCol();
-        eng->gameMap->addEntityToTile(eng->player2, row, col);
+        eng->gameMap->addEntityToTile(eng->player2, eng->gameMap->player2RespawnTile);
     }
     //eng->player1->tile = eng->gameMap[]
     
@@ -118,7 +115,7 @@ bool RAGameEngine::doPlayerAction(int playerID, RADirection direction)
     {
         if (player->speed > 0 && destTile->isWakable())
         {
-            gameMap->moveEntityToTile(player, destTile->getRow(), destTile->getCol());
+            gameMap->moveEntityToTile(player, destTile);
             player->speed--;
             
             if(destTile->getType() == Fire)
@@ -176,27 +173,36 @@ bool RAGameEngine::doPlayerAction(int playerID, RADirection direction)
                 CCLOG("ATTACK!");
                 int damageTook = creature->inflictDamage(player->getAtkDamage());
                 bool isDead = creature->isDead();
-                bool leveledUp = false;
-                
+                int creatureID = creature->id;
                 //add experience
                 if (creature->isDead())
                 {
                     const int experience = creature->experience;
-                    player->score += experience;
-                    
-                    leveledUp = player->addExperiencePoints(experience);
-                    if(leveledUp)
+                    score+= experience;
+                    if(player1 != nullptr && !player1->isDead())
                     {
-                        //do something if level up
+                        gameListener->playerWonExperience(player1->playerID, experience, player1->addExperiencePoints(experience));
+                        
+                    }
+                    if(player2 != nullptr && !player2->isDead())
+                    {
+                        gameListener->playerWonExperience(player2->playerID, experience, player2->addExperiencePoints(experience));
+
                     }
                 }
                 player->actionPoints--;
+                if (isDead)
+                {
+                    if(gameMap->removeEntityFromTile(creature, destTile))
+                    {
+                        delete creature;
+                    }
+                }
                 gameListener->playerAttackedCreature(player->playerID,
-                                                     creature->id,
+                                                     creatureID,
                                                      damageTook,
                                                      isDead,
-                                                     player->score,
-                                                     leveledUp
+                                                     score
                                                      );
                 return true;
             }
