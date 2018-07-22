@@ -1,5 +1,6 @@
 #include "RAGameScene.h"
 #include "SimpleAudioEngine.h"
+#include "RAMainMenuScene.hpp"
 
 USING_NS_CC;
 
@@ -405,14 +406,17 @@ void RAGameScene::loadPlayer (RAPlayer* player)
 
 void RAGameScene::playerMoved(int playerID, int row, int col)
 {
-    auto player = auxGetPlayerNodeById(playerID);
+    if(auto player = auxGetPlayerNodeById(playerID))
+    {
+        
+        Vec2 destination = mapNode->tiles.at(MAP_MAX_ROW*row + col)->sprite->getPosition();
+        
+        auto moveAction = MoveTo::create(0.3, destination);
+        
+        moveAction->setTag(MOVE_ACTION_TAG);
+        player->node->runAction(moveAction);
+    }
     
-    Vec2 destination = mapNode->tiles.at(MAP_MAX_ROW*row + col)->sprite->getPosition();
-    
-    auto moveAction = MoveTo::create(0.3, destination);
-    
-    moveAction->setTag(MOVE_ACTION_TAG);
-    player->node->runAction(moveAction);
 }
 
 void RAGameScene::playerMovedAndCaughtItem (int playerID, int row, int col, int atSlot, ItemID itemType, int charges)
@@ -565,7 +569,7 @@ void RAGameScene::playerWonExperience(int playerID, int experience, bool leveled
     }
 }
 
-void RAGameScene::playerDied(int playerID)
+void RAGameScene::playerDied(int playerID, bool isGameOver)
 {
     auto playerNode = auxGetPlayerNodeById(playerID);
     
@@ -585,7 +589,13 @@ void RAGameScene::playerDied(int playerID)
     {
         player2Node = nullptr;
     }
-    delete playerNode;    
+    delete playerNode;
+    
+    if(isGameOver)
+    {
+        //FIXME:: MEMORY LEAK, CLEAN SCENE
+        _director->pushScene(RAMainMenuScene::create());
+    }
 }
 
 
