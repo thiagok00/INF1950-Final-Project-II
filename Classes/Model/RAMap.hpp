@@ -33,6 +33,12 @@ public:
     bool addEntityToTile(RAEntity* entity, int row, int col);
     bool moveEntityToTile(RAEntity* entity, int row, int col);
 
+    bool addEntityToTile(RAEntity* entity, RATile* tile);
+    bool moveEntityToTile(RAEntity* entity, RATile* tile);
+    
+    bool removeEntityFromTile(RAEntity* entity, RATile* tile);
+    bool removeEntityFromTile(RAEntity* entity, int row, int col);
+    
     bool addItemToTile(RAItem* item, int row, int col);
     RAItem* removeItemToTile(int row, int col);
 

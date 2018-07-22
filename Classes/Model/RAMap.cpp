@@ -35,11 +35,16 @@ void RAMap::setTile(int row, int col, RATile *t)
 
 bool RAMap::addEntityToTile(RAEntity* entity, int row, int col)
 {
-    RATile* tile = this->getTile(row, col);
+    return addEntityToTile(entity, getTile(row, col));
+}
+
+
+bool RAMap::addEntityToTile(RAEntity* entity, RATile* tile)
+{
     if(tile->entity == nullptr)
     {
-        entity->row = row;
-        entity->col = col;
+        entity->row = tile->getRow();
+        entity->col = tile->getCol();
         tile->entity = entity;
         if (RACreature * cr = dynamic_cast<RACreature*>(entity))
             creatures.push_back(cr);
@@ -51,27 +56,53 @@ bool RAMap::addEntityToTile(RAEntity* entity, int row, int col)
     }
 }
 
+bool RAMap::moveEntityToTile(RAEntity* entity, RATile* tile)
+{
+    RATile *oldTile = getTile(entity->row,entity->col);
+    if (oldTile->entity == entity)
+    {
+        oldTile->entity = nullptr;
+    }
+    if(tile->entity != nullptr)
+        return false; //tile occupied
+    
+    tile->entity = entity;
+    entity->row = tile->getRow();
+    entity->col = tile->getCol();
+    return true;
+}
+
+
 bool RAMap::moveEntityToTile(RAEntity* entity, int row, int col)
 {
-    //TODO: improve this
-    for (RATile * t : this->map)
+    return moveEntityToTile(entity, getTile(row, col));
+}
+
+bool RAMap::removeEntityFromTile(RAEntity* entity, RATile* tile)
+{
+    if(tile->entity == entity)
     {
-        if (t->entity == entity)
+        tile->entity = nullptr;
+        entity->row = -1;
+        entity->col = -1;
+        
+        if(RACreature *creature = dynamic_cast<RACreature*>(entity))
         {
-            t->entity = nullptr;
-            RATile *destTile = this->getTile(row, col);
-            if (destTile != nullptr)
-            {
-                destTile->entity = entity;
-                entity->row = row;
-                entity->col = col;
-                return true;
-            }
-            return false;
+            //erase–remove idiom
+            creatures.erase(std::remove(creatures.begin(), creatures.end(), creature), creatures.end());
         }
+        
+        return true;
     }
     return false;
 }
+
+bool RAMap::removeEntityFromTile(RAEntity* entity, int row, int col)
+{
+    return removeEntityFromTile(entity, getTile(row,col));
+}
+
+
 
 bool RAMap::addItemToTile(RAItem* item, int row, int col)
 {

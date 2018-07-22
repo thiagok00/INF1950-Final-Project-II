@@ -39,7 +39,6 @@ public:
     int getMaxSlots();
     
     int level;
-    int score;
 protected:
     int experiencePoints;
     int experienceMultiplier;

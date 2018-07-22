@@ -33,29 +33,3 @@ void RASinglePlayerGameController::playerPassTurn(int playerID)
     gameEngine->doPlayerPassTurn(playerID);
 }
 
-
-//Not using anymore
-void RASinglePlayerGameController::playerMoved (int playerID, int row, int col)
-{
-    gameScene->playerMoved(playerID, row, col);
-}
-
-void RASinglePlayerGameController::playerAttackedCreature (int playerID, int creatureID, int damage, bool died, int score, bool leveledUp)
-{
-    gameScene->playerAttackedCreature(playerID, creatureID, damage, died, score, leveledUp);
-}
-
-void RASinglePlayerGameController::creatureMoved(int creatureID, int row, int col)
-{
-    gameScene->creatureMoved(creatureID, row, col);
-}
-
-void RASinglePlayerGameController::creatureAttackedPlayer(int creatureID, int playerID, int damage)
-{
-    gameScene->creatureAttackedPlayer(creatureID, playerID, damage);
-}
-
-void RASinglePlayerGameController::playerMovedAndCaughtItem (int playerID, int row, int col, int atSlot, ItemID itemType, int charges)
-{
-    gameScene->playerMovedAndCaughtItem(playerID, row, col, atSlot, itemType, charges);
-}

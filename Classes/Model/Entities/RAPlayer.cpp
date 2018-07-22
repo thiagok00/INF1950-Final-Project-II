@@ -29,7 +29,6 @@ RAPlayer::RAPlayer() : RAEntity(PLAYER_INI_HEALTH, PLAYER_INI_DMG, PLAYER_INI_SP
     }
     occupiedSlots = 0;
     this->level = 1;
-    this->score = 0;
 }
 
 RAPlayer::~RAPlayer()

@@ -159,13 +159,8 @@ bool RAGameScene::init(int gameMode)
 
 void RAGameScene::auxUpdateScoreLabelText()
 {
-    int score = 0;
-    if (player1Node != nullptr)
-        score += player1Node->pController->score;
-    if (player2Node != nullptr)
-        score += player2Node->pController->score;
     std::ostringstream oss1;
-    oss1 << score;
+    oss1 << this->score;
     std::string buf = oss1.str();
     
     varExperienceLabel->setString(buf);
@@ -444,7 +439,7 @@ void RAGameScene::playerMovedAndCaughtItem (int playerID, int row, int col, int 
     auxUpdatePlayerItensSlots();
 }
 
-void RAGameScene::playerAttackedCreature (int playerID, int creatureID, int damage, bool died, int score, bool leveledUp)
+void RAGameScene::playerAttackedCreature (int playerID, int creatureID, int damage, bool died, int score)
 {
     auto blinkAction = Blink::create(0.5, 3);
     blinkAction->setTag(HURT_ACTION_TAG);
@@ -461,29 +456,14 @@ void RAGameScene::playerAttackedCreature (int playerID, int creatureID, int dama
     if (died)
     {
         //creature died, do something
-        auxUpdateScoreLabelText();
-        //cSprite->removeFromParentAndCleanup(true);
-    }
-    if(leveledUp)
-    {
-        auto playerNode = auxGetPlayerNodeById(playerID);
-        playerNode->level++;
-        Sprite *levelUpSprite = Sprite::create("levelUp.png");
-        levelUpSprite->setScale(playerNode->playerSize.width/levelUpSprite->getBoundingBox().size.width,
-                                playerNode->playerSize.height*0.4/levelUpSprite->getBoundingBox().size.height);
-        
-        levelUpSprite->setAnchorPoint(Vec2(0.5, 0.5));
-        levelUpSprite->setPosition(Vec2(0,0));
-        auto fadeout = FadeOut::create(1.5);
-        auto moveby = MoveBy::create(1.5, Vec2(0,playerNode->playerSize.height/2.0f));
-        
-        levelUpSprite->runAction(moveby);
-        levelUpSprite->runAction(fadeout);
-        //FIXME: memory leak levelupSprite
-        playerNode->node->addChild(levelUpSprite);
-        
+        auto creatureNode = varCreaturesMap.find(creatureID)->second;
+        creatureNode->cSprite->removeFromParentAndCleanup(true);
+        delete creatureNode;
+        varCreaturesMap.erase(creatureID);
     }
     
+    this->score = score;
+    auxUpdateScoreLabelText();
 }
 
 void RAGameScene::creatureMoved(int creatureID, int row, int col)
@@ -559,6 +539,29 @@ void RAGameScene::switchRound(int playerID)
         auxUpdateHealthBar();
         auxUpdateManaBar();
         auxUpdatePlayerItensSlots();
+    }
+}
+
+void RAGameScene::playerWonExperience(int playerID, int experience, bool leveledUp)
+{
+    if(leveledUp)
+    {
+        auto playerNode = auxGetPlayerNodeById(playerID);
+        playerNode->level++;
+        Sprite *levelUpSprite = Sprite::create("levelUp.png");
+        levelUpSprite->setScale(playerNode->playerSize.width/levelUpSprite->getBoundingBox().size.width,
+                                playerNode->playerSize.height*0.4/levelUpSprite->getBoundingBox().size.height);
+        
+        levelUpSprite->setAnchorPoint(Vec2(0.5, 0.5));
+        levelUpSprite->setPosition(Vec2(0,0));
+        auto fadeout = FadeOut::create(1.5);
+        auto moveby = MoveBy::create(1.5, Vec2(0,playerNode->playerSize.height/2.0f));
+        
+        levelUpSprite->runAction(moveby);
+        levelUpSprite->runAction(fadeout);
+        //FIXME: memory leak levelupSprite
+        playerNode->node->addChild(levelUpSprite);
+        
     }
 }
 
