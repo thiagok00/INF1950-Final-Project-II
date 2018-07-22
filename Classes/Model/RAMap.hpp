@@ -12,6 +12,7 @@
 #include "RAMap.hpp"
 #include "RATile.hpp"
 #include "RAItem.hpp"
+#include "RAEntity.hpp"
 #include "RACreature.hpp"
 
 #define MAP_MAX_ROW 8
@@ -29,8 +30,8 @@ public:
     RATile *player1RespawnTile;
     RATile *player2RespawnTile;
     
-    bool addCreatureToTile(RACreature* creature, int row, int col);
-    bool moveCreatureToTile(RACreature* creature, int row, int col);
+    bool addEntityToTile(RAEntity* entity, int row, int col);
+    bool moveEntityToTile(RAEntity* entity, int row, int col);
 
     bool addItemToTile(RAItem* item, int row, int col);
     RAItem* removeItemToTile(int row, int col);

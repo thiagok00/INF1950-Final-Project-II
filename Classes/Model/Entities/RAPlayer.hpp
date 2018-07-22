@@ -9,7 +9,6 @@
 #define RAPlayer_hpp
 
 #include <stdio.h>
-#include "RATile.hpp"
 #include "RAEntity.hpp"
 #include "RAItem.hpp"
 
@@ -24,7 +23,6 @@ public:
     ~RAPlayer();
     
     int playerID;
-    RATile *tile;
     
     int getExperiencePoints();
     bool addExperiencePoints(int experience);

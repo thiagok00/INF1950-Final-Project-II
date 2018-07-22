@@ -36,25 +36,29 @@ RAGameEngine* RAGameEngine::createGame(int gameMode, RASceneProtocol *gameListen
     {
         eng->player1 = new RAPlayer();
         eng->player1->playerID = PLAYER1_TURN;
-
+        
         eng->player2 = new RAPlayer();
         eng->player2->playerID = PLAYER2_TURN;
-
+        
     }
     else
     {
-        eng->player1 = new RAPlayer();
+        return nullptr;
     }
     
     eng->gameMap = RALevelGenerator::generateLevel(0);
     
     if(eng->player1 != nullptr)
     {
-        eng->player1->tile = eng->gameMap->player1RespawnTile;
+        int row = eng->gameMap->player1RespawnTile->getRow();
+        int col = eng->gameMap->player1RespawnTile->getCol();
+        eng->gameMap->addEntityToTile(eng->player1, row, col);
     }
     if(eng->player2 != nullptr)
     {
-        eng->player2->tile = eng->gameMap->player2RespawnTile;
+        int row = eng->gameMap->player2RespawnTile->getRow();
+        int col = eng->gameMap->player2RespawnTile->getCol();
+        eng->gameMap->addEntityToTile(eng->player2, row, col);
     }
     //eng->player1->tile = eng->gameMap[]
     
@@ -67,7 +71,7 @@ RAGameEngine* RAGameEngine::createGame(int gameMode, RASceneProtocol *gameListen
         gameListener->loadPlayer(eng->player2);
     
     gameListener->switchRound(PLAYER1_TURN);
-
+    
     return eng;
 }
 
@@ -85,121 +89,131 @@ bool RAGameEngine::doPlayerAction(int playerID, RADirection direction)
     switch(direction)
     {
         case RIGHT:
-            if (player->tile->getCol() == MAP_MAX_COL - 1)
+            if (player->col == MAP_MAX_COL - 1)
                 return false;
             else
-                destTile = gameMap->getTile(player->tile->getRow(), player->tile->getCol() + 1);
+                destTile = gameMap->getTile(player->row, player->col + 1);
             break;
         case LEFT:
-            if (player->tile->getCol() == 0)
+            if (player->col == 0)
                 return false;
             else
-                destTile = gameMap->getTile(player->tile->getRow(), player->tile->getCol() - 1);
+                destTile = gameMap->getTile(player->row, player->col - 1);
             break;
         case DOWN:
-            if (player->tile->getRow() == 0)
+            if (player->row == 0)
                 return false;
             else
-                destTile = gameMap->getTile(player->tile->getRow() - 1, player->tile->getCol());
+                destTile = gameMap->getTile(player->row - 1, player->col);
             break;
         case UP:
-            if (player->tile->getRow() == MAP_MAX_ROW - 1)
+            if (player->row == MAP_MAX_ROW - 1)
                 return false;
             else
-                destTile = gameMap->getTile(player->tile->getRow() + 1, player->tile->getCol());
+                destTile = gameMap->getTile(player->row + 1, player->col);
             break;
     }
     
-    if(destTile->creature != nullptr && !destTile->creature->isDead())
+    if (destTile->entity == nullptr)
     {
-        //attack
-        if(player->actionPoints > 0)
+        if (player->speed > 0 && destTile->isWakable())
         {
-            CCLOG("ATTACK!");
-            int damageTook = destTile->creature->inflictDamage(player->getAtkDamage());
-            bool isDead = destTile->creature->isDead();
-            bool leveledUp = false;
+            gameMap->moveEntityToTile(player, destTile->getRow(), destTile->getCol());
+            player->speed--;
             
-            //add experience
-            if (destTile->creature->isDead())
+            if(destTile->getType() == Fire)
             {
-                const int experience = destTile->creature->experience;
-                player->score += experience;
-
-                leveledUp = player->addExperiencePoints(experience);
-                if(leveledUp)
+                player->burningTick = 5;
+                float damage = player->burn();
+                if(player && gameListener != nullptr)
                 {
-                    //do something if level up
+                    gameListener->playerBadStatus(player->playerID, BURNING, damage);
                 }
             }
-            player->actionPoints--;
-            gameListener->playerAttackedCreature(player->playerID,
-                                                 destTile->creature->id,
-                                                 damageTook,
-                                                 isDead,
-                                                 player->score,
-                                                 leveledUp
-                                                 );
-            return true;
-        }
-        else
-        {
-            //Fail to Attack - Do nothing
-            CCLOG("FAIL ATTACK! - NO ACTION POINTS");
-            return false;
-        }
-    }
-    //CCLOG("MOVING FROM: %dx%d TO %dx%d",player->tile->getRow(),player->tile->getCol(),destTile->getRow(),destTile->getCol());
-    if (player->speed > 0 && destTile->isWakable())
-    {
-        player->tile = destTile;
-        player->speed--;
-        
-        if(destTile->getType() == Fire)
-        {
-            player->burningTick = 5;
-            float damage = player->burn();
-            if(player && gameListener != nullptr)
+            if(destTile->getType() == Poison)
             {
-                gameListener->playerBadStatus(player->playerID, BURNING, damage);
-            }
-        }
-        if(destTile->getType() == Poison)
-        {
-            player->poisonTick = 9;
-            float damage = player->poison();
-            if(player && gameListener != nullptr)
-            {
-                gameListener->playerBadStatus(player->playerID, POISONED, damage);
-            }
-        }
-        
-        int slot = -1;
-        if( destTile->droppedItem != nullptr)
-            slot = player->addItemToSlot(destTile->droppedItem);
-        
-        if(slot >= 0)
-        {
-            //player caught item
-            RAItem *caughtItem = destTile->droppedItem;
-            destTile->droppedItem = nullptr;
-            if (gameListener != nullptr)
-            {
-                gameListener->playerMovedAndCaughtItem(player->playerID, destTile->getRow(), destTile->getCol(), slot, caughtItem->getItemType(), caughtItem->getCharges());
+                player->poisonTick = 9;
+                float damage = player->poison();
+                if(player && gameListener != nullptr)
+                {
+                    gameListener->playerBadStatus(player->playerID, POISONED, damage);
+                }
             }
             
+            int slot = -1;
+            if( destTile->droppedItem != nullptr)
+                slot = player->addItemToSlot(destTile->droppedItem);
+            
+            if(slot >= 0)
+            {
+                //player caught item
+                RAItem *caughtItem = destTile->droppedItem;
+                destTile->droppedItem = nullptr;
+                if (gameListener != nullptr)
+                {
+                    gameListener->playerMovedAndCaughtItem(player->playerID, destTile->getRow(), destTile->getCol(), slot, caughtItem->getItemType(), caughtItem->getCharges());
+                }
+                
+            }
+            else if(gameListener != nullptr)
+            {
+                gameListener->playerMoved(player->playerID, destTile->getRow(), destTile->getCol());
+            }
         }
-        else if(gameListener != nullptr)
+    }
+    else if (auto secondPlayer = dynamic_cast<RAPlayer*>(destTile->entity))
+    {
+        //trying to do action to other player tile
+        return false;
+    }
+    else if(RACreature* creature = dynamic_cast<RACreature*>(destTile->entity))
+    {
+        if (!creature->isDead())
         {
-            gameListener->playerMoved(player->playerID, destTile->getRow(), destTile->getCol());
+            //attack
+            if(player->actionPoints > 0)
+            {
+                CCLOG("ATTACK!");
+                int damageTook = creature->inflictDamage(player->getAtkDamage());
+                bool isDead = creature->isDead();
+                bool leveledUp = false;
+                
+                //add experience
+                if (creature->isDead())
+                {
+                    const int experience = creature->experience;
+                    player->score += experience;
+                    
+                    leveledUp = player->addExperiencePoints(experience);
+                    if(leveledUp)
+                    {
+                        //do something if level up
+                    }
+                }
+                player->actionPoints--;
+                gameListener->playerAttackedCreature(player->playerID,
+                                                     creature->id,
+                                                     damageTook,
+                                                     isDead,
+                                                     player->score,
+                                                     leveledUp
+                                                     );
+                return true;
+            }
+            else
+            {
+                //Fail to Attack - Do nothing
+                CCLOG("FAIL ATTACK! - NO ACTION POINTS");
+                return false;
+            }
         }
     }
     if (player->speed == 0 && player->actionPoints == 0)
     {
         switchTurn();
     }
+    //CCLOG("MOVING FROM: %dx%d TO %dx%d",player->tile->getRow(),player->tile->getCol(),destTile->getRow(),destTile->getCol());
     return true;
-    
 }
 
 bool RAGameEngine::doPlayerUseItem(int playerID, int slot)
@@ -272,7 +286,7 @@ void RAGameEngine::switchTurn()
     }
     else if(turnOrder == PLAYER2_TURN)
     {
-            nextTurn = CREATURE_TURN;
+        nextTurn = CREATURE_TURN;
     }
     else if(turnOrder == CREATURE_TURN)
     {
@@ -287,7 +301,7 @@ void RAGameEngine::switchTurn()
     }
     
     turnOrder = nextTurn;
-
+    
     if(turnOrder == PLAYER1_TURN)
     {
         player1->resetTurn();
@@ -316,16 +330,16 @@ void RAGameEngine::switchTurn()
                 col = cr->col;
                 if (row < 0) row = 1;
                 
-                if(player1->tile == gameMap->getTile(row, col))
+                if(RAPlayer * atkPlayer = dynamic_cast<RAPlayer*>(gameMap->getTile(row, col)->entity))
                 {
                     //player standing in destiny tile, so attack
-                    int damageTook = player1->inflictDamage(cr->getAtkDamage());
-                    gameListener->creatureAttackedPlayer(cr->id, player1->playerID, damageTook);
+                    int damageTook = atkPlayer->inflictDamage(cr->getAtkDamage());
+                    gameListener->creatureAttackedPlayer(cr->id, atkPlayer->playerID, damageTook);
                 }
                 else
                 {
                     //just move
-                    gameMap->moveCreatureToTile(cr, row, col);
+                    gameMap->moveEntityToTile(cr, row, col);
                     gameListener->creatureMoved(cr->id, row, col);
                 }
                 
