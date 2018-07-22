@@ -78,6 +78,9 @@ bool RAGameEngine::doPlayerAction(int playerID, RADirection direction)
     if(player == nullptr)
         return false;
     
+    if (player->isDead())
+        return false;
+    
     //Not player turn
     if(turnOrder != player->playerID)
         return false;
@@ -338,23 +341,33 @@ void RAGameEngine::switchTurn()
                 
                 if(RAPlayer * atkPlayer = dynamic_cast<RAPlayer*>(gameMap->getTile(row, col)->entity))
                 {
-                    //player standing in destiny tile, so attack
-                    int damageTook = atkPlayer->inflictDamage(cr->getAtkDamage());
-                    gameListener->creatureAttackedPlayer(cr->id, atkPlayer->playerID, damageTook);
+                    if (!atkPlayer->isDead())
+                    {
+                        //player standing in destiny tile, so attack
+                        int damageTook = atkPlayer->inflictDamage(cr->getAtkDamage());
+                        gameListener->creatureAttackedPlayer(cr->id, atkPlayer->playerID, damageTook);
+                        
+                        if(atkPlayer->isDead())
+                        {
+                            gameListener->playerDied(atkPlayer->playerID);
+                            gameMap->removeEntityFromTile(atkPlayer,atkPlayer->row,atkPlayer->col);
+                        }
+                        break;
+                    }
                 }
+                //just move
+                if(gameMap->moveEntityToTile(cr, row, col))
+                   gameListener->creatureMoved(cr->id, row, col);
                 else
                 {
-                    //just move
-                    gameMap->moveEntityToTile(cr, row, col);
-                    gameListener->creatureMoved(cr->id, row, col);
+                    //creature tried to walk but it cant
                 }
-                
-                
                 CCLOG("CRIATURA SE MOVEU PARA X:%D Y:%D",row,col);
+                
             }
         }
         switchTurn();
-    }
+    } //end creature turn
 }
 
 void RAGameEngine::checkNewTurnConditions(RAEntity* entity)

@@ -59,13 +59,14 @@ bool RAMap::addEntityToTile(RAEntity* entity, RATile* tile)
 bool RAMap::moveEntityToTile(RAEntity* entity, RATile* tile)
 {
     RATile *oldTile = getTile(entity->row,entity->col);
+    
+    if(tile->entity != nullptr)
+        return false; //tile occupied
+    
     if (oldTile->entity == entity)
     {
         oldTile->entity = nullptr;
     }
-    if(tile->entity != nullptr)
-        return false; //tile occupied
-    
     tile->entity = entity;
     entity->row = tile->getRow();
     entity->col = tile->getCol();

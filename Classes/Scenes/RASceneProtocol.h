@@ -26,6 +26,7 @@ public:
     virtual void playerBadStatus(int playerID, Status_ID statusID, int damage) {}
     virtual void switchRound(int playerID) {}
     virtual void playerWonExperience(int playerID, int experience, bool leveledUp) {}
+    virtual void playerDied(int playerID) {}
 };
 
 #endif /* RASceneProtocol_h */

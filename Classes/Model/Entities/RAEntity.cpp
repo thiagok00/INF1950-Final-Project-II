@@ -39,16 +39,24 @@ void RAEntity::resetTurn()
 
 int RAEntity::inflictDamage(int damage)
 {
+    if(isDead())
+        return 0;
+    
     int realDamage = damage - armor;
     if(realDamage < 0) realDamage = 0;
 
-    healthPoints = healthPoints - realDamage;
-    if(healthPoints <= 0)
+    if(healthPoints - realDamage <= 0)
     {
+        float damageTook = realDamage - healthPoints;
         dead = true;
         healthPoints = 0;
+        return damageTook;
     }
-    return realDamage;
+    else
+    {
+        healthPoints = healthPoints - realDamage;
+        return realDamage;
+    }
 }
 
 int RAEntity::getAtkDamage()

@@ -226,11 +226,11 @@ void RAGameScene::auxUpdatePlayerItensSlots()
 
 RAGameScene::PlayerNode* RAGameScene::auxGetPlayerNodeById(int playerID)
 {
-    if (player1Node != nullptr &&  player1Node->pController != nullptr && player1Node->pController->playerID == playerID)
+    if (player1Node != nullptr && player1Node->playerID == playerID)
     {
         return player1Node;
     }
-    else if (player2Node != nullptr && player2Node->pController != nullptr && player2Node->pController->playerID == playerID)
+    else if (player2Node != nullptr && player2Node->playerID == playerID)
     {
         return player2Node;
     }
@@ -366,7 +366,7 @@ void RAGameScene::loadPlayer (RAPlayer* player)
         else if (player->playerID == PLAYER2_TURN)
             player2Node = playerNode;
 
-        
+        playerNode->playerID = player->playerID;
         Size playerSize;
         playerSize.width = varScreenSize.width/MAP_MAX_ROW;
         playerSize.height = playerSize.width;
@@ -564,6 +564,30 @@ void RAGameScene::playerWonExperience(int playerID, int experience, bool leveled
         
     }
 }
+
+void RAGameScene::playerDied(int playerID)
+{
+    auto playerNode = auxGetPlayerNodeById(playerID);
+    
+    playerNode->pSprite->removeFromParentAndCleanup(true);
+    playerNode->node->removeFromParentAndCleanup(true);
+    for ( auto inode : playerNode->items)
+    {
+        //not using sprite yet
+        //inode->iSprite->removeFromParentAndCleanup(true);
+        delete inode;
+    }
+    if (playerNode == player1Node)
+    {
+        player1Node = nullptr;
+    }
+    else if(playerNode == player2Node)
+    {
+        player2Node = nullptr;
+    }
+    delete playerNode;    
+}
+
 
 // MARK: Touch Events
 bool RAGameScene::onTouchBegan(Touch* touch, Event* event)
