@@ -173,8 +173,8 @@ void RAGameScene::auxUpdateScoreLabelText()
 
 void RAGameScene::auxUpdateHealthBar()
 {
-    RAPlayer *player = auxGetPlayerNodeById(playerRound)->pController;
-    float healthPercentage = (float)player->healthPoints/(float)player->maxHealthPoints;
+    PlayerNode *player = auxGetPlayerNodeById(playerRound);
+    float healthPercentage = (float)player->health/(float)player->maxHealth;
     healthBar->removeFromParentAndCleanup(true);
     healthBar = LayerColor::create(Color4B::RED, healthBarBaseSize.width*healthPercentage, healthBarBaseSize.height);
     healthBar->setAnchorPoint(Vec2(0.5,0.5));
@@ -184,8 +184,8 @@ void RAGameScene::auxUpdateHealthBar()
 
 void RAGameScene::auxUpdateManaBar()
 {
-    RAPlayer *player = auxGetPlayerNodeById(playerRound)->pController;
-    float manaPercentage = (float)player->manaPoints/(float)player->maxManaPoints;
+    PlayerNode *player = auxGetPlayerNodeById(playerRound);
+    float manaPercentage = (float)player->mana/(float)player->maxMana;
     manaBar->removeFromParentAndCleanup(true);
     manaBar = LayerColor::create(Color4B::BLUE, healthBarBaseSize.width*manaPercentage, healthBarBaseSize.height);
     manaBar->setAnchorPoint(Vec2(0.5,0.5));
@@ -392,7 +392,11 @@ void RAGameScene::loadPlayer (RAPlayer* player)
         
         
     }
-    playerNode->level = 0;
+    playerNode->health = player->healthPoints;
+    playerNode->maxHealth = player->maxHealthPoints;
+    playerNode->mana = player->maxManaPoints;
+    playerNode->maxMana = player->maxManaPoints;
+    playerNode->level = player->level;
     playerNode->pController = player;
    // playerNode->pSprite->setPosition(mapNode->tiles.at(MAP_MAX_ROW*player->tile->getRow() + player->tile->getCol())->sprite->getPosition());
     playerNode->node->setPosition(mapNode->tiles.at(MAP_MAX_ROW*player->row + player->col)->sprite->getPosition());
@@ -512,6 +516,7 @@ void RAGameScene::creatureAttackedPlayer(int creatureID, int playerID, int damag
     
     playerNode->pSprite->runAction(blinkAction);
     
+    playerNode->health = playerNode->health - damage;
     auxUpdateHealthBar();
 }
 
@@ -540,6 +545,7 @@ void RAGameScene::playerBadStatus(int playerID, Status_ID statusID, int damage)
     //FIXME: memory leak burnSpr
     statusSpr->runAction(FadeOut::create(1.5));
 
+    playerNode->health = playerNode->health - damage;
     auxUpdateHealthBar();
 }
 

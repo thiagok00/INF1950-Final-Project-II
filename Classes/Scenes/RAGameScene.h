@@ -51,6 +51,12 @@ public:
         cocos2d::Size playerSize;
         int level;
         
+        int health;
+        int maxHealth;
+        
+        float mana;
+        int maxMana;
+        
     };
     
     struct TileNode
