@@ -145,10 +145,20 @@ bool RAGameEngine::doPlayerAction(int playerID, RADirection direction)
         if(destTile->getType() == Fire)
         {
             player->burningTick = 5;
+            float damage = player->burn();
+            if(player && gameListener != nullptr)
+            {
+                gameListener->playerBadStatus(player->playerID, BURNING, damage);
+            }
         }
         if(destTile->getType() == Poison)
         {
             player->poisonTick = 9;
+            float damage = player->poison();
+            if(player && gameListener != nullptr)
+            {
+                gameListener->playerBadStatus(player->playerID, POISONED, damage);
+            }
         }
         
         int slot = -1;

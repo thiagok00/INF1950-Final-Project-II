@@ -98,6 +98,7 @@ int RAEntity::poison()
             this->dead = true;
         }
         poisonTick--;
+        return poisonDamage;
     }
     return 0;
 }
