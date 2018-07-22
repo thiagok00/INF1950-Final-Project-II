@@ -123,7 +123,7 @@ public:
     void playerBadStatus(int playerID, Status_ID statusID, int damage);
     void switchRound(int playerID);
     void playerWonExperience(int playerID, int experience, bool leveledUp);
-    void playerDied(int playerID);
+    void playerDied(int playerID, bool isGameOver);
                     
     cocos2d::LayerColor *varBackLayer;
     cocos2d::Size varScreenSize;

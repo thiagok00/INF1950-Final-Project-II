@@ -18,7 +18,7 @@ RAGameEngine::RAGameEngine(int gameMode, RASceneProtocol *gameListener)
     player1 = nullptr;
     player2 = nullptr;
     this->gameListener = gameListener;
-    gameMode = gameMode;
+    this->gameMode = gameMode;
     turnOrder = 0;
 }
 
@@ -139,6 +139,8 @@ bool RAGameEngine::doPlayerAction(int playerID, RADirection direction)
                     gameListener->playerBadStatus(player->playerID, POISONED, damage);
                 }
             }
+            if(auxPlayerCheckDeath(player))
+                return false;
             
             int slot = -1;
             if( destTile->droppedItem != nullptr)
@@ -347,11 +349,7 @@ void RAGameEngine::switchTurn()
                         int damageTook = atkPlayer->inflictDamage(cr->getAtkDamage());
                         gameListener->creatureAttackedPlayer(cr->id, atkPlayer->playerID, damageTook);
                         
-                        if(atkPlayer->isDead())
-                        {
-                            gameListener->playerDied(atkPlayer->playerID);
-                            gameMap->removeEntityFromTile(atkPlayer,atkPlayer->row,atkPlayer->col);
-                        }
+                        if(auxPlayerCheckDeath(atkPlayer)) return;
                         break;
                     }
                 }
@@ -372,6 +370,7 @@ void RAGameEngine::switchTurn()
 
 void RAGameEngine::checkNewTurnConditions(RAEntity* entity)
 {
+    //TODO: extend bad status for monsters
     bool burned = entity->isBurning();
     bool poisoned = entity->isPoisoned();
     RAPlayer* player = dynamic_cast<RAPlayer*>(entity);
@@ -391,7 +390,43 @@ void RAGameEngine::checkNewTurnConditions(RAEntity* entity)
             gameListener->playerBadStatus(player->playerID, POISONED, damage);
         }
     }
+    if(player)
+    {
+        auxPlayerCheckDeath(player);
+    }
 }
+bool RAGameEngine::auxCheckGameOver()
+{
+    if(gameMode == kGAMEMODE_SINGLEPLAYER)
+    {
+        if (player1->isDead())
+            return true;
+        return false;
+    }
+    else if(gameMode == kGAMEMODE_ONLINE_MULTIPLAYER || gameMode == kGAMEMODE_OFFLINE_MULTIPLAYER)
+    {
+        if(player1->isDead() && player2->isDead())
+            return true;
+        return false;
+    }
+    return false;
+}
+
+bool RAGameEngine::auxPlayerCheckDeath(RAPlayer *player)
+{
+    if(player->isDead()){
+        bool isGameOver = auxCheckGameOver();
+        gameListener->playerDied(player->playerID, isGameOver );
+        gameMap->removeEntityFromTile(player,player->row,player->col);
+        if(!auxCheckGameOver())
+        {
+            switchTurn();
+        }
+        return true;
+    }
+    return false;
+}
+
 
 RAPlayer* RAGameEngine::auxGetPlayerById(int playerID)
 {

@@ -39,6 +39,9 @@ protected:
     void switchTurn();
     void checkNewTurnConditions(RAEntity* entity);
     
+    bool auxPlayerCheckDeath(RAPlayer *player);
+    bool auxCheckGameOver();
+
     RAPlayer* auxGetPlayerById(int playerID);
     
 };
