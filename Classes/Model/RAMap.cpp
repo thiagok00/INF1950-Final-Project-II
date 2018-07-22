@@ -33,15 +33,16 @@ void RAMap::setTile(int row, int col, RATile *t)
     this->map[col + row*MAP_MAX_COL] = t;
 }
 
-bool RAMap::addCreatureToTile(RACreature* creature, int row, int col)
+bool RAMap::addEntityToTile(RAEntity* entity, int row, int col)
 {
     RATile* tile = this->getTile(row, col);
-    if(tile->creature == nullptr)
+    if(tile->entity == nullptr)
     {
-        creature->row = row;
-        creature->col = col;
-        tile->creature = creature;
-        creatures.push_back(creature);
+        entity->row = row;
+        entity->col = col;
+        tile->entity = entity;
+        if (RACreature * cr = dynamic_cast<RACreature*>(entity))
+            creatures.push_back(cr);
         return true;
     }
     else
@@ -50,20 +51,20 @@ bool RAMap::addCreatureToTile(RACreature* creature, int row, int col)
     }
 }
 
-bool RAMap::moveCreatureToTile(RACreature* creature, int row, int col)
+bool RAMap::moveEntityToTile(RAEntity* entity, int row, int col)
 {
     //TODO: improve this
     for (RATile * t : this->map)
     {
-        if (t->creature == creature)
+        if (t->entity == entity)
         {
-            t->creature = nullptr;
+            t->entity = nullptr;
             RATile *destTile = this->getTile(row, col);
             if (destTile != nullptr)
             {
-                destTile->creature = creature;
-                creature->row = row;
-                creature->col = col;
+                destTile->entity = entity;
+                entity->row = row;
+                entity->col = col;
                 return true;
             }
             return false;

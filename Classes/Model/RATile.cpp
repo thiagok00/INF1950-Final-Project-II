@@ -13,7 +13,7 @@ RATile::RATile(TileType type, int row, int col, bool walkable)
     this->row = row;
     this->col = col;
     this->walkable = walkable;
-    this->creature = nullptr;
+    this->entity = nullptr;
     this->droppedItem = nullptr;
 }
 

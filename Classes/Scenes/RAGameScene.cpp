@@ -297,27 +297,30 @@ void RAGameScene::loadMap (RAMap* map)
                 }
                 
                 //render creature of tile
-                if(tile->creature != nullptr)
+                if(tile->entity != nullptr)
                 {
-                    CreatureNode * creature = new CreatureNode();
-                    creature->size = tileSize;
-                    creature->isDead = tile->creature->isDead();
-                    creature->creatureID = tile->creature->id;
-                    switch(creature->creatureID)
+                    if (RACreature * tileCreature = dynamic_cast<RACreature*>(tile->entity))
                     {
-                        case Rat:
-                            creature->cSprite = Sprite::create("creature_example.png");
-                            break;
-                        case Cave_Rat:
-                            creature->cSprite = Sprite::create("creature_example.png");
-                            break;
+                        CreatureNode * creature = new CreatureNode();
+                        creature->size = tileSize;
+                        creature->isDead = tileCreature->isDead();
+                        creature->creatureID = tileCreature->id;
+                        switch(creature->creatureID)
+                        {
+                            case Rat:
+                                creature->cSprite = Sprite::create("creature_example.png");
+                                break;
+                            case Cave_Rat:
+                                creature->cSprite = Sprite::create("creature_example.png");
+                                break;
+                        }
+                        
+                        creature->cSprite->setScale(creature->size.width/creature->cSprite->getContentSize().width);
+                        creature->cSprite->setAnchorPoint(Vec2(0.5,0.5));
+                        creature->cSprite->setPosition(xPos,yPos);
+                        varBackLayer->addChild(creature->cSprite,zORDER_CREATURE);
+                        varCreaturesMap.insert(std::make_pair(creature->creatureID, creature));
                     }
-                    
-                    creature->cSprite->setScale(creature->size.width/creature->cSprite->getContentSize().width);
-                    creature->cSprite->setAnchorPoint(Vec2(0.5,0.5));
-                    creature->cSprite->setPosition(xPos,yPos);
-                    varBackLayer->addChild(creature->cSprite,zORDER_CREATURE);
-                    varCreaturesMap.insert(std::make_pair(creature->creatureID, creature));
                 }
                 
                 //render item
@@ -392,7 +395,7 @@ void RAGameScene::loadPlayer (RAPlayer* player)
     playerNode->level = 0;
     playerNode->pController = player;
    // playerNode->pSprite->setPosition(mapNode->tiles.at(MAP_MAX_ROW*player->tile->getRow() + player->tile->getCol())->sprite->getPosition());
-    playerNode->node->setPosition(mapNode->tiles.at(MAP_MAX_ROW*player->tile->getRow() + player->tile->getCol())->sprite->getPosition());
+    playerNode->node->setPosition(mapNode->tiles.at(MAP_MAX_ROW*player->row + player->col)->sprite->getPosition());
     
     auxUpdateScoreLabelText();
     auxUpdateHealthBar();
@@ -493,7 +496,6 @@ void RAGameScene::creatureMoved(int creatureID, int row, int col)
 void RAGameScene::creatureAttackedPlayer(int creatureID, int playerID, int damage)
 {
     auto playerNode = auxGetPlayerNodeById(playerID);
-    RAPlayer *player = playerNode->pController;
     auto rt = RotateBy::create(0.5, 0.8);
     auto rt2 = rt->reverse();
     auto seq = Sequence::create(rt,rt2, NULL);
@@ -516,8 +518,6 @@ void RAGameScene::creatureAttackedPlayer(int creatureID, int playerID, int damag
 void RAGameScene::playerBadStatus(int playerID, Status_ID statusID, int damage)
 {
     auto playerNode = auxGetPlayerNodeById(playerID);
-    RAPlayer *player = playerNode->pController;
-    
     Sprite* statusSpr;
     
     switch(statusID)

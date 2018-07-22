@@ -31,7 +31,7 @@ public:
     int getCol();
     bool isWakable();
     const char  * getDescription();
-    RACreature  *creature;
+    RAEntity  *entity;
     RAItem      *droppedItem;
     
     int getType();
