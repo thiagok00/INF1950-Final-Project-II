@@ -107,6 +107,8 @@
 		D05EC6AD2107F9F4006FB485 /* stair.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6AB2107F9F3006FB485 /* stair.png */; };
 		D05EC6AF2107FA98006FB485 /* healthpotion.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6AE2107FA98006FB485 /* healthpotion.png */; };
 		D05EC6B02107FA98006FB485 /* healthpotion.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6AE2107FA98006FB485 /* healthpotion.png */; };
+		D05EC6B22107FFA9006FB485 /* passturnbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6B12107FFA9006FB485 /* passturnbutton.png */; };
+		D05EC6B32107FFA9006FB485 /* passturnbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6B12107FFA9006FB485 /* passturnbutton.png */; };
 		D08AF03520B259F500BB9B17 /* RAGameController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D08AF03320B259F500BB9B17 /* RAGameController.cpp */; };
 		D08AF03820B25A0000BB9B17 /* RASinglePlayerGameController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D08AF03620B25A0000BB9B17 /* RASinglePlayerGameController.cpp */; };
 		D08AF03F20B262D700BB9B17 /* placeholderButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D08AF03E20B262D700BB9B17 /* placeholderButton.png */; };
@@ -261,6 +263,7 @@
 		D05EC6A82107F38C006FB485 /* backgroundapp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundapp.png; sourceTree = "<group>"; };
 		D05EC6AB2107F9F3006FB485 /* stair.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stair.png; sourceTree = "<group>"; };
 		D05EC6AE2107FA98006FB485 /* healthpotion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = healthpotion.png; sourceTree = "<group>"; };
+		D05EC6B12107FFA9006FB485 /* passturnbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = passturnbutton.png; sourceTree = "<group>"; };
 		D08AF03320B259F500BB9B17 /* RAGameController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RAGameController.cpp; sourceTree = "<group>"; };
 		D08AF03420B259F500BB9B17 /* RAGameController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RAGameController.hpp; sourceTree = "<group>"; };
 		D08AF03620B25A0000BB9B17 /* RASinglePlayerGameController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RASinglePlayerGameController.cpp; sourceTree = "<group>"; };
@@ -402,6 +405,7 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D05EC6B12107FFA9006FB485 /* passturnbutton.png */,
 				D05EC6A82107F38C006FB485 /* backgroundapp.png */,
 				D05EC6AE2107FA98006FB485 /* healthpotion.png */,
 				D05EC6992107F295006FB485 /* floor1.png */,
@@ -723,6 +727,7 @@
 				D0A6919920FAC6E900BC832E /* poison_1.png in Resources */,
 				521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */,
 				D0A6919720FAC6E900BC832E /* burn_1.png in Resources */,
+				D05EC6B22107FFA9006FB485 /* passturnbutton.png in Resources */,
 				D05EC6AF2107FA98006FB485 /* healthpotion.png in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
 			);
@@ -753,6 +758,7 @@
 				D03B6A032104943E00F5B384 /* hero.png in Resources */,
 				3EACC99019EE6D4300EB3C5E /* res in Resources */,
 				D05EC6862107EBC5006FB485 /* greenghost_south.png in Resources */,
+				D05EC6B32107FFA9006FB485 /* passturnbutton.png in Resources */,
 				D03B6A0C2104976D00F5B384 /* hero1.png in Resources */,
 				521A8EAA19F11F5000D177D7 /* fonts in Resources */,
 				D08AF04020B262D700BB9B17 /* placeholderButton.png in Resources */,

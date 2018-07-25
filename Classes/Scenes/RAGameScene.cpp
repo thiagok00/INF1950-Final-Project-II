@@ -76,7 +76,7 @@ bool RAGameScene::init(int gameMode)
     //
     //HUD
     //
-    varExperienceLabel = Label::createWithTTF("----", "fonts/arial.ttf", 32);
+    varExperienceLabel = Label::createWithTTF("----", "fonts/arial.ttf", 48);
     varExperienceLabel->setAnchorPoint(Vec2(0.5, 0.5));
     varExperienceLabel->setPosition(Vec2(varScreenSize.width/2.0f, varScreenSize.height - varExperienceLabel->getBoundingBox().size.height/2.0f));
     
@@ -84,7 +84,7 @@ bool RAGameScene::init(int gameMode)
     healthBarBaseSize = Size(varScreenSize.width*0.6, varScreenSize.height*0.05);
     healthBarBase = LayerColor::create(Color4B::BLACK, healthBarBaseSize.width, healthBarBaseSize.height);
     healthBarBase->setAnchorPoint(Vec2(0.5,0.5));
-    healthBarBase->setPosition(varScreenSize.width*0.3, healthBarBase->getBoundingBox().size.height*2);
+    healthBarBase->setPosition(varScreenSize.width*0.35, healthBarBase->getBoundingBox().size.height*2);
     varBackLayer->addChild(healthBarBase);
     
     healthBar = LayerColor::create(Color4B::RED, healthBarBaseSize.width, healthBarBaseSize.height);
@@ -95,7 +95,7 @@ bool RAGameScene::init(int gameMode)
     //mana bar
     manaBarBase = LayerColor::create(Color4B::BLACK, healthBarBaseSize.width, healthBarBaseSize.height);
     manaBarBase->setAnchorPoint(Vec2(0.5,0.5));
-    manaBarBase->setPosition(varScreenSize.width*0.3, manaBarBase->getBoundingBox().size.height/2.0f);
+    manaBarBase->setPosition(varScreenSize.width*0.35, manaBarBase->getBoundingBox().size.height/2.0f);
     varBackLayer->addChild(manaBarBase);
     
     manaBar = LayerColor::create(Color4B::BLUE, healthBarBaseSize.width, healthBarBaseSize.height);
@@ -128,7 +128,7 @@ bool RAGameScene::init(int gameMode)
     }
     
     //pass turn button
-    auto passTurnButton = ui::Button::create("placeholderButton.png");
+    auto passTurnButton = ui::Button::create("passturnbutton.png");
     passTurnButton->setAnchorPoint(Vec2(0.5, 0.5));
     passTurnButton->setPosition(Vec2(varScreenSize.width/2.0f, varScreenSize.height*0.23));
     Size passTurnBtnSize = Size(varScreenSize.width*0.6, varScreenSize.height*0.05);
