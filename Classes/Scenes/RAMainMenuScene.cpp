@@ -32,6 +32,12 @@ bool RAMainMenuScene::init()
     varBackLayer->setPosition(Vec2(0,0));
     this->addChild(varBackLayer);
     
+    auto backgroundImage = Sprite::create("backgroundapp.png");
+    varBackLayer->addChild(backgroundImage);
+    backgroundImage->setAnchorPoint(Vec2(0,0));
+    backgroundImage->setPosition(Vec2(0,0));
+    backgroundImage->setScale(varScreenSize.height/backgroundImage->getContentSize().height);
+    
     varSinglePlayerButton = ui::Button::create("placeholderButton.png");
     varSinglePlayerButton->setPosition(Vec2(varScreenSize.width/2.0f,varScreenSize.height/2.0f));
     Size btnSize = Size(varScreenSize.width*0.6, varScreenSize.height*0.2);

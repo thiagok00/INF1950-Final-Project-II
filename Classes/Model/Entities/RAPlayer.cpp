@@ -45,7 +45,7 @@ bool RAPlayer::addExperiencePoints(int experience)
 {
     
     this->experiencePoints += experience * this->experienceMultiplier;
-    
+    if (level>=10) return false;
     const int nextLevel = level+1;
     int nextLevelExpRequired = 16.67*(nextLevel*nextLevel*nextLevel - 6*(nextLevel*nextLevel + 17*nextLevel) - 12);
     if(experiencePoints >= nextLevelExpRequired)

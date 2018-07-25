@@ -63,6 +63,14 @@ bool RAGameScene::init(int gameMode)
     varBackLayer = LayerColor::create(Color4B(97, 24, 22, 255), varScreenSize.width, varScreenSize.height);
     varBackLayer->setAnchorPoint(Vec2(0,0));
     varBackLayer->setPosition(Vec2(0,0));
+    
+    auto backgroundImage = Sprite::create("backgroundapp.png");
+    varBackLayer->addChild(backgroundImage);
+    backgroundImage->setAnchorPoint(Vec2(0,0));
+    backgroundImage->setPosition(Vec2(0,0));
+    backgroundImage->setScale(varScreenSize.height/backgroundImage->getContentSize().height);
+    
+    
     this->addChild(varBackLayer, 0);
     
     //
@@ -275,10 +283,26 @@ void RAGameScene::loadMap (RAMap* map)
                 t->walkable = tile->isWakable();
                 
                 //temp
-                t->sprite = Sprite::create("cave_ground.png");
+                int rand = cocos2d::random(1, 6);
+                std::ostringstream oss1;
+                oss1 << "floor";
+                oss1 << rand;
+                oss1 << ".png";
+                std::string floorSprite = oss1.str();
+                if (tile->getType() == Stairs)
+                {
+                    floorSprite = "stair.png";
+                }
+                
+                t->node = Node::create();
+                t->node->setContentSize(tileSize);
+                t->node->setAnchorPoint(Vec2(0.0,0.0));
+                t->node->setPosition(xPos,yPos);
+                t->sprite = Sprite::create(floorSprite);
                 t->sprite->setScale(tileSize.width/t->sprite->getContentSize().width);
                 t->sprite->setAnchorPoint(Vec2(0.5,0.5));
-                t->sprite->setPosition(xPos,yPos);
+                t->sprite->setPosition(Vec2(0,0));
+                //t->sprite->setPosition(xPos,yPos);
                 if(tile->getType() == Fire)
                 {
                     t->sprite->setColor(Color3B::RED);
@@ -287,11 +311,14 @@ void RAGameScene::loadMap (RAMap* map)
                 {
                     t->sprite->setColor(Color3B::GREEN);
                 }
-                else if (tile->getType() == Stairs)
+                else if(tile->getType() == Rock)
                 {
-                    t->sprite->setColor(Color3B::GRAY);
+                    auto rock = Sprite::create("stone1.png");
+                    rock->setScale(tileSize.width/t->sprite->getContentSize().width);
+                    rock->setAnchorPoint(Vec2(0.5,0.5));
+                    t->node->addChild(rock,zORDER_PLAYER);
                 }
-                
+
                 //render creature of tile
                 if(tile->entity != nullptr)
                 {
@@ -303,12 +330,14 @@ void RAGameScene::loadMap (RAMap* map)
                         creature->creatureID = tileCreature->id;
                         switch(creature->creatureID)
                         {
-                            case Rat:
-                                creature->cSprite = Sprite::create("creature_example.png");
+                            case BlueGhost:
+                                creature->cSprite = Sprite::create("blueghost_south.png");
                                 break;
-                            case Cave_Rat:
-                                creature->cSprite = Sprite::create("creature_example.png");
+                            case GreenGhost:
+                                creature->cSprite = Sprite::create("greenghost_south.png");
                                 break;
+                            case RedGhost:
+                                creature->cSprite = Sprite::create("redghost_south.png");
                         }
                         
                         creature->cSprite->setScale(creature->size.width/creature->cSprite->getContentSize().width);
@@ -328,10 +357,12 @@ void RAGameScene::loadMap (RAMap* map)
                     
                     //TODO: sprites of itens
                     //temporary "sprite"
-                    Color4B color = Color4B::MAGENTA;
-                    item->iSprite = LayerColor::create(color, tileSize.width*0.6, tileSize.height*0.6);
+                    item->iSprite = Sprite::create("healthpotion.png");
+                    item->iSprite->setAnchorPoint(Vec2(0.5,0.5));
+                    item->iSprite->setPosition(Vec2(0,0));
+                    item->iSprite->setScale((tileSize.width/item->iSprite->getContentSize().width)/2.0);
                     item->iSprite->setAnchorPoint(Vec2(0.5, 0.5));
-                    t->sprite->addChild(item->iSprite, zORDER_ITEM);
+                    t->node->addChild(item->iSprite, zORDER_ITEM);
                     
                     t->droppedItem = item;
                     item->iSprite = item->iSprite;
@@ -339,7 +370,10 @@ void RAGameScene::loadMap (RAMap* map)
                 
                 mapNode->tiles.push_back(t);
                 
-                varBackLayer->addChild(t->sprite,zORDER_TILE);
+                
+                varBackLayer->addChild(t->node,zORDER_TILE);
+                t->node->addChild(t->sprite,zORDER_TILE);
+
                 xPos += tileSize.width;
             }
             yPos += tileSize.height;
@@ -377,7 +411,7 @@ void RAGameScene::loadPlayer (RAPlayer* player)
         
         playerNode->playerSize = playerSize;
         
-        playerNode->pSprite = Sprite::create("hero3.png");
+        playerNode->pSprite = Sprite::create("hero_south.png");
         
         playerNode->pSprite->setScale(playerSize.width/playerNode->pSprite->getContentSize().width);
         playerNode->pSprite->setAnchorPoint(Vec2(0.5,0.5));
@@ -395,7 +429,7 @@ void RAGameScene::loadPlayer (RAPlayer* player)
     playerNode->level = player->level;
     playerNode->pController = player;
    // playerNode->pSprite->setPosition(mapNode->tiles.at(MAP_MAX_ROW*player->tile->getRow() + player->tile->getCol())->sprite->getPosition());
-    playerNode->node->setPosition(mapNode->tiles.at(MAP_MAX_ROW*player->row + player->col)->sprite->getPosition());
+    playerNode->node->setPosition(mapNode->tiles.at(MAP_MAX_ROW*player->row + player->col)->node->getPosition());
     
     auxUpdateScoreLabelText();
     auxUpdateHealthBar();
@@ -409,7 +443,7 @@ void RAGameScene::playerMoved(int playerID, int row, int col)
     if(auto player = auxGetPlayerNodeById(playerID))
     {
         
-        Vec2 destination = mapNode->tiles.at(MAP_MAX_ROW*row + col)->sprite->getPosition();
+        Vec2 destination = mapNode->tiles.at(MAP_MAX_ROW*row + col)->node->getPosition();
         
         auto moveAction = MoveTo::create(0.3, destination);
         
@@ -473,7 +507,7 @@ void RAGameScene::playerAttackedCreature (int playerID, int creatureID, int dama
 void RAGameScene::creatureMoved(int creatureID, int row, int col)
 {
     Sprite *cSprite = varCreaturesMap.find(creatureID)->second->cSprite;
-    Vec2 destination = mapNode->tiles[auxGetTileIndex(row, col)]->sprite->getPosition();
+    Vec2 destination = mapNode->tiles[auxGetTileIndex(row, col)]->node->getPosition();
     
     auto moveAction = MoveTo::create(0.3, destination);
     
@@ -684,6 +718,7 @@ void RAGameScene::useItemSlotButton(Ref* pSender, cocos2d::ui::Widget::TouchEven
     {
         case cocos2d::ui::Widget::TouchEventType::ENDED:
             gameController->doPlayerUseItem(playerRound, slot);
+            varItensSlotButtons.at(slot)->setColor(Color3B::RED);
             break;
         default:
             break;

@@ -17,7 +17,8 @@ enum TileType
     Normal,
     Stairs,
     Fire,
-    Poison
+    Poison,
+    Rock
 };
 
 class RATile

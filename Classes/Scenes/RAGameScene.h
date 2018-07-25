@@ -19,7 +19,7 @@ public:
     {
         ItemID itemType;
         int charges;
-        cocos2d::LayerColor* iSprite;
+        cocos2d::Sprite* iSprite;
     };
     
     struct InventaryItemNode
@@ -68,6 +68,7 @@ public:
         bool walkable;
         CreatureNode * cr;
         cocos2d::Sprite * sprite;
+        cocos2d::Node *node;
         ItemNode* droppedItem;
     };
     
