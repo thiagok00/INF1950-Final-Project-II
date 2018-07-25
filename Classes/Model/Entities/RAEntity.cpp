@@ -55,6 +55,7 @@ int RAEntity::inflictDamage(int damage)
     else
     {
         healthPoints = healthPoints - realDamage;
+        if (realDamage == 0) realDamage = 1;
         return realDamage;
     }
 }

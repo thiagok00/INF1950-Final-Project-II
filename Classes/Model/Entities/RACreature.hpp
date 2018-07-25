@@ -13,8 +13,9 @@
 
 enum CreatureID
 {
-    Rat,
-    Cave_Rat
+    GreenGhost,
+    BlueGhost,
+    RedGhost
 };
 
 class RACreature: public RAEntity
@@ -27,6 +28,8 @@ public:
     int experience;
     
     void resetTurn();
+    
+    static RACreature * createCreature (int difficulty);
 
 };
 

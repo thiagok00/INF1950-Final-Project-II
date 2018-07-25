@@ -60,8 +60,6 @@
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
 		D022E1A020B26C7100BACC96 /* RAMainMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D022E19E20B26C7100BACC96 /* RAMainMenuScene.cpp */; };
 		D022E1A520B276F500BACC96 /* RAMainMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D022E19E20B26C7100BACC96 /* RAMainMenuScene.cpp */; };
-		D03B113C20D6BC73003D24AD /* cave_ground.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B113B20D6BC72003D24AD /* cave_ground.png */; };
-		D03B113D20D6BC73003D24AD /* cave_ground.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B113B20D6BC72003D24AD /* cave_ground.png */; };
 		D03B114220D6C961003D24AD /* player_idle_south.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B114120D6C961003D24AD /* player_idle_south.png */; };
 		D03B114320D6C961003D24AD /* player_idle_south.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B114120D6C961003D24AD /* player_idle_south.png */; };
 		D03B114A20D6F17C003D24AD /* creature_example.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B114920D6F17B003D24AD /* creature_example.png */; };
@@ -70,8 +68,6 @@
 		D03B6A032104943E00F5B384 /* hero.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B6A002104943E00F5B384 /* hero.png */; };
 		D03B6A0B2104976D00F5B384 /* hero1.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B6A0A2104976D00F5B384 /* hero1.png */; };
 		D03B6A0C2104976D00F5B384 /* hero1.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B6A0A2104976D00F5B384 /* hero1.png */; };
-		D03B6A0E21050AED00F5B384 /* hero3.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B6A0D21050AEC00F5B384 /* hero3.png */; };
-		D03B6A0F21050AED00F5B384 /* hero3.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B6A0D21050AEC00F5B384 /* hero3.png */; };
 		D04B04E720F2C71B009FB450 /* RAMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D04B04CE20F2C71B009FB450 /* RAMap.cpp */; };
 		D04B04E820F2C71B009FB450 /* RAItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D04B04D220F2C71B009FB450 /* RAItem.cpp */; };
 		D04B04E920F2C71B009FB450 /* RATargetItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D04B04D320F2C71B009FB450 /* RATargetItem.cpp */; };
@@ -83,6 +79,34 @@
 		D04B04EF20F2C71B009FB450 /* RACreature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D04B04E320F2C71B009FB450 /* RACreature.cpp */; };
 		D04B04F020F2C71B009FB450 /* RAPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D04B04E420F2C71B009FB450 /* RAPlayer.cpp */; };
 		D04B04F120F2C71B009FB450 /* RAEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D04B04E520F2C71B009FB450 /* RAEntity.cpp */; };
+		D05EC6852107EBC5006FB485 /* greenghost_south.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6832107EBC4006FB485 /* greenghost_south.png */; };
+		D05EC6862107EBC5006FB485 /* greenghost_south.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6832107EBC4006FB485 /* greenghost_south.png */; };
+		D05EC6882107EBDD006FB485 /* redghost_south.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6872107EBDD006FB485 /* redghost_south.png */; };
+		D05EC6892107EBDD006FB485 /* redghost_south.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6872107EBDD006FB485 /* redghost_south.png */; };
+		D05EC68B2107EBE4006FB485 /* blueghost_south.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC68A2107EBE4006FB485 /* blueghost_south.png */; };
+		D05EC68C2107EBE4006FB485 /* blueghost_south.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC68A2107EBE4006FB485 /* blueghost_south.png */; };
+		D05EC68E2107ED46006FB485 /* hero_south.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC68D2107ED46006FB485 /* hero_south.png */; };
+		D05EC68F2107ED46006FB485 /* hero_south.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC68D2107ED46006FB485 /* hero_south.png */; };
+		D05EC69A2107F295006FB485 /* floor2.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6932107F291006FB485 /* floor2.png */; };
+		D05EC69B2107F295006FB485 /* floor2.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6932107F291006FB485 /* floor2.png */; };
+		D05EC69C2107F295006FB485 /* floor6.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6942107F292006FB485 /* floor6.png */; };
+		D05EC69D2107F295006FB485 /* floor6.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6942107F292006FB485 /* floor6.png */; };
+		D05EC69E2107F295006FB485 /* floor3.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6952107F292006FB485 /* floor3.png */; };
+		D05EC69F2107F295006FB485 /* floor3.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6952107F292006FB485 /* floor3.png */; };
+		D05EC6A02107F295006FB485 /* floor4.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6962107F293006FB485 /* floor4.png */; };
+		D05EC6A12107F295006FB485 /* floor4.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6962107F293006FB485 /* floor4.png */; };
+		D05EC6A22107F295006FB485 /* floor5.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6972107F293006FB485 /* floor5.png */; };
+		D05EC6A32107F295006FB485 /* floor5.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6972107F293006FB485 /* floor5.png */; };
+		D05EC6A42107F295006FB485 /* stone1.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6982107F294006FB485 /* stone1.png */; };
+		D05EC6A52107F295006FB485 /* stone1.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6982107F294006FB485 /* stone1.png */; };
+		D05EC6A62107F295006FB485 /* floor1.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6992107F295006FB485 /* floor1.png */; };
+		D05EC6A72107F295006FB485 /* floor1.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6992107F295006FB485 /* floor1.png */; };
+		D05EC6A92107F38C006FB485 /* backgroundapp.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6A82107F38C006FB485 /* backgroundapp.png */; };
+		D05EC6AA2107F38C006FB485 /* backgroundapp.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6A82107F38C006FB485 /* backgroundapp.png */; };
+		D05EC6AC2107F9F4006FB485 /* stair.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6AB2107F9F3006FB485 /* stair.png */; };
+		D05EC6AD2107F9F4006FB485 /* stair.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6AB2107F9F3006FB485 /* stair.png */; };
+		D05EC6AF2107FA98006FB485 /* healthpotion.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6AE2107FA98006FB485 /* healthpotion.png */; };
+		D05EC6B02107FA98006FB485 /* healthpotion.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6AE2107FA98006FB485 /* healthpotion.png */; };
 		D08AF03520B259F500BB9B17 /* RAGameController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D08AF03320B259F500BB9B17 /* RAGameController.cpp */; };
 		D08AF03820B25A0000BB9B17 /* RASinglePlayerGameController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D08AF03620B25A0000BB9B17 /* RASinglePlayerGameController.cpp */; };
 		D08AF03F20B262D700BB9B17 /* placeholderButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D08AF03E20B262D700BB9B17 /* placeholderButton.png */; };
@@ -197,12 +221,10 @@
 		D022E19F20B26C7100BACC96 /* RAMainMenuScene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RAMainMenuScene.hpp; sourceTree = "<group>"; };
 		D022E1A620B280CC00BACC96 /* RAUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RAUtil.h; sourceTree = "<group>"; };
 		D022E1A720B28E5700BACC96 /* RASceneProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RASceneProtocol.h; sourceTree = "<group>"; };
-		D03B113B20D6BC72003D24AD /* cave_ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cave_ground.png; sourceTree = "<group>"; };
 		D03B114120D6C961003D24AD /* player_idle_south.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player_idle_south.png; sourceTree = "<group>"; };
 		D03B114920D6F17B003D24AD /* creature_example.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = creature_example.png; sourceTree = "<group>"; };
 		D03B6A002104943E00F5B384 /* hero.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hero.png; sourceTree = "<group>"; };
 		D03B6A0A2104976D00F5B384 /* hero1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hero1.png; sourceTree = "<group>"; };
-		D03B6A0D21050AEC00F5B384 /* hero3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hero3.png; sourceTree = "<group>"; };
 		D04B04CE20F2C71B009FB450 /* RAMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RAMap.cpp; sourceTree = "<group>"; };
 		D04B04CF20F2C71B009FB450 /* RATile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RATile.hpp; sourceTree = "<group>"; };
 		D04B04D020F2C71B009FB450 /* RAMap.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RAMap.hpp; sourceTree = "<group>"; };
@@ -225,6 +247,20 @@
 		D04B04E420F2C71B009FB450 /* RAPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RAPlayer.cpp; sourceTree = "<group>"; };
 		D04B04E520F2C71B009FB450 /* RAEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RAEntity.cpp; sourceTree = "<group>"; };
 		D04B04E620F2C71B009FB450 /* RACreature.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RACreature.hpp; sourceTree = "<group>"; };
+		D05EC6832107EBC4006FB485 /* greenghost_south.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenghost_south.png; sourceTree = "<group>"; };
+		D05EC6872107EBDD006FB485 /* redghost_south.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redghost_south.png; sourceTree = "<group>"; };
+		D05EC68A2107EBE4006FB485 /* blueghost_south.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueghost_south.png; sourceTree = "<group>"; };
+		D05EC68D2107ED46006FB485 /* hero_south.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hero_south.png; sourceTree = "<group>"; };
+		D05EC6932107F291006FB485 /* floor2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = floor2.png; sourceTree = "<group>"; };
+		D05EC6942107F292006FB485 /* floor6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = floor6.png; sourceTree = "<group>"; };
+		D05EC6952107F292006FB485 /* floor3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = floor3.png; sourceTree = "<group>"; };
+		D05EC6962107F293006FB485 /* floor4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = floor4.png; sourceTree = "<group>"; };
+		D05EC6972107F293006FB485 /* floor5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = floor5.png; sourceTree = "<group>"; };
+		D05EC6982107F294006FB485 /* stone1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stone1.png; sourceTree = "<group>"; };
+		D05EC6992107F295006FB485 /* floor1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = floor1.png; sourceTree = "<group>"; };
+		D05EC6A82107F38C006FB485 /* backgroundapp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundapp.png; sourceTree = "<group>"; };
+		D05EC6AB2107F9F3006FB485 /* stair.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stair.png; sourceTree = "<group>"; };
+		D05EC6AE2107FA98006FB485 /* healthpotion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = healthpotion.png; sourceTree = "<group>"; };
 		D08AF03320B259F500BB9B17 /* RAGameController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RAGameController.cpp; sourceTree = "<group>"; };
 		D08AF03420B259F500BB9B17 /* RAGameController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RAGameController.hpp; sourceTree = "<group>"; };
 		D08AF03620B25A0000BB9B17 /* RASinglePlayerGameController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RASinglePlayerGameController.cpp; sourceTree = "<group>"; };
@@ -366,7 +402,20 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D03B6A0D21050AEC00F5B384 /* hero3.png */,
+				D05EC6A82107F38C006FB485 /* backgroundapp.png */,
+				D05EC6AE2107FA98006FB485 /* healthpotion.png */,
+				D05EC6992107F295006FB485 /* floor1.png */,
+				D05EC6932107F291006FB485 /* floor2.png */,
+				D05EC6952107F292006FB485 /* floor3.png */,
+				D05EC6962107F293006FB485 /* floor4.png */,
+				D05EC6972107F293006FB485 /* floor5.png */,
+				D05EC6AB2107F9F3006FB485 /* stair.png */,
+				D05EC6942107F292006FB485 /* floor6.png */,
+				D05EC6982107F294006FB485 /* stone1.png */,
+				D05EC6872107EBDD006FB485 /* redghost_south.png */,
+				D05EC68A2107EBE4006FB485 /* blueghost_south.png */,
+				D05EC6832107EBC4006FB485 /* greenghost_south.png */,
+				D05EC68D2107ED46006FB485 /* hero_south.png */,
 				D03B6A0A2104976D00F5B384 /* hero1.png */,
 				D03B6A002104943E00F5B384 /* hero.png */,
 				D0A6919120FAC67900BC832E /* levelUp.png */,
@@ -374,7 +423,6 @@
 				D0A6919620FAC6E800BC832E /* poison_1.png */,
 				D03B114920D6F17B003D24AD /* creature_example.png */,
 				D03B114120D6C961003D24AD /* player_idle_south.png */,
-				D03B113B20D6BC72003D24AD /* cave_ground.png */,
 				D08AF03E20B262D700BB9B17 /* placeholderButton.png */,
 				521A8EA819F11F5000D177D7 /* fonts */,
 				3EACC98E19EE6D4300EB3C5E /* res */,
@@ -637,17 +685,21 @@
 			files = (
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
+				D05EC68B2107EBE4006FB485 /* blueghost_south.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				D03B114220D6C961003D24AD /* player_idle_south.png in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
+				D05EC6A62107F295006FB485 /* floor1.png in Resources */,
+				D05EC69C2107F295006FB485 /* floor6.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
-				D03B6A0E21050AED00F5B384 /* hero3.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
 				D08AF03F20B262D700BB9B17 /* placeholderButton.png in Resources */,
-				D03B113C20D6BC73003D24AD /* cave_ground.png in Resources */,
+				D05EC6A92107F38C006FB485 /* backgroundapp.png in Resources */,
+				D05EC6852107EBC5006FB485 /* greenghost_south.png in Resources */,
 				521A8EA919F11F5000D177D7 /* fonts in Resources */,
+				D05EC6A42107F295006FB485 /* stone1.png in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				D03B6A0B2104976D00F5B384 /* hero1.png in Resources */,
@@ -655,15 +707,23 @@
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				D03B6A022104943E00F5B384 /* hero.png in Resources */,
+				D05EC69E2107F295006FB485 /* floor3.png in Resources */,
+				D05EC69A2107F295006FB485 /* floor2.png in Resources */,
+				D05EC6A02107F295006FB485 /* floor4.png in Resources */,
 				3EACC98F19EE6D4300EB3C5E /* res in Resources */,
+				D05EC68E2107ED46006FB485 /* hero_south.png in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
+				D05EC6882107EBDD006FB485 /* redghost_south.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
+				D05EC6AC2107F9F4006FB485 /* stair.png in Resources */,
 				D0A6919320FAC67900BC832E /* levelUp.png in Resources */,
+				D05EC6A22107F295006FB485 /* floor5.png in Resources */,
 				D03B114A20D6F17C003D24AD /* creature_example.png in Resources */,
 				D0A6919920FAC6E900BC832E /* poison_1.png in Resources */,
 				521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */,
 				D0A6919720FAC6E900BC832E /* burn_1.png in Resources */,
+				D05EC6AF2107FA98006FB485 /* healthpotion.png in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -673,18 +733,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				D03B114B20D6F17C003D24AD /* creature_example.png in Resources */,
+				D05EC69D2107F295006FB485 /* floor6.png in Resources */,
+				D05EC6A32107F295006FB485 /* floor5.png in Resources */,
+				D05EC6A52107F295006FB485 /* stone1.png in Resources */,
+				D05EC6A12107F295006FB485 /* floor4.png in Resources */,
+				D05EC68F2107ED46006FB485 /* hero_south.png in Resources */,
 				D0A6919420FAC67900BC832E /* levelUp.png in Resources */,
+				D05EC6AD2107F9F4006FB485 /* stair.png in Resources */,
+				D05EC69B2107F295006FB485 /* floor2.png in Resources */,
+				D05EC69F2107F295006FB485 /* floor3.png in Resources */,
+				D05EC6AA2107F38C006FB485 /* backgroundapp.png in Resources */,
 				D03B114320D6C961003D24AD /* player_idle_south.png in Resources */,
+				D05EC6892107EBDD006FB485 /* redghost_south.png in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
+				D05EC68C2107EBE4006FB485 /* blueghost_south.png in Resources */,
 				D0A6919820FAC6E900BC832E /* burn_1.png in Resources */,
+				D05EC6B02107FA98006FB485 /* healthpotion.png in Resources */,
+				D05EC6A72107F295006FB485 /* floor1.png in Resources */,
 				D03B6A032104943E00F5B384 /* hero.png in Resources */,
 				3EACC99019EE6D4300EB3C5E /* res in Resources */,
+				D05EC6862107EBC5006FB485 /* greenghost_south.png in Resources */,
 				D03B6A0C2104976D00F5B384 /* hero1.png in Resources */,
 				521A8EAA19F11F5000D177D7 /* fonts in Resources */,
-				D03B113D20D6BC73003D24AD /* cave_ground.png in Resources */,
 				D08AF04020B262D700BB9B17 /* placeholderButton.png in Resources */,
 				D0A6919A20FAC6E900BC832E /* poison_1.png in Resources */,
-				D03B6A0F21050AED00F5B384 /* hero3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
