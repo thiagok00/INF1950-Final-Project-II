@@ -47,7 +47,7 @@ int RAEntity::inflictDamage(int damage)
 
     if(healthPoints - realDamage <= 0)
     {
-        float damageTook = realDamage - healthPoints;
+        int damageTook = realDamage - (realDamage - healthPoints) ;
         dead = true;
         healthPoints = 0;
         return damageTook;

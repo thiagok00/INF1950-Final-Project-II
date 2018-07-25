@@ -8,7 +8,7 @@
 #include "RAPlayer.hpp"
 
 #define PLAYER_INI_HEALTH   100
-#define PLAYER_INI_DMG      1
+#define PLAYER_INI_DMG      50
 #define PLAYER_INI_SPEED    2
 #define PLAYER_INI_ACTPTS   1
 #define PLAYER_INI_ARMOR    1
