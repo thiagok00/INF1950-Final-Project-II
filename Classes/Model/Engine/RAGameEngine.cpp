@@ -20,6 +20,7 @@ RAGameEngine::RAGameEngine(int gameMode, RASceneProtocol *gameListener)
     this->gameListener = gameListener;
     this->gameMode = gameMode;
     turnOrder = 0;
+    level = 1;
 }
 
 RAGameEngine* RAGameEngine::createGame(int gameMode, RASceneProtocol *gameListener)
@@ -48,7 +49,7 @@ RAGameEngine* RAGameEngine::createGame(int gameMode, RASceneProtocol *gameListen
         return nullptr;
     }
     
-    
+        
     if(eng->player1 != nullptr)
     {
         eng->gameMap->addEntityToTile(eng->player1, eng->gameMap->player1RespawnTile);
@@ -138,6 +139,11 @@ bool RAGameEngine::doPlayerAction(int playerID, RADirection direction)
                 {
                     gameListener->playerBadStatus(player->playerID, POISONED, damage);
                 }
+            }
+            if(destTile->getType() == Stairs)
+            {
+                auxNewMap();
+                return true;
             }
             if(auxPlayerCheckDeath(player))
                 return false;
@@ -437,3 +443,26 @@ RAPlayer* RAGameEngine::auxGetPlayerById(int playerID)
     return nullptr;
 }
 
+void RAGameEngine::auxNewMap()
+{
+    gameMap = RALevelGenerator::generateLevel(0);
+    gameListener->loadMap(gameMap);
+
+    if(player1 != nullptr && !player1->isDead())
+    {
+        gameMap->addEntityToTile(player1, gameMap->player1RespawnTile);
+        gameListener->loadPlayer(player1);
+
+    }
+    if(player2 != nullptr && !player2->isDead())
+    {
+        gameMap->addEntityToTile(player2, gameMap->player2RespawnTile);
+        gameListener->loadPlayer(player2);
+
+    }
+    turnOrder = PLAYER1_TURN;
+    player1->resetTurn();
+    
+    gameListener->switchRound(PLAYER1_TURN);
+    
+}

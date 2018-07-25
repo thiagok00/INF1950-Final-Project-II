@@ -35,13 +35,14 @@ protected:
     int gameMode;
     int score;
     int turnOrder;
+    int level;
     
     void switchTurn();
     void checkNewTurnConditions(RAEntity* entity);
     
     bool auxPlayerCheckDeath(RAPlayer *player);
     bool auxCheckGameOver();
-
+    void auxNewMap();
     RAPlayer* auxGetPlayerById(int playerID);
     
 };

@@ -265,6 +265,7 @@ void RAGameScene::loadMap (RAMap* map)
     
     tileSize.width = varScreenSize.width/MAP_MAX_ROW;
     tileSize.height = tileSize.width;
+    destroyMapNode();
     if(mapNode == nullptr)
     {
         mapNode = new MapNode();
@@ -765,4 +766,28 @@ bool RAGameScene::isTurnHappening()
     }
     
         return false;
+}
+
+void RAGameScene::destroyMapNode()
+{
+    if(mapNode != nullptr)
+    {
+        for(auto t : mapNode->tiles)
+        {
+            t->node->removeFromParentAndCleanup(true);
+            if (t->droppedItem != nullptr)
+            {
+                delete t->droppedItem;
+            }
+            delete t;
+        }
+        delete mapNode;
+        mapNode = nullptr;
+        for(auto c : varCreaturesMap)
+        {
+            c.second->cSprite->removeFromParentAndCleanup(true);
+            delete c.second;
+        }
+        varCreaturesMap.clear();
+    }
 }

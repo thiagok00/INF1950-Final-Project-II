@@ -154,6 +154,8 @@ public:
 
     bool isTurnHappening();
     
+    void destroyMapNode();
+    
     PlayerNode *player1Node;
     PlayerNode *player2Node;
     
