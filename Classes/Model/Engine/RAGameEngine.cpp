@@ -489,7 +489,20 @@ RATile* RAGameEngine::auxGetCreatureAction(RACreature* creature)
     //IMPROVE: MAYBE USE HEAPS?
     RATile *creatureTile = gameMap->getTile(creature->row, creature->col);
     
-    RATile* playerTile = gameMap->getTile(player1->row, player1->col);
+    RATile* playerTile;
+    int cost1 = INT_MAX;
+    int cost2 = INT_MAX;
+    
+    if(!player1->isDead())
+    {
+        cost1 = auxGetManhattanDistance(creatureTile, gameMap->getTile(player1->row, player1->col));
+    }
+    if (player2 != nullptr && !player2->isDead())
+    {
+        cost2 = auxGetManhattanDistance(creatureTile, gameMap->getTile(player2->row, player2->col));
+    }
+    const RAPlayer *playerRef = cost1 < cost2? player1:player2;
+    playerTile = gameMap->getTile(playerRef->row, playerRef->col);
 
     auto paux = new RAPath(0, nullptr, creatureTile);
     std::pair<RATile*,RAPath*> pair = std::make_pair(creatureTile,paux);

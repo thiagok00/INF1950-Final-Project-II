@@ -116,7 +116,7 @@ bool RAGameScene::init(int gameMode)
     
     for(int i = 0; i < 6; i++)
     {
-        auto btn = ui::Button::create("placeholderButton.png");
+        auto btn = ui::Button::create("slotempty.png");
         btn->setAnchorPoint(Vec2(0.5, 0.5));
         btn->setPosition(pos[i]);
         btn->setScale9Enabled(true);
@@ -224,12 +224,14 @@ void RAGameScene::auxUpdatePlayerItensSlots()
 {
     for(auto btn :varItensSlotButtons)
     {
-        btn->setColor(Color3B::RED);
+        //btn->setColor(Color3B::WHITE);
+        btn->loadTextureNormal("slotempty.png");
     }
     auto playerNode = auxGetPlayerNodeById(playerRound);
     for(auto iNode : playerNode->items)
     {
-        varItensSlotButtons.at(iNode->slot)->setColor(Color3B::MAGENTA);
+        //varItensSlotButtons.at(iNode->slot)->setColor(Color3B::MAGENTA);
+        varItensSlotButtons.at(iNode->slot)->loadTextureNormal("slothealthpotion.png");
     }
 }
 
@@ -298,6 +300,10 @@ void RAGameScene::loadMap (RAMap* map)
                 if (tile->getType() == Stairs)
                 {
                     floorSprite = "stair.png";
+                }
+                if (tile->getType() == Rock)
+                {
+                    floorSprite = "stone.png";
                 }
                 t->node = Node::create();
                 t->node->setContentSize(tileSize);
@@ -469,9 +475,8 @@ void RAGameScene::playerMovedAndCaughtItem (int playerID, int row, int col, int 
     iNode->itemType = itemType;
     iNode->charges = charges;
     iNode->slot = atSlot;
-    //TODO: add iventary item sprite
-    //iNode->iSprite = Sprite::create
-    
+    //iNode->iSprite->setTexture("slothealthpotions.png");
+
     playerNode->items.push_back(iNode);
     
     //removing item from the floor
