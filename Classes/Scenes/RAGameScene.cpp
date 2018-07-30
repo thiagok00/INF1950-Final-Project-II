@@ -284,17 +284,21 @@ void RAGameScene::loadMap (RAMap* map)
                 t->walkable = tile->isWakable();
                 
                 //temp
-                int rand = cocos2d::random(1, 6);
-                std::ostringstream oss1;
-                oss1 << "floor";
-                oss1 << rand;
-                oss1 << ".png";
-                std::string floorSprite = oss1.str();
+//                int rand = cocos2d::random(1, 6);
+//                std::ostringstream oss1;
+//                oss1 << "floor";
+//                oss1 << rand;
+//                oss1 << ".png";
+//                std::string floorSprite = oss1.str();
+//                if (tile->getType() == Stairs)
+//                {
+//                    floorSprite = "stair.png";
+//                }
+                auto floorSprite = "tile.png";
                 if (tile->getType() == Stairs)
                 {
                     floorSprite = "stair.png";
                 }
-                
                 t->node = Node::create();
                 t->node->setContentSize(tileSize);
                 t->node->setAnchorPoint(Vec2(0.0,0.0));
@@ -312,13 +316,13 @@ void RAGameScene::loadMap (RAMap* map)
                 {
                     t->sprite->setColor(Color3B::GREEN);
                 }
-                else if(tile->getType() == Rock)
-                {
-                    auto rock = Sprite::create("stone1.png");
-                    rock->setScale(tileSize.width/t->sprite->getContentSize().width);
-                    rock->setAnchorPoint(Vec2(0.5,0.5));
-                    t->node->addChild(rock,zORDER_PLAYER);
-                }
+//                else if(tile->getType() == Rock)
+//                {
+//                    auto rock = Sprite::create("stone1.png");
+//                    rock->setScale(tileSize.width/t->sprite->getContentSize().width);
+//                    rock->setAnchorPoint(Vec2(0.5,0.5));
+//                    t->node->addChild(rock,zORDER_PLAYER);
+//                }
 
                 //render creature of tile
                 if(tile->entity != nullptr)
@@ -332,10 +336,10 @@ void RAGameScene::loadMap (RAMap* map)
                         switch(creature->creatureID)
                         {
                             case BlueGhost:
-                                creature->cSprite = Sprite::create("blueghost_south.png");
+                                creature->cSprite = Sprite::create("enemy1.png");
                                 break;
                             case GreenGhost:
-                                creature->cSprite = Sprite::create("greenghost_south.png");
+                                creature->cSprite = Sprite::create("enemy2.png");
                                 break;
                             case RedGhost:
                                 creature->cSprite = Sprite::create("redghost_south.png");
