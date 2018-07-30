@@ -61,9 +61,7 @@
 		D01E45CB210D00EB006954DC /* RAPath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D01E45C9210D00EB006954DC /* RAPath.cpp */; };
 		D01E45CE210EBB03006954DC /* heroArt.png in Resources */ = {isa = PBXBuildFile; fileRef = D01E45CD210EBB03006954DC /* heroArt.png */; };
 		D01E45D2210EC30F006954DC /* ONLINE MODE.png in Resources */ = {isa = PBXBuildFile; fileRef = D01E45CF210EC30D006954DC /* ONLINE MODE.png */; };
-		D01E45D3210EC30F006954DC /* SINGLEPLAYER BUTTON.png in Resources */ = {isa = PBXBuildFile; fileRef = D01E45D0210EC30E006954DC /* SINGLEPLAYER BUTTON.png */; };
 		D01E45D4210EC30F006954DC /* MULTIPLAYER BUTTON.png in Resources */ = {isa = PBXBuildFile; fileRef = D01E45D1210EC30F006954DC /* MULTIPLAYER BUTTON.png */; };
-		D01E45D6210ECFA0006954DC /* SINGLEPLAYER BUTTON.png in Resources */ = {isa = PBXBuildFile; fileRef = D01E45D5210ECF9F006954DC /* SINGLEPLAYER BUTTON.png */; };
 		D01E45DC210EDB60006954DC /* tile.png in Resources */ = {isa = PBXBuildFile; fileRef = D01E45D7210EDB5D006954DC /* tile.png */; };
 		D01E45DD210EDB60006954DC /* wall_west.png in Resources */ = {isa = PBXBuildFile; fileRef = D01E45D8210EDB5D006954DC /* wall_west.png */; };
 		D01E45DE210EDB60006954DC /* wall_east.png in Resources */ = {isa = PBXBuildFile; fileRef = D01E45D9210EDB5E006954DC /* wall_east.png */; };
@@ -72,6 +70,11 @@
 		D01E45EE210EDEB4006954DC /* enemy1.png in Resources */ = {isa = PBXBuildFile; fileRef = D01E45EB210EDEB1006954DC /* enemy1.png */; };
 		D01E45EF210EDEB4006954DC /* enemy3.png in Resources */ = {isa = PBXBuildFile; fileRef = D01E45EC210EDEB2006954DC /* enemy3.png */; };
 		D01E45F0210EDEB4006954DC /* enemy2.png in Resources */ = {isa = PBXBuildFile; fileRef = D01E45ED210EDEB3006954DC /* enemy2.png */; };
+		D01E45F8210EE1B2006954DC /* stone.png in Resources */ = {isa = PBXBuildFile; fileRef = D01E45F6210EE1B1006954DC /* stone.png */; };
+		D01E45FC210EE35C006954DC /* healthpotion.png in Resources */ = {isa = PBXBuildFile; fileRef = D01E45FB210EE35B006954DC /* healthpotion.png */; };
+		D01E45FF210EE4AE006954DC /* slotempty.png in Resources */ = {isa = PBXBuildFile; fileRef = D01E45FD210EE4AD006954DC /* slotempty.png */; };
+		D01E4600210EE4AE006954DC /* slothealthpotion.png in Resources */ = {isa = PBXBuildFile; fileRef = D01E45FE210EE4AD006954DC /* slothealthpotion.png */; };
+		D01E4602210EE7BD006954DC /* SINGLEPLAYER BUTTON.png in Resources */ = {isa = PBXBuildFile; fileRef = D01E4601210EE7BC006954DC /* SINGLEPLAYER BUTTON.png */; };
 		D022E1A020B26C7100BACC96 /* RAMainMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D022E19E20B26C7100BACC96 /* RAMainMenuScene.cpp */; };
 		D022E1A520B276F500BACC96 /* RAMainMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D022E19E20B26C7100BACC96 /* RAMainMenuScene.cpp */; };
 		D03B114220D6C961003D24AD /* player_idle_south.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B114120D6C961003D24AD /* player_idle_south.png */; };
@@ -117,8 +120,6 @@
 		D05EC6A72107F295006FB485 /* floor1.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6992107F295006FB485 /* floor1.png */; };
 		D05EC6A92107F38C006FB485 /* backgroundapp.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6A82107F38C006FB485 /* backgroundapp.png */; };
 		D05EC6AA2107F38C006FB485 /* backgroundapp.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6A82107F38C006FB485 /* backgroundapp.png */; };
-		D05EC6AF2107FA98006FB485 /* healthpotion.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6AE2107FA98006FB485 /* healthpotion.png */; };
-		D05EC6B02107FA98006FB485 /* healthpotion.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6AE2107FA98006FB485 /* healthpotion.png */; };
 		D05EC6B22107FFA9006FB485 /* passturnbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6B12107FFA9006FB485 /* passturnbutton.png */; };
 		D05EC6B32107FFA9006FB485 /* passturnbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = D05EC6B12107FFA9006FB485 /* passturnbutton.png */; };
 		D08AF03520B259F500BB9B17 /* RAGameController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D08AF03320B259F500BB9B17 /* RAGameController.cpp */; };
@@ -234,9 +235,7 @@
 		D01E45CA210D00EB006954DC /* RAPath.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RAPath.hpp; sourceTree = "<group>"; };
 		D01E45CD210EBB03006954DC /* heroArt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heroArt.png; sourceTree = "<group>"; };
 		D01E45CF210EC30D006954DC /* ONLINE MODE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ONLINE MODE.png"; sourceTree = "<group>"; };
-		D01E45D0210EC30E006954DC /* SINGLEPLAYER BUTTON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SINGLEPLAYER BUTTON.png"; sourceTree = "<group>"; };
 		D01E45D1210EC30F006954DC /* MULTIPLAYER BUTTON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MULTIPLAYER BUTTON.png"; sourceTree = "<group>"; };
-		D01E45D5210ECF9F006954DC /* SINGLEPLAYER BUTTON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "SINGLEPLAYER BUTTON.png"; path = "../../../Downloads/SINGLEPLAYER BUTTON.png"; sourceTree = "<group>"; };
 		D01E45D7210EDB5D006954DC /* tile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tile.png; sourceTree = "<group>"; };
 		D01E45D8210EDB5D006954DC /* wall_west.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wall_west.png; sourceTree = "<group>"; };
 		D01E45D9210EDB5E006954DC /* wall_east.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wall_east.png; sourceTree = "<group>"; };
@@ -245,6 +244,11 @@
 		D01E45EB210EDEB1006954DC /* enemy1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy1.png; sourceTree = "<group>"; };
 		D01E45EC210EDEB2006954DC /* enemy3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy3.png; sourceTree = "<group>"; };
 		D01E45ED210EDEB3006954DC /* enemy2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy2.png; sourceTree = "<group>"; };
+		D01E45F6210EE1B1006954DC /* stone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stone.png; sourceTree = "<group>"; };
+		D01E45FB210EE35B006954DC /* healthpotion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = healthpotion.png; sourceTree = "<group>"; };
+		D01E45FD210EE4AD006954DC /* slotempty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slotempty.png; sourceTree = "<group>"; };
+		D01E45FE210EE4AD006954DC /* slothealthpotion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slothealthpotion.png; sourceTree = "<group>"; };
+		D01E4601210EE7BC006954DC /* SINGLEPLAYER BUTTON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SINGLEPLAYER BUTTON.png"; sourceTree = "<group>"; };
 		D022E19B20B26A2600BACC96 /* RAGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAGameScene.h; sourceTree = "<group>"; };
 		D022E19E20B26C7100BACC96 /* RAMainMenuScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RAMainMenuScene.cpp; sourceTree = "<group>"; };
 		D022E19F20B26C7100BACC96 /* RAMainMenuScene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RAMainMenuScene.hpp; sourceTree = "<group>"; };
@@ -288,7 +292,6 @@
 		D05EC6982107F294006FB485 /* stone1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stone1.png; sourceTree = "<group>"; };
 		D05EC6992107F295006FB485 /* floor1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = floor1.png; sourceTree = "<group>"; };
 		D05EC6A82107F38C006FB485 /* backgroundapp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundapp.png; sourceTree = "<group>"; };
-		D05EC6AE2107FA98006FB485 /* healthpotion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = healthpotion.png; sourceTree = "<group>"; };
 		D05EC6B12107FFA9006FB485 /* passturnbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = passturnbutton.png; sourceTree = "<group>"; };
 		D08AF03320B259F500BB9B17 /* RAGameController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RAGameController.cpp; sourceTree = "<group>"; };
 		D08AF03420B259F500BB9B17 /* RAGameController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RAGameController.hpp; sourceTree = "<group>"; };
@@ -437,23 +440,25 @@
 				D05EC6B12107FFA9006FB485 /* passturnbutton.png */,
 				D01E45CD210EBB03006954DC /* heroArt.png */,
 				D05EC6A82107F38C006FB485 /* backgroundapp.png */,
-				D05EC6AE2107FA98006FB485 /* healthpotion.png */,
+				D01E45FD210EE4AD006954DC /* slotempty.png */,
+				D01E45FE210EE4AD006954DC /* slothealthpotion.png */,
 				D01E45D7210EDB5D006954DC /* tile.png */,
 				D01E45D9210EDB5E006954DC /* wall_east.png */,
 				D01E45E1210EDBE9006954DC /* stair.png */,
 				D01E45DA210EDB5F006954DC /* wall_normal.png */,
 				D01E45D8210EDB5D006954DC /* wall_west.png */,
-				D01E45D5210ECF9F006954DC /* SINGLEPLAYER BUTTON.png */,
 				D01E45D1210EC30F006954DC /* MULTIPLAYER BUTTON.png */,
+				D01E4601210EE7BC006954DC /* SINGLEPLAYER BUTTON.png */,
 				D01E45CF210EC30D006954DC /* ONLINE MODE.png */,
-				D01E45D0210EC30E006954DC /* SINGLEPLAYER BUTTON.png */,
 				D05EC6992107F295006FB485 /* floor1.png */,
 				D05EC6932107F291006FB485 /* floor2.png */,
 				D05EC6952107F292006FB485 /* floor3.png */,
 				D05EC6962107F293006FB485 /* floor4.png */,
 				D05EC6972107F293006FB485 /* floor5.png */,
 				D05EC6942107F292006FB485 /* floor6.png */,
+				D01E45F6210EE1B1006954DC /* stone.png */,
 				D05EC6982107F294006FB485 /* stone1.png */,
+				D01E45FB210EE35B006954DC /* healthpotion.png */,
 				D05EC6872107EBDD006FB485 /* redghost_south.png */,
 				D05EC68A2107EBE4006FB485 /* blueghost_south.png */,
 				D05EC6832107EBC4006FB485 /* greenghost_south.png */,
@@ -732,6 +737,7 @@
 				D01E45DF210EDB60006954DC /* wall_normal.png in Resources */,
 				D01E45DD210EDB60006954DC /* wall_west.png in Resources */,
 				D05EC68B2107EBE4006FB485 /* blueghost_south.png in Resources */,
+				D01E45F8210EE1B2006954DC /* stone.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				D03B114220D6C961003D24AD /* player_idle_south.png in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
@@ -752,9 +758,11 @@
 				D05EC6852107EBC5006FB485 /* greenghost_south.png in Resources */,
 				521A8EA919F11F5000D177D7 /* fonts in Resources */,
 				D05EC6A42107F295006FB485 /* stone1.png in Resources */,
+				D01E45FF210EE4AE006954DC /* slotempty.png in Resources */,
+				D01E45FC210EE35C006954DC /* healthpotion.png in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
-				D01E45D3210EC30F006954DC /* SINGLEPLAYER BUTTON.png in Resources */,
+				D01E4600210EE4AE006954DC /* slothealthpotion.png in Resources */,
 				D01E45DE210EDB60006954DC /* wall_east.png in Resources */,
 				D03B6A0B2104976D00F5B384 /* hero1.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
@@ -770,9 +778,9 @@
 				D05EC68E2107ED46006FB485 /* hero_south.png in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				D05EC6882107EBDD006FB485 /* redghost_south.png in Resources */,
+				D01E4602210EE7BD006954DC /* SINGLEPLAYER BUTTON.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
-				D01E45D6210ECFA0006954DC /* SINGLEPLAYER BUTTON.png in Resources */,
 				D0A6919320FAC67900BC832E /* levelUp.png in Resources */,
 				D05EC6A22107F295006FB485 /* floor5.png in Resources */,
 				D03B114A20D6F17C003D24AD /* creature_example.png in Resources */,
@@ -780,7 +788,6 @@
 				521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */,
 				D0A6919720FAC6E900BC832E /* burn_1.png in Resources */,
 				D05EC6B22107FFA9006FB485 /* passturnbutton.png in Resources */,
-				D05EC6AF2107FA98006FB485 /* healthpotion.png in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -804,7 +811,6 @@
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 				D05EC68C2107EBE4006FB485 /* blueghost_south.png in Resources */,
 				D0A6919820FAC6E900BC832E /* burn_1.png in Resources */,
-				D05EC6B02107FA98006FB485 /* healthpotion.png in Resources */,
 				D05EC6A72107F295006FB485 /* floor1.png in Resources */,
 				D03B6A032104943E00F5B384 /* hero.png in Resources */,
 				3EACC99019EE6D4300EB3C5E /* res in Resources */,
