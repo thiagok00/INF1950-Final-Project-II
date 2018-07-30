@@ -23,6 +23,7 @@ public:
     cocos2d::Size varScreenSize;
     cocos2d::ui::Button *varSinglePlayerButton;
     cocos2d::ui::Button *varMultiPlayerButton;
+    cocos2d::ui::Button *varOnlineButton;
 
     // implement the "static create()" method manually
     CREATE_FUNC(RAMainMenuScene);

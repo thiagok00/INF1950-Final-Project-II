@@ -38,9 +38,9 @@ bool RAMainMenuScene::init()
     backgroundImage->setPosition(Vec2(0,0));
     backgroundImage->setScale(varScreenSize.height/backgroundImage->getContentSize().height);
     
-    varSinglePlayerButton = ui::Button::create("placeholderButton.png");
+    varSinglePlayerButton = ui::Button::create("SINGLEPLAYER BUTTON.png");
     varSinglePlayerButton->setPosition(Vec2(varScreenSize.width/2.0f,varScreenSize.height/2.0f));
-    Size btnSize = Size(varScreenSize.width*0.6, varScreenSize.height*0.2);
+    Size btnSize = Size(varScreenSize.width*0.8, varScreenSize.height*0.11);
     varSinglePlayerButton->setScale9Enabled(true);
     varSinglePlayerButton->setScale(btnSize.width/varSinglePlayerButton->getContentSize().width, btnSize.height/varSinglePlayerButton->getContentSize().height);
     varSinglePlayerButton->_ID = kGAMEMODE_SINGLEPLAYER;
@@ -49,15 +49,28 @@ bool RAMainMenuScene::init()
     
     varBackLayer->addChild(varSinglePlayerButton);
     
-    varMultiPlayerButton = ui::Button::create("placeholderButton.png");
-    varMultiPlayerButton->setPosition(Vec2(varScreenSize.width/2.0f,varScreenSize.height*0.3));
+    varMultiPlayerButton = ui::Button::create("MULTIPLAYER BUTTON.png");
+    varMultiPlayerButton->setPosition(Vec2(varScreenSize.width/2.0f,varScreenSize.height*0.35));
     varMultiPlayerButton->setScale9Enabled(true);
     varMultiPlayerButton->setScale(btnSize.width/varMultiPlayerButton->getContentSize().width, btnSize.height/varMultiPlayerButton->getContentSize().height);
     varMultiPlayerButton->_ID = kGAMEMODE_OFFLINE_MULTIPLAYER;
     varMultiPlayerButton->addTouchEventListener(CC_CALLBACK_2(RAMainMenuScene::startSinglePlayerCallback, this));
     
     
+    varOnlineButton = ui::Button::create("ONLINE MODE.png");
+    varOnlineButton->setPosition(Vec2(varScreenSize.width/2.0f,varScreenSize.height*0.20));
+    varOnlineButton->setScale9Enabled(true);
+    varOnlineButton->setScale(btnSize.width/varOnlineButton->getContentSize().width, btnSize.height/varOnlineButton->getContentSize().height);
+    
+    
+    
+    
+    auto heroArt = Sprite::create("heroArt.png");
+    
+    heroArt->setPosition(Vec2(varScreenSize.width/2.0f, varScreenSize.height - heroArt->getContentSize().height));
+    varBackLayer->addChild(heroArt);
     varBackLayer->addChild(varMultiPlayerButton);
+    varBackLayer->addChild(varOnlineButton);
     
     return true;
 }
