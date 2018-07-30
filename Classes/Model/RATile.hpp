@@ -40,6 +40,7 @@ public:
     void setFire();
     void setPoison();
     
+    int getCost();
 protected:
     int row;
     int col;

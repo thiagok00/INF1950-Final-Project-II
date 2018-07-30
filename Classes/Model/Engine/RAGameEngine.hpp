@@ -43,8 +43,12 @@ protected:
     bool auxPlayerCheckDeath(RAPlayer *player);
     bool auxCheckGameOver();
     void auxNewMap();
-    RAPlayer* auxGetPlayerById(int playerID);
     
+    RATile* auxGetCreatureAction(RACreature* creature);
+    RAPlayer* auxGetPlayerById(int playerID);
+    int auxGetManhattanDistance(RATile* originTile, RATile* sourceTile);
 };
+
+
 
 #endif /* RAGameEngine_hpp */

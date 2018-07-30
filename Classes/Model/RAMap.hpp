@@ -42,7 +42,7 @@ public:
     bool addItemToTile(RAItem* item, int row, int col);
     RAItem* removeItemToTile(int row, int col);
 
-    
+    std::vector<RATile*> getNeighboursTiles(RATile* tile);
     std::vector<RACreature*> creatures;
 
 protected:

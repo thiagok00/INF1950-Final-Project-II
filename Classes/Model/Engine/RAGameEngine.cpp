@@ -8,6 +8,7 @@
 #include "RAGameEngine.hpp"
 #include "RALevelGenerator.hpp"
 #include "RASelfUseItem.hpp"
+#include "RAPath.hpp"
 
 
 #define CREATURE_TURN   3
@@ -343,10 +344,18 @@ void RAGameEngine::switchTurn()
             {
                 checkNewTurnConditions(cr);
                 int row, col;
-                row = cr->row - 1;
-                col = cr->col;
-                if (row < 0) row = 1;
                 
+                RATile* destTile = this->auxGetCreatureAction(cr);
+                if(destTile == nullptr)
+                {
+                    row = 6;
+                    col = 6;
+                }
+                else
+                {
+                row = destTile->getRow();
+                col = destTile->getCol();
+                }
                 if(RAPlayer * atkPlayer = dynamic_cast<RAPlayer*>(gameMap->getTile(row, col)->entity))
                 {
                     if (!atkPlayer->isDead())
@@ -356,7 +365,6 @@ void RAGameEngine::switchTurn()
                         gameListener->creatureAttackedPlayer(cr->id, atkPlayer->playerID, damageTook);
                         
                         if(auxPlayerCheckDeath(atkPlayer)) return;
-                        break;
                     }
                 }
                 //just move
@@ -465,4 +473,95 @@ void RAGameEngine::auxNewMap()
     
     gameListener->switchRound(PLAYER1_TURN);
     
+}
+
+RATile* RAGameEngine::auxGetCreatureAction(RACreature* creature)
+{
+    int row = creature->row - 1;
+    int col = creature->col;
+    if (row < 0) row = 1;
+    
+    std::map<RATile*,RAPath*> visitedTiles;
+    
+    //TODO:optimize this -> consider use heap
+    std::map<RATile*,RAPath*> openTiles;
+    
+    //IMPROVE: MAYBE USE HEAPS?
+    RATile *creatureTile = gameMap->getTile(creature->row, creature->col);
+    
+    RATile* playerTile = gameMap->getTile(player1->row, player1->col);
+
+    auto paux = new RAPath(0, nullptr, creatureTile);
+    std::pair<RATile*,RAPath*> pair = std::make_pair(creatureTile,paux);
+    openTiles.insert(pair);
+    
+    //int h = auxGetManhattanDistance(creatureTile, gameMap->getTile(player1->row, player1->col));
+    
+    while(!openTiles.empty())
+    {
+        int currentSquareCost = INT_MAX;
+        //improve this
+        std::pair<RATile*,RAPath*> currentPair;
+        for(auto p : openTiles)
+        {
+            if(p.second->cost <= currentSquareCost)
+            {
+                currentSquareCost =  p.second->cost;
+                currentPair = p;
+            }
+        }
+        
+        visitedTiles.insert(currentPair);
+        openTiles.erase(currentPair.first);
+        
+        auto path = visitedTiles.find(playerTile);
+        if ( path != visitedTiles.end())
+        {
+            RATile* lastTile = path->first;
+            RAPath* pathAux = path->second;
+           while(pathAux->current != creatureTile)
+           {
+               lastTile = pathAux->current;
+               pathAux = pathAux->rootTile;
+           }
+
+            return lastTile;
+            CCLOG("CUSTO: %d",path->second->cost);
+        }
+        
+        std::vector<RATile*> neighboursTiles = this->gameMap->getNeighboursTiles(currentPair.first);
+        
+        for (RATile *neighbourTile : neighboursTiles)
+        {
+            if(visitedTiles.find(neighbourTile) == visitedTiles.end())
+            {
+                //not visited yet
+                auto tilePair = openTiles.find(neighbourTile);
+                const int newCost = neighbourTile->getCost() + auxGetManhattanDistance(neighbourTile, playerTile) + currentPair.second->cost;
+                if (tilePair != openTiles.end() )
+                {
+                    //already opened: recompute cost
+                    if(newCost < tilePair->second->cost)
+                    {
+                        tilePair->second->cost = newCost;
+                        tilePair->second->rootTile = currentPair.second;
+                        tilePair->second->current = currentPair.first;
+                    }
+                }
+                else
+                {
+                    std::pair<RATile*,RAPath*> pair = std::make_pair(neighbourTile,
+                                                                     new RAPath(newCost, currentPair.second, currentPair.first));
+                    openTiles.insert(pair);
+                }
+            }
+        }
+    }
+    
+    return this->gameMap->getTile(row, col);
+}
+
+int RAGameEngine::auxGetManhattanDistance(RATile* originTile, RATile* sourceTile)
+{
+    return abs(originTile->getCol() - sourceTile->getCol()) + abs(originTile->getRow() - sourceTile->getCol());
 }
