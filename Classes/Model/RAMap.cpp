@@ -124,3 +124,48 @@ RAItem* RAMap::removeItemToTile(int row, int col)
     //FIXME: possible memmory leak point
     return item;
 }
+
+bool auxCheckConditionsNeighbours(RATile *tile)
+{
+    if(!tile->isWakable())
+        return false;
+    if(tile->getType() == Rock)
+        return false;
+    if(tile->entity != nullptr)
+        if(RACreature *creature = dynamic_cast<RACreature*>(tile->entity))
+            return false;
+    return true;
+}
+std::vector<RATile*> RAMap::getNeighboursTiles(RATile* tile)
+{
+    //TODO: maybe use heaps here?
+    std::vector<RATile*> neighboursTiles;
+    
+    int row = tile->getRow(); int col = tile->getCol();
+    
+    if(row > 0)
+    {
+        RATile* tile = getTile(row-1, col);
+        if(auxCheckConditionsNeighbours(tile))
+            neighboursTiles.push_back(tile);
+    }
+    if(row < MAP_MAX_ROW-1)
+    {
+        RATile* tile = getTile(row+1, col);
+        if(auxCheckConditionsNeighbours(tile))
+            neighboursTiles.push_back(tile);
+    }
+    if(col > 0)
+    {
+        RATile *tile = getTile(row, col-1);
+        if(auxCheckConditionsNeighbours(tile))
+            neighboursTiles.push_back(tile);
+    }
+    if(col < MAP_MAX_COL-1)
+    {
+        RATile* tile = getTile(row, col+1);
+        if(auxCheckConditionsNeighbours(tile))
+            neighboursTiles.push_back(tile);
+    }
+    return neighboursTiles;
+}

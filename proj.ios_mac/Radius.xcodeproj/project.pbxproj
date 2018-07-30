@@ -58,6 +58,7 @@
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
+		D01E45CB210D00EB006954DC /* RAPath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D01E45C9210D00EB006954DC /* RAPath.cpp */; };
 		D022E1A020B26C7100BACC96 /* RAMainMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D022E19E20B26C7100BACC96 /* RAMainMenuScene.cpp */; };
 		D022E1A520B276F500BACC96 /* RAMainMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D022E19E20B26C7100BACC96 /* RAMainMenuScene.cpp */; };
 		D03B114220D6C961003D24AD /* player_idle_south.png in Resources */ = {isa = PBXBuildFile; fileRef = D03B114120D6C961003D24AD /* player_idle_south.png */; };
@@ -218,6 +219,8 @@
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		D01E45C9210D00EB006954DC /* RAPath.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RAPath.cpp; sourceTree = "<group>"; };
+		D01E45CA210D00EB006954DC /* RAPath.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RAPath.hpp; sourceTree = "<group>"; };
 		D022E19B20B26A2600BACC96 /* RAGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAGameScene.h; sourceTree = "<group>"; };
 		D022E19E20B26C7100BACC96 /* RAMainMenuScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RAMainMenuScene.cpp; sourceTree = "<group>"; };
 		D022E19F20B26C7100BACC96 /* RAMainMenuScene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RAMainMenuScene.hpp; sourceTree = "<group>"; };
@@ -544,6 +547,8 @@
 				D04B04DE20F2C71B009FB450 /* RAGameEngine.hpp */,
 				D04B04DD20F2C71B009FB450 /* RALevelGenerator.cpp */,
 				D04B04DC20F2C71B009FB450 /* RALevelGenerator.hpp */,
+				D01E45C9210D00EB006954DC /* RAPath.cpp */,
+				D01E45CA210D00EB006954DC /* RAPath.hpp */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -792,6 +797,7 @@
 				D04B04ED20F2C71B009FB450 /* RALevelGenerator.cpp in Sources */,
 				D022E1A020B26C7100BACC96 /* RAMainMenuScene.cpp in Sources */,
 				D04B04E820F2C71B009FB450 /* RAItem.cpp in Sources */,
+				D01E45CB210D00EB006954DC /* RAPath.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
